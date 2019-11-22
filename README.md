@@ -17,11 +17,11 @@ This project has been chosen as a precursor, test case, to applying bayesian dee
 
 Bearing in mind the potential of deep learning in the fields of medicine & health, the objective of this project is to
 
-* Apply bayesian deep learning, amongst other methods, to the stated problem within an engineering design/prototype that addresses feasibility and scalability issues; evaluations steps will also be included.
+* Apply bayesian deep learning, amongst other methods, to the stated problem within an engineering design/prototype that is not constrained by scalability; make the best use of bayes for model selection.
 
 * Investigate and apply interpretability options.
 
-Non-bayesian deep convolutional neural networks has been applied to skin cancer images.
+Non-bayesian deep convolutional neural networks [has been applied to skin cancer images](https://cs.stanford.edu/people/esteva/nature/).
 
 <br>
 
