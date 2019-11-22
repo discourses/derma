@@ -1,0 +1,9 @@
+{
+  "data": {
+    "directory": {
+      "images": "https://raw.githubusercontent.com/greyhypotheses/dermatology/master/data/images/",
+      "truth": "https://raw.githubusercontent.com/greyhypotheses/dermatology/master/data/isic_2019_ground_truth.csv",
+      "metadata": "https://raw.githubusercontent.com/greyhypotheses/dermatology/master/data/isic_2019_metadata.csv"
+    }
+  }
+}
