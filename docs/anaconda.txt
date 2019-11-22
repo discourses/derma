@@ -1,0 +1,1 @@
+﻿conda create --prefix ~/Anaconda3/envs/derma python=3.6.9 mxnet pandas matplotlib setuptools pytest coverage scikit-learn requests
