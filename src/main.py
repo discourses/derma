@@ -1,8 +1,8 @@
 import logging
 import os
+import config
 
 import src.data.Sources as Sources
-import src.data.DermoscopicImages as DermoscopicImages
 
 import sklearn.model_selection as model_selection
 
@@ -16,17 +16,13 @@ def main():
     logger = logging.getLogger(__name__)
 
     # Preliminaries
-    random_state = 5
+    random_state = 5 # config.variables['modelling']['parameters']['random_state']
     listing, labels, features = Sources.Sources().summary()
     xlearn, xtest, ylearn, ytest = model_selection\
         .train_test_split(listing.drop(columns=labels).values, listing[labels],
                           train_size=0.7, random_state=random_state, stratify=listing[labels])
 
-    listing.head()
-    print(listing['image'])
-
-    states = DermoscopicImages.DermoscopicImages().states(listing['image'])
-    print(states.status.all())
+    logger.info(listing.head())
 
 
 if __name__ == '__main__':
