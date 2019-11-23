@@ -7,7 +7,7 @@
     }
   },
   "tests": {
-    "sample_size": {
+    "random_sample_size": {
       "images": 32
     }
   }
