@@ -31,4 +31,4 @@ jobs:
       - name: Test with pytest
         run: |
           pip install pytest
-          pytest -o python_files=test_*.py -o python_files=Test*.py
+          pytest -o python_files=test_*.py,Test*.py
