@@ -6,10 +6,10 @@ import pandas as pd
 import config
 
 
-class DermoscopicImages:
+class Images:
 
     def __init__(self):
-        logging.basicConfig(filename='DermoscopicImages.txt', level=logging.DEBUG)
+        logging.basicConfig(filename='Images.txt', level=logging.DEBUG)
         self.logger = logging.getLogger(__name__)
 
     @staticmethod
@@ -30,8 +30,8 @@ class DermoscopicImages:
         listing = [{excerpt[i]} for i in excerpt.index]
 
         # Parallel processing of states
-        # sample = [pool.apply(DermoscopicImages.state, args=i) for i in listing]
-        sample = pool.starmap_async(DermoscopicImages.state, [i for i in listing]).get()
+        # sample = [pool.apply(Images.state, args=i) for i in listing]
+        sample = pool.starmap_async(Images.state, [i for i in listing]).get()
 
         # Log states of ...
         self.logger.info(sample)

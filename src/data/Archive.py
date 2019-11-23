@@ -10,10 +10,9 @@ import sys
 # However, the approach has been abandoned due to the risks.
 #
 # API Structure: https://isic-archive.com/api/v1/image?limit=50&sort=name&sortdir=1&detail=false
-class ISIC:
+class Archive:
 
     def __init__(self):
-        self.name = 'API'
 
         # URL
         self.version = 'v1'
@@ -27,7 +26,7 @@ class ISIC:
         self.detail = 'false'
         self.parameters = {'limit': self.limit, 'sort': self.sort, 'sortdir': self.sortdir, 'detail': self.detail}
 
-    def api(self):
+    def images(self):
 
         # Request
         try:
@@ -37,9 +36,9 @@ class ISIC:
             sys.exit(1)
 
         # The data frame of the images and their identification codes
-        identifiers = pd.DataFrame.from_dict(r.json())
-        identifiers.rename(columns={'_id': 'id'}, inplace=True)
+        summary = pd.DataFrame.from_dict(r.json())
+        summary.rename(columns={'_id': 'id'}, inplace=True)
 
         # A data frame consisting of image identification code (id),
         # image name (name), and last update time stamp (updated) is returned.
-        return identifiers
+        return summary
