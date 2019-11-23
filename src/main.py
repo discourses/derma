@@ -16,7 +16,7 @@ def main():
     logger = logging.getLogger(__name__)
 
     # Preliminaries
-    random_state = 5 # config.variables['modelling']['parameters']['random_state']
+    random_state = config.variables['modelling']['parameters']['random_state']
     listing, labels, features = Sources.Sources().summary()
     xlearn, xtest, ylearn, ytest = model_selection\
         .train_test_split(listing.drop(columns=labels).values, listing[labels],
