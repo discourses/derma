@@ -2,6 +2,7 @@ import logging
 import os
 
 import src.data.Sources as Sources
+import src.data.DermoscopicImages as DermoscopicImages
 
 import sklearn.model_selection as model_selection
 
@@ -22,6 +23,10 @@ def main():
                           train_size=0.7, random_state=random_state, stratify=listing[labels])
 
     listing.head()
+    print(listing['image'])
+
+    states = DermoscopicImages.DermoscopicImages().states(listing['image'])
+    print(states.status.all())
 
 
 if __name__ == '__main__':
