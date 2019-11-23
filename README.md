@@ -31,7 +31,7 @@ Non-bayesian deep convolutional neural networks [has been applied to skin cancer
 
 As noted above, this project's modelling challenge is focused on the International Skin Imaging Collaboration’s (ISIC's) dermoscopic images of skin lesions.  It is specifically using a subset of the images of the [ISIC 2019 Challenge](https://challenge2019.isic-archive.com/), i.e.,
 
-<div style="font-size:xx-small">
+<br>
 
 |file | description|
 |:---|:---|
@@ -39,8 +39,7 @@ As noted above, this project's modelling challenge is focused on the Internation
 |[ISIC_2019_Training_Metadata.csv](https://s3.amazonaws.com/isic-challenge-2019/ISIC_2019_Training_Metadata.csv)|25,331 metadata entries of age, sex, general anatomic site, and common lesion identifier|
 |[ISIC_2019_Training_GroundTruth.csv](https://s3.amazonaws.com/isic-challenge-2019/ISIC_2019_Training_GroundTruth.csv)|25,331 entries of gold standard lesion diagnoses|
 
-</div>
-
+<br>
 <br>
 
 The images are either the same as those hosted by the [ISIC Archive API](https://www.isic-archive.com/#!/topWithHeader/onlyHeaderTop/apiDocumentation) or  down-sampled versions.  Future modelling projects might involve re-visiting the original images of the [ISIC Archive API](https://isic-archive.com/api/v1).  The API is documented at [ISIC Archive API Documentation](https://www.isic-archive.com/#!/topWithHeader/onlyHeaderTop/apiDocumentation); [sample API script](data/api.py).  The data set outlined below might be used if the ground truths are released in time.
