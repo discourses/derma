@@ -11,3 +11,13 @@ class TestSources:
         _, n_metadata = Sources.Sources().metadata()
         assert n_metadata != 0, "The metadata file should not be empty"
 
+    def test_summary(self):
+        _, n_truth = Sources.Sources().truth()
+        _, n_metadata = Sources.Sources().metadata()
+        listing, labels, features = Sources.Sources().summary()
+
+        assert n_truth == listing.shape[0]
+        assert n_metadata == listing.shape[0]
+        assert len(labels) != 0
+        assert len(features) != 0
+
