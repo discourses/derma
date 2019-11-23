@@ -15,7 +15,7 @@ class DermoscopicImages:
     @staticmethod
     def state(image):
         r = requests.get(config.variables['data']['source']['images'] + image + '.jpg')
-        return {'image': image, 'status': r.status_code}
+        return {'image': image, 'status': True if r.status_code == 200 else False}
 
     def states(self, images):
 
@@ -23,10 +23,11 @@ class DermoscopicImages:
         pool = mp.Pool(mp.cpu_count())
 
         # For a small data frame of image names
+        # images.sample(n=config.variables['tests']['random_sample_size']['images'])
         excerpt = images.sample(n=config.variables['tests']['random_sample_size']['images'])
 
         # An iterable form of excerpt
-        listing = [{excerpt.image[i]} for i in excerpt.index]
+        listing = [{excerpt[i]} for i in excerpt.index]
 
         # Parallel processing of states
         # sample = [pool.apply(DermoscopicImages.state, args=i) for i in listing]
