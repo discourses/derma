@@ -41,10 +41,8 @@ As noted above, this project's modelling challenge is focused on the Internation
 
 The images are either the same as those hosted by the [ISIC Archive API](https://www.isic-archive.com/#!/topWithHeader/onlyHeaderTop/apiDocumentation) or  down-sampled versions.  Future modelling projects might involve re-visiting the original images of the [ISIC Archive API](https://isic-archive.com/api/v1).  The API is documented at [ISIC Archive API Documentation](https://www.isic-archive.com/#!/topWithHeader/onlyHeaderTop/apiDocumentation); [sample API script](data/api.py).  The data set outlined below might be used if the ground truths are released in time.
 
-|file | description|
-|---|---|
-|[ISIC_2019_Test_Input.zip](https://s3.amazonaws.com/isic-challenge-2019/ISIC_2019_Test_Input.zip)|8,238 JPEG images of skin lesions|
-|[ISIC_2019_Test_Metadata.csv](https://s3.amazonaws.com/isic-challenge-2019/ISIC_2019_Test_Metadata.csv)|8,238 metadata entries of age, sex, and general anatomic site|
+* [ISIC_2019_Test_Input.zip](https://s3.amazonaws.com/isic-challenge-2019/ISIC_2019_Test_Input.zip): 8,238 JPEG images of skin lesions
+* [ISIC_2019_Test_Metadata.csv](https://s3.amazonaws.com/isic-challenge-2019/ISIC_2019_Test_Metadata.csv): 8,238 metadata entries of age, sex, and general anatomic site
 
 <br>
 <br>
