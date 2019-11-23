@@ -10,5 +10,10 @@
     "random_sample_size": {
       "images": 32
     }
+  },
+  "modelling": {
+    "parameters": {
+      "random_state": 5
+    }
   }
 }
