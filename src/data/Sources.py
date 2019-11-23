@@ -4,6 +4,7 @@ import logging
 
 
 class Sources:
+
     def __init__(self):
         logging.basicConfig(level=logging.DEBUG)
         self.logger = logging.getLogger(__name__)
