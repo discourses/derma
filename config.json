@@ -15,5 +15,11 @@
     "parameters": {
       "random_state": 5
     }
+  },
+  "api": {
+    "isic": {
+      "version": "v1",
+      "url": "https://isic-archive.com/api/"
+    }
   }
 }
