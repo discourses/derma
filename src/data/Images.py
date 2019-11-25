@@ -4,18 +4,33 @@ import multiprocessing as mp
 import pandas as pd
 
 import config
+import logging.config
 
 
 class Images:
 
     def __init__(self):
-        logging.basicConfig(filename='Images.txt', level=logging.DEBUG)
+
+        # Proceed from
+        # logging.config.dictConfig('logging.yml')
+
+        # Logging: Temporary Approach
         self.logger = logging.getLogger(__name__)
+        self.logger.setLevel(logging.DEBUG)
+
+        handler = logging.FileHandler(filename='images.log')
+        handler.setLevel(logging.DEBUG)
+
+        formatter = logging.Formatter(
+            '%(asctime)s %(name)-12s %(levelname)-8s %(message)s')
+        handler.setFormatter(formatter)
+
+        self.logger.addHandler(handler)
 
     @staticmethod
     def state(image):
         r = requests.get(config.variables['data']['source']['images'] + image + '.jpg')
-        return {'image': image, 'status': True if r.status_code == 200 else False}
+        return {'image': image, 'status': 1 if r.status_code == 200 else 0}
 
     def states(self, images):
 
@@ -27,14 +42,16 @@ class Images:
         excerpt = images.sample(n=config.variables['tests']['random_sample_size']['images'])
 
         # An iterable form of excerpt
-        listing = [{excerpt[i]} for i in excerpt.index]
+        excerpt_iterable = [{excerpt[i]} for i in excerpt.index]
 
-        # Parallel processing of states
-        # sample = [pool.apply(Images.state, args=i) for i in listing]
-        sample = pool.starmap_async(Images.state, [i for i in listing]).get()
+        # Determine whether each of the randomly selected images exists in the repository
+        # image, status
+        sample_dict = pool.starmap_async(Images.state, [i for i in excerpt_iterable]).get()
+        sample_frame = pd.DataFrame(sample_dict)
 
-        # Log states of ...
-        self.logger.info(sample)
+        # Are there any missing images?
+        missing_images = sample_frame[sample_frame.status == 0]
+        self.logger.info(missing_images)
 
-        # The access states of images
-        return pd.DataFrame(sample)
+        # The status codes of the images
+        return sample_frame

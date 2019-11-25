@@ -32,8 +32,8 @@ class Sources:
         # 'MEL', 'NV', 'BCC', 'AK', 'BKL', 'DF', 'VASC', 'SCC', 'UNK'
         labels = truth.columns.drop('image').values.tolist()
 
-        # Features
-        features = listing.columns.drop(labels).values.tolist()
+        # Fields
+        fields = listing.columns.drop(labels).values.tolist()
 
         # Hence
-        return listing, labels, features
+        return listing, labels, fields
