@@ -14,10 +14,9 @@ class TestSources:
     def test_summary(self):
         _, n_truth = Sources.Sources().truth()
         _, n_metadata = Sources.Sources().metadata()
-        listing, labels, features = Sources.Sources().summary()
+        listing, labels, fields = Sources.Sources().summary()
 
-        assert n_truth == listing.shape[0]
-        assert n_metadata == listing.shape[0]
-        assert len(labels) != 0
-        assert len(features) != 0
-
+        assert n_truth == listing.shape[0], "The number of ground truth & listing data points must be equal"
+        assert n_metadata == listing.shape[0], "The number of medata & listing data points must be equal"
+        assert len(labels) != 0, "At least one label column must exist"
+        assert len(fields) != 0, "Missing field names"
