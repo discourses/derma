@@ -1,3 +1,10 @@
+branch|state
+:---|:---
+develop|![](https://github.com/greyhypotheses/derma/workflows/Derma%20Python%20Package/badge.svg?branch=develop)
+master|
+
+<br>
+
 ## Identification of Cancerous/Pre-cancerous Skin Lesion Types
 Via Dermoscopic Images of Skin Lesions
 
