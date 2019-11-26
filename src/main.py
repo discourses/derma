@@ -11,7 +11,8 @@ def main():
 
     # Logging
     cfg.logs()
-    logger = logging.getLogger(__name__)
+    logger = logging.getLogger('root')
+    logger.name = __name__
 
     # Preliminaries
     listing, labels, fields = Usable.Usable().records()
@@ -21,7 +22,6 @@ def main():
     xlearn, xtest, ylearn, ytest = model_selection\
         .train_test_split(listing.drop(columns=labels).values, listing[labels],
                           train_size=0.7, random_state=random_state, stratify=listing[labels])
-    logger.info(xlearn[0])
 
     x = Images.Images().states(listing['image'])
     logger.info(x)
