@@ -1,32 +1,44 @@
 import pandas as pd
 import config
 import logging
+import sys
 
 
 class Sources:
-
     def __init__(self):
-        logging.basicConfig(level=logging.DEBUG)
         self.logger = logging.getLogger(__name__)
+        self.logger.setLevel(logging.DEBUG)
+        self.logger.propagate = False
+        self.logger.disabled = True
 
     # The data classifications
     @staticmethod
     def truth():
-        truth = pd.read_csv(config.variables['data']['source']['truth'])
+        try:
+            truth = pd.read_csv(config.variables['data']['source']['truth'])
+        except Exception as e:
+            print(e)
+            sys.exit(1)
+
         return truth, truth.shape[0]
 
     @staticmethod
     def metadata():
-        metadata = pd.read_csv(config.variables['data']['source']['metadata'])
+        try:
+            metadata = pd.read_csv(config.variables['data']['source']['metadata'])
+        except Exception as e:
+            print(e)
+            sys.exit(1)
+
         return metadata, metadata.shape[0]
 
-    def summary(self):
+    @staticmethod
+    def summary():
         truth, _ = Sources.truth()
         metadata, _ = Sources.metadata()
 
         # Hence
         listing = metadata.merge(truth, on='image', how='inner')
-        self.logger.info(listing.head())
 
         # The truth labels are one-hot-coded.  The labels are
         # 'MEL', 'NV', 'BCC', 'AK', 'BKL', 'DF', 'VASC', 'SCC', 'UNK'
@@ -36,4 +48,5 @@ class Sources:
         fields = listing.columns.drop(labels).values.tolist()
 
         # Hence
+        assert listing[labels].sum(axis=1).all(), "Each image must be associated with a single class only"
         return listing, labels, fields

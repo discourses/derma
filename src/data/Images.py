@@ -4,7 +4,6 @@ import multiprocessing as mp
 import pandas as pd
 
 import config
-import logging.config
 
 
 class Images:
@@ -12,11 +11,12 @@ class Images:
     def __init__(self):
 
         # Proceed from
-        # logging.config.dictConfig('logging.yml')
+        # logging.config.dictConfig(dictionary)
 
         # Logging: Temporary Approach
         self.logger = logging.getLogger(__name__)
         self.logger.setLevel(logging.DEBUG)
+        self.logger.propagate = False
 
         handler = logging.FileHandler(filename='images.log')
         handler.setLevel(logging.DEBUG)
