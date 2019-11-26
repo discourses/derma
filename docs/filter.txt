@@ -7,3 +7,5 @@ coverage
 scikit-learn
 requests
 jupyterlab
+seaborn
+PyYAML
