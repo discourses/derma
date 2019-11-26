@@ -20,3 +20,4 @@ class TestSources:
         assert n_metadata == listing.shape[0], "The number of medata & listing data points must be equal"
         assert len(labels) != 0, "At least one label column must exist"
         assert len(fields) != 0, "Missing field names"
+        assert listing[labels].sum(axis=1).all(), "Each image must be associated with a single class only"
