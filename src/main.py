@@ -1,5 +1,5 @@
 import logging
-import config
+import configurations.configurations as cfg
 
 import src.data.Usable as Usable
 import src.data.Images as Images
@@ -9,15 +9,15 @@ import sklearn.model_selection as model_selection
 
 def main():
 
-    # Logging, logging.disable(logging.WARN)
-    logging.basicConfig(level=logging.DEBUG)
+    # Logging
+    cfg.logs()
     logger = logging.getLogger(__name__)
 
     # Preliminaries
     listing, labels, fields = Usable.Usable().records()
-    logger.info(listing.head())
 
-    random_state = config.variables['modelling']['parameters']['random_state']
+    # Split
+    random_state = cfg.variables()['modelling']['parameters']['random_state']
     xlearn, xtest, ylearn, ytest = model_selection\
         .train_test_split(listing.drop(columns=labels).values, listing[labels],
                           train_size=0.7, random_state=random_state, stratify=listing[labels])
