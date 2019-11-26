@@ -1,7 +1,7 @@
 import requests
 import pandas as pd
 import sys
-import config
+import configurations.configurations as cfg
 
 
 # Due to the size of the ISIC data set, an initial consideration was
@@ -17,9 +17,9 @@ class Archive:
     def images():
 
         # URL
-        version = config.variables['api']['isic']['version']
+        version = cfg.variables()['api']['isic']['version']
         retrieve = 'image'
-        url = f"{config.variables['api']['isic']['url']}{version}/{retrieve}"
+        url = f"{cfg.variables()['api']['isic']['url']}{version}/{retrieve}"
 
         # Parameters
         limit = '30000'

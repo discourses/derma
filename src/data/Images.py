@@ -2,34 +2,21 @@ import logging
 import requests
 import multiprocessing as mp
 import pandas as pd
-
-import config
+import configurations.configurations as cfg
 
 
 class Images:
 
     def __init__(self):
 
-        # Proceed from
-        # logging.config.dictConfig(dictionary)
-
-        # Logging: Temporary Approach
-        self.logger = logging.getLogger(__name__)
-        self.logger.setLevel(logging.DEBUG)
-        self.logger.propagate = False
-
-        handler = logging.FileHandler(filename='images.log')
-        handler.setLevel(logging.DEBUG)
-
-        formatter = logging.Formatter(
-            '%(asctime)s %(name)-12s %(levelname)-8s %(message)s')
-        handler.setFormatter(formatter)
-
-        self.logger.addHandler(handler)
+        # Logging
+        cfg.logs()
+        self.logger = logging.getLogger('basic')
+        self.logger.name = __name__
 
     @staticmethod
     def state(image):
-        r = requests.get(config.variables['data']['source']['images'] + image + '.jpg')
+        r = requests.get(cfg.variables()['data']['source']['images'] + image + '.jpg')
         return {'image': image, 'status': 1 if r.status_code == 200 else 0}
 
     def states(self, images):
@@ -39,7 +26,7 @@ class Images:
 
         # For a small data frame of image names
         # images.sample(n=config.variables['tests']['random_sample_size']['images'])
-        excerpt = images.sample(n=config.variables['tests']['random_sample_size']['images'])
+        excerpt = images.sample(n=cfg.variables()['tests']['random_sample_size']['images'])
 
         # An iterable form of excerpt
         excerpt_iterable = [{excerpt[i]} for i in excerpt.index]

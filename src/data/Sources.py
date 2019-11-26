@@ -1,5 +1,5 @@
 import pandas as pd
-import config
+import configurations.configurations as cfg
 import logging
 import sys
 
@@ -15,7 +15,7 @@ class Sources:
     @staticmethod
     def truth():
         try:
-            truth = pd.read_csv(config.variables['data']['source']['truth'])
+            truth = pd.read_csv(cfg.variables()['data']['source']['truth'])
         except Exception as e:
             print(e)
             sys.exit(1)
@@ -25,7 +25,7 @@ class Sources:
     @staticmethod
     def metadata():
         try:
-            metadata = pd.read_csv(config.variables['data']['source']['metadata'])
+            metadata = pd.read_csv(cfg.variables()['data']['source']['metadata'])
         except Exception as e:
             print(e)
             sys.exit(1)
