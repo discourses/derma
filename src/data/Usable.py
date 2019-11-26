@@ -6,7 +6,7 @@ class Usable:
         self.name = 'Feasible'
 
     @staticmethod
-    def records():
+    def summary():
         # The metadata & ground truth (listing), the names of the label columns, and
         # the names of the metadata fields
         listing, labels, fields = Sources.Sources().summary()
