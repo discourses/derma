@@ -13,7 +13,8 @@
   },
   "modelling": {
     "parameters": {
-      "random_state": 5
+      "random_state": 5,
+      "minimum_instances_per_class": 2
     }
   },
   "api": {
