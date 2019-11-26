@@ -32,9 +32,9 @@ handlers:
 loggers:
   basic:
     level: DEBUG
-    handlers: [console]
+    handlers: [file, error]
     propagate: no
 
 root:
   level: DEBUG
-  handlers: [console, file]
+  handlers: [file, error]

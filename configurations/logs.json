@@ -43,11 +43,17 @@
       "level": "DEBUG",
       "handlers": ["file", "error"],
       "propagate": false
+    },
+    "debug": {
+      "level": "DEBUG",
+      "handlers": ["file", "console"],
+      "propagate": false
     }
   },
 
   "root": {
-    "level": "INFO",
-    "handlers": ["file", "error"]
+    "level": "DEBUG",
+    "handlers": ["console"],
+    "propagate": false
   }
 }
