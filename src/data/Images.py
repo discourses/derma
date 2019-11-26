@@ -11,7 +11,7 @@ class Images:
 
         # Logging
         cfg.logs()
-        self.logger = logging.getLogger('basic')
+        self.logger = logging.getLogger('debug')
         self.logger.name = __name__
 
     @staticmethod

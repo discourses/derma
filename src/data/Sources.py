@@ -1,15 +1,11 @@
 import pandas as pd
 import configurations.configurations as cfg
-import logging
 import sys
 
 
 class Sources:
     def __init__(self):
-        self.logger = logging.getLogger(__name__)
-        self.logger.setLevel(logging.DEBUG)
-        self.logger.propagate = False
-        self.logger.disabled = True
+        self.name = 'Sources'
 
     # The data classifications
     @staticmethod
