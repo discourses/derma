@@ -1,0 +1,11 @@
+mxnet
+pandas
+matplotlib
+setuptools
+pytest 
+coverage
+scikit-learn
+requests
+jupyterlab
+seaborn
+PyYAML
