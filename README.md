@@ -24,8 +24,10 @@ master|![](https://github.com/greyhypotheses/derma/workflows/Derma%20Python%20Pa
 
 The current structure of this repository's project is outlined below.  An item with a ``--`` prefix is a directory, otherwise a file.  The ``.github/workflows`` directory host the `yaml` files used by GitHub Actions.
 
+<br>
+
 ![](./docs/structure.svg)
-<img src="./docs/structure.svg">
+# <img src="./docs/structure.svg">
 
 <br>
 <br>
