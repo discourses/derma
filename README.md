@@ -5,6 +5,7 @@
   * [Problem Statement](#problem-statement)
   * [Rationale](#rationale)
   * [The Data](#the-data)
+  * [Preliminary Analysis of Metadata](./notebooks/preliminary.ipynb)
   * [Copyright & Attribution](#copyright-and-attribution)
 
 <br>
@@ -24,6 +25,7 @@ master|![](https://github.com/greyhypotheses/derma/workflows/Derma%20Python%20Pa
 The current structure of this repository's project is outlined below.  An item with a ``--`` prefix is a directory, otherwise a file.  The ``.github/workflows`` directory host the `yaml` files used by GitHub Actions.
 
 ![](./docs/structure.png)
+
 
 <br>
 <br>
@@ -76,6 +78,13 @@ The images are either the same as those hosted by the [ISIC Archive API](https:/
 
 * [ISIC_2019_Test_Input.zip](https://s3.amazonaws.com/isic-challenge-2019/ISIC_2019_Test_Input.zip): 8,238 JPEG images of skin lesions
 * [ISIC_2019_Test_Metadata.csv](https://s3.amazonaws.com/isic-challenge-2019/ISIC_2019_Test_Metadata.csv): 8,238 metadata entries of age, sex, and general anatomic site
+
+<br>
+<br>
+
+### Preliminary Analysis of Metadata
+
+A preliminary analysis of the metadata is hosted in the notebook [preliminary.ipynb](./notebooks/preliminary.ipynb).
 
 <br>
 <br>
