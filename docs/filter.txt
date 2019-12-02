@@ -9,3 +9,5 @@ requests
 jupyterlab
 seaborn
 PyYAML
+Pillow
+numpy
