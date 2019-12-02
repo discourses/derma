@@ -1,12 +1,35 @@
+
+
+* [Brief Repository Notes](#brief-repository-notes)
+* [Project](#automatic-identification-of-skin-lesion-types)
+  * [Problem Statement](#problem-statement)
+  * [Rationale](#rationale)
+  * [The Data](#the-data)
+  * [Copyright & Attribution](#copyright-and-attribution)
+
+<br>
+<br>
+
+## Brief Repository Notes
+
+This repository uses the wonderful continuous integration & delivery tool GitHub Actions. Hence, a variety of tests are conducted continuously.  The badges below will continuously highlight the state of each repository branch w.r.t. GitHub Action's actions. 
+
 branch|state
 :---|:---
 develop|![](https://github.com/greyhypotheses/derma/workflows/Derma%20Python%20Package/badge.svg?branch=develop)
-master|
+master|![](https://github.com/greyhypotheses/derma/workflows/Derma%20Python%20Package/badge.svg?branch=master)
 
 <br>
 
-## Identification of Cancerous/Pre-cancerous Skin Lesion Types
-Via Dermoscopic Images of Skin Lesions
+The current structure of this repository's project is outlined below.  An item with a ``--`` prefix is a directory, otherwise a file.  The ``.github/workflows`` directory host the `yaml` files used by GitHub Actions.
+
+![](./docs/structure.png)
+
+<br>
+<br>
+
+## Automatic Identification of Skin Lesion Types
+Via Dermoscopic Images of Cancerous/Pre-cancerous Skin Lesions
 
 <br>
 
@@ -49,7 +72,7 @@ As noted above, this project's modelling challenge is focused on the Internation
 <br>
 <br>
 
-The images are either the same as those hosted by the [ISIC Archive API](https://www.isic-archive.com/#!/topWithHeader/onlyHeaderTop/apiDocumentation) or  down-sampled versions.  Future modelling projects might involve re-visiting the original images of the [ISIC Archive API](https://isic-archive.com/api/v1).  The API is documented at [ISIC Archive API Documentation](https://www.isic-archive.com/#!/topWithHeader/onlyHeaderTop/apiDocumentation); [sample API script](data/api.py).  The data set outlined below might be used if the ground truths are released in time.
+The images are either the same as those hosted by the [ISIC Archive API](https://www.isic-archive.com/#!/topWithHeader/onlyHeaderTop/apiDocumentation) or  down-sampled versions.  Future modelling projects might involve re-visiting the original images of the [ISIC Archive API](https://isic-archive.com/api/v1).  The API is documented at [ISIC Archive API Documentation](https://www.isic-archive.com/#!/topWithHeader/onlyHeaderTop/apiDocumentation); [sample API script](./src/data/Archive.py).  The data set outlined below might be used if the ground truths are released in time.
 
 * [ISIC_2019_Test_Input.zip](https://s3.amazonaws.com/isic-challenge-2019/ISIC_2019_Test_Input.zip): 8,238 JPEG images of skin lesions
 * [ISIC_2019_Test_Metadata.csv](https://s3.amazonaws.com/isic-challenge-2019/ISIC_2019_Test_Metadata.csv): 8,238 metadata entries of age, sex, and general anatomic site
