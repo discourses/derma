@@ -8,7 +8,6 @@ import configurations.configurations as cfg
 class Images:
 
     def __init__(self):
-
         # Logging
         cfg.logs()
         self.logger = logging.getLogger('debug')
