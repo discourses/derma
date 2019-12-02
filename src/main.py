@@ -15,7 +15,7 @@ def main():
     logger.name = __name__
 
     # Preliminaries
-    listing, labels, fields = Usable.Usable().records()
+    listing, labels, fields = Usable.Usable().summary()
 
     # Split
     random_state = cfg.variables()['modelling']['parameters']['random_state']
