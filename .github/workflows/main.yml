@@ -39,3 +39,8 @@ jobs:
         run: |
           pip install pytest
           pytest -o python_files=test_*.py
+      - name: Coverage with pytest-cov
+          run: |
+            pip install coverage
+            pip install pytest-cov
+            pytest --cov src/data tests/data
