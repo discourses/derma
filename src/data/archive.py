@@ -1,6 +1,8 @@
-import requests
-import pandas as pd
 import sys
+
+import pandas as pd
+import requests
+
 import configurations.configurations as cfg
 
 
@@ -9,8 +11,14 @@ import configurations.configurations as cfg
 # the identification code of each image is required, hence this method.  This approach
 # has been abandoned due to the risks.
 class Archive:
+    """
+    The Archive object
+    """
 
     def __init__(self):
+        """
+        The constructor
+        """
         self.name = 'Archive'
 
     @staticmethod

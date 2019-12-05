@@ -7,11 +7,28 @@ import configurations.configurations as cfg
 
 
 class Image:
+    """
+    In progress
+    """
+
+    # Constructor
     def __init__(self):
+        """
+        Constructor
+        """
         self.name = 'Images'
 
     @staticmethod
     def name(images, datawidth, index):
+        """
+        Extract image name
+        :param images: A data frame of image names.  Each column name is an image class name, and each column records
+                       a series of image names.
+        :param datawidth: The number of columns of images [In progress, remove]
+        :param index: The index of a series of images
+        :return:
+                image name
+        """
         # Extracting image names via table grid
         return images.loc[np.floor(index/datawidth).astype(int), images.columns[np.mod(index, datawidth)]]
 

@@ -9,7 +9,7 @@ jobs:
     strategy:
       max-parallel: 4
       matrix:
-        python-version: [3.6]
+        python-version: [3.7]
 
     steps:
       - uses: actions/checkout@v1
@@ -24,11 +24,36 @@ jobs:
       - name: Lint with flake8
         run: |
           pip install flake8
+          printf "\n"
+          echo "============================= flake8 session starts =============================="
+          printf "\n"
           # stop the build if there are Python syntax errors or undefined names
-          flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+          echo "Issues in relation to logic (F7), syntax (Python E9, Flake F7), mathematical
+          formulae symbols (F63), undefined variable names (F82):"
+          echo "src/data"
+          flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics src/data
+          echo "src/graphing"
+          flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics src/graphing
           # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
-          flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+          printf "\n"
+          echo "Complexity issues:"
+          echo "src/data"
+          flake8 . --count --exit-zero --max-complexity=10 --max-line-length=120 --statistics src/data
+          echo "src/graphing"
+          flake8 . --count --exit-zero --max-complexity=10 --max-line-length=120 --statistics src/graphing
+      - name: Lint with pylint
+        run: |
+          pip install pylint
+          printf "\n"
+          echo "============================= pylint session starts =============================="
+          printf "\n"
+          # pylint --rcfile .pylintrc src/data
       - name: Test with pytest
         run: |
           pip install pytest
           pytest -o python_files=test_*.py
+      - name: Coverage with pytest-cov
+        run: |
+          pip install coverage
+          pip install pytest-cov
+          pytest --cov src/data tests/data

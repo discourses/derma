@@ -2,8 +2,16 @@ import pandas as pd
 
 
 class Missing:
+    """
+    The Missing object
+    """
 
     def __init__(self, text=None, numeric=None):
+        """
+        The constructor
+        :param text: The string that should replace str NaN values; default 'unknown'.
+        :param numeric: The number that should replace numeric NaN values; default 0.
+        """
         self.text = 'unknown' if text is None else text
         self.numeric = 0 if numeric is None else numeric
 

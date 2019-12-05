@@ -1,8 +1,7 @@
-mxnet
 pandas
 matplotlib
 setuptools
-pytest 
+pytest
 coverage
 scikit-learn
 requests
@@ -11,3 +10,5 @@ seaborn
 PyYAML
 Pillow
 numpy
+pytest-cov
+pylint

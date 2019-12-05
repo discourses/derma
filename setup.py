@@ -6,7 +6,7 @@ VERSION = '0.0.1'
 DESCRIPTION = 'The dermatology project'
 AUTHOR = 'greyhypotheses'
 URL = 'https://github.com/greyhypotheses/derma'
-PYTHON_REQUIRES = '=3.6.9'
+PYTHON_REQUIRES = '=3.7.5'
 
 with open('README.md') as f:
     readme_text = f.read()

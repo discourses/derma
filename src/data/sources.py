@@ -1,10 +1,19 @@
-import pandas as pd
-import configurations.configurations as cfg
 import sys
+
+import pandas as pd
+
+import configurations.configurations as cfg
 
 
 class Sources:
+    """
+    The Sources object
+    """
+
     def __init__(self):
+        """
+        The constructor
+        """
         self.name = 'Sources'
 
     # The data classifications
@@ -44,6 +53,13 @@ class Sources:
 
     @staticmethod
     def summary():
+        """
+        Reads the 'truth' & 'metadata' files and joins their data via the image name field 'image'
+        :return:
+            listing: The joined 'truth' & 'metadata' data
+            labels: The list of the data's classes; the classes are one-hot-coded.
+            fields: The list of metadata fields, excluding labels.
+        """
         truth, _ = Sources.truth()
         metadata, _ = Sources.metadata()
 

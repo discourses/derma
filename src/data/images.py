@@ -1,13 +1,22 @@
 import logging
-import requests
 import multiprocessing as mp
+
 import pandas as pd
+import requests
+
 import configurations.configurations as cfg
 
 
 class Images:
+    """
+    The Images object
+    """
 
     def __init__(self):
+        """
+        The constructor
+        """
+
         # Logging
         cfg.logs()
         self.logger = logging.getLogger('debug')
@@ -15,10 +24,24 @@ class Images:
 
     @staticmethod
     def state(image):
+        """
+
+        :param image:
+        :return:
+        """
+
+        # Image
         r = requests.get(cfg.variables()['data']['source']['images'] + image + '.jpg')
+
+        # Return image & access status code
         return {'image': image, 'status': 1 if r.status_code == 200 else 0}
 
     def states(self, images):
+        """
+
+        :param images:
+        :return:
+        """
 
         # Parallel Processing via CPU
         pool = mp.Pool(mp.cpu_count())

@@ -1,10 +1,10 @@
-import src.data.Usable as Usable
+import src.data.usable as usable
 
 
 class TestUsable:
 
     def test_summary(self):
-        listing, labels, fields = Usable.Usable().summary()
+        listing, labels, fields = usable.Usable().summary()
 
         assert len(labels) != 0, "At least one label column must exist"
         assert len(fields) != 0, "Missing field names"
