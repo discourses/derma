@@ -1,20 +1,27 @@
-import src.data.Sources as Sources
+import src.data.sources as sources
 
 
 class TestSources:
 
     def test_truth(self):
-        _, n_truth = Sources.Sources().truth()
-        assert n_truth != 0, "The ground truth labels file should not be empty"
+        truth, n_truth = sources.Sources().truth()
+        assert truth.shape[0] != 0, "The ground truth labels file should not be empty"
+        assert n_truth != 0, "The ground truth labels file should have more than zero records"
+        assert truth.shape[0] == n_truth, "The variable 'n_truth' is the number of records in data frame 'truth', " \
+                                          " therefore truth.shape[0] & n_truth must be equal."
 
     def test_metadata(self):
-        _, n_metadata = Sources.Sources().metadata()
-        assert n_metadata != 0, "The metadata file should not be empty"
+        metadata, n_metadata = sources.Sources().metadata()
+        assert metadata.shape[0] != 0, "The metadata file should not be empty"
+        assert n_metadata != 0, "The metadata file should have more than zero records"
+        assert metadata.shape[0] == n_metadata, "The variable 'n_metadata' is the number of records in " \
+                                                "data frame 'metadata', therefore metadata.shape[0] & " \
+                                                "n_metadata must be equal."
 
     def test_summary(self):
-        _, n_truth = Sources.Sources().truth()
-        _, n_metadata = Sources.Sources().metadata()
-        listing, labels, fields = Sources.Sources().summary()
+        _, n_truth = sources.Sources().truth()
+        _, n_metadata = sources.Sources().metadata()
+        listing, labels, fields = sources.Sources().summary()
 
         assert n_truth == listing.shape[0], "The number of ground truth & listing data points must be equal"
         assert n_metadata == listing.shape[0], "The number of medata & listing data points must be equal"
