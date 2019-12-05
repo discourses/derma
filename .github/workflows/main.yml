@@ -35,6 +35,13 @@ jobs:
           printf "\n"
           echo "Complexity issues:"
           flake8 . --count --exit-zero --max-complexity=10 --max-line-length=120 --statistics src/data
+      - name: Lint with pylint
+        run: |
+          pip install pylint
+          printf "\n"
+          echo "============================= pylint session starts =============================="
+          printf "\n"
+          pylint --rcfile .pylintrc src/data
       - name: Test with pytest
         run: |
           pip install pytest
