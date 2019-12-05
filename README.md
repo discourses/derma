@@ -86,7 +86,7 @@ To ensure availability these three data files are also stored in a [GitHub repos
 
 ### Preliminary Analysis of Metadata
 
-A preliminary analysis of the metadata is hosted in the notebook [preliminary.ipynb](./notebooks/preliminary.ipynb).
+A preliminary analysis of the metadata is hosted in the notebook [preliminary.ipynb](https://nbviewer.jupyter.org/github/greyhypotheses/derma/blob/master/notebooks/preliminary.ipynb).
 
 <br>
 <br>
