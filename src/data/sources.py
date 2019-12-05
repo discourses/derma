@@ -7,10 +7,13 @@ import configurations.configurations as cfg
 
 class Sources:
     """
-    Processes source data
+    The Sources object
     """
 
     def __init__(self):
+        """
+        The constructor
+        """
         self.name = 'Sources'
 
     # The data classifications
