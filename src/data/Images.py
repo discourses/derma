@@ -1,7 +1,9 @@
 import logging
-import requests
 import multiprocessing as mp
+
 import pandas as pd
+import requests
+
 import configurations.configurations as cfg
 
 
@@ -19,7 +21,6 @@ class Images:
         return {'image': image, 'status': 1 if r.status_code == 200 else 0}
 
     def states(self, images):
-
         # Parallel Processing via CPU
         pool = mp.Pool(mp.cpu_count())
 
