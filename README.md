@@ -5,7 +5,7 @@
   * [Problem Statement](#problem-statement)
   * [Rationale](#rationale)
   * [The Data](#the-data)
-  * [Preliminary Analysis of Metadata](./notebooks/preliminary.ipynb)
+  * [Preliminary Analysis of Metadata](https://nbviewer.jupyter.org/github/greyhypotheses/derma/blob/master/notebooks/preliminary.ipynb)
   * [Copyright & Attribution](#copyright-and-attribution)
 
 <br>
