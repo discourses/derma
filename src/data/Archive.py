@@ -1,6 +1,8 @@
-import requests
-import pandas as pd
 import sys
+
+import pandas as pd
+import requests
+
 import configurations.configurations as cfg
 
 
