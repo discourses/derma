@@ -12,3 +12,4 @@ Pillow
 numpy
 pytest-cov
 pylint
+tensorflow
