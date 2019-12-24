@@ -16,3 +16,4 @@ dependencies:
   - numpy=1.17.4
   - pytest-cov=2.8.1
   - pylint=2.4.4
+  - tensorflow=2.0.0
