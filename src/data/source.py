@@ -23,6 +23,7 @@ class Source:
         # Variables
         variables = cfg.Cfg().variables()
         self.inventory_filename = variables['inventory']['filename']
+        self.inventory_url = variables['inventory']['url']
         self.images_location = variables['images']['location']
         self.images_ext = variables['images']['ext']
         self.inventory_fields = variables['inventory']['fields']
@@ -37,7 +38,7 @@ class Source:
         for i in self.inventory_filename:
             inventory_filename = os.path.join(inventory_filename, i)
 
-        return pd.read_csv(inventory_filename)
+        return pd.read_csv(self.inventory_url)
 
 
     def url(self, inventory):
