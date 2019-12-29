@@ -1,29 +1,17 @@
-import logging
+import src.data.source as source
 
-import sklearn.model_selection as model_selection
-
-import configurations.configurations as cfg
-import src.data.images as images
-import src.data.usable as usable
+import src.modelling.VGG19E.complex as vgg19e
 
 
 def main():
-    # Logging
-    cfg.logs()
-    logger = logging.getLogger('root')
-    logger.name = __name__
 
-    # Preliminaries
-    listing, labels, fields = usable.Usable().summary()
+    # Data
+    training, validating, testing, labels = source.Source().summaries()
 
-    # Split
-    random_state = cfg.variables()['modelling']['parameters']['random_state']
-    xlearn, xtest, ylearn, ytest = model_selection \
-        .train_test_split(listing.drop(columns=labels).values, listing[labels],
-                          train_size=0.7, random_state=random_state, stratify=listing[labels])
-
-    x = images.Images().states(listing['image'])
-    logger.info(x)
+    # VGG19 Extract
+    vgg = vgg19e.Steps(training_=training, validating_=validating, testing_=testing,
+                       labels=labels, epochs=2)
+    vgg.run()
 
 
 if __name__ == '__main__':
