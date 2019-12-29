@@ -54,6 +54,19 @@ class Source:
 
 
     def builder(self, x, y, labels, group):
+        """
+        :type x: numpy.ndarray
+        :type y: numpy.ndarray
+        :type labels: list
+        :type group: str
+
+        :param x: The features part of a data set
+        :param y: The corresponding classes/labels
+        :param labels: The list of the labels
+        :param group: The data group in focus, i.e., training, validating, or testing; for logging purposes.
+        :return:
+        """
+
         data = pd.DataFrame(x, columns=['url']) \
             .join(pd.DataFrame(y, columns=labels), how='inner')
 
