@@ -1,1 +1,1 @@
-﻿conda create --prefix ~/Anaconda3/envs/derma python=3.7.5 pandas matplotlib setuptools pytest coverage scikit-learn requests jupyterlab pywin32 seaborn pyyaml pillow numpy pytest-cov pylint tensorflow
+﻿conda create --prefix ~/Anaconda3/envs/derma python=3.7.5 tensorflow pandas matplotlib pytest coverage pytest-cov pylint scikit-learn scikit-image requests jupyterlab nodejs
