@@ -1,0 +1,21 @@
+inventory:
+  url: "https://raw.githubusercontent.com/greyhypotheses/derma/develop/inventory.csv"
+  filename: ["images", "inventory.csv"]
+  key: "name"
+  fields: ["name", "age_approx", "anatom_site_general", "sex", "angle", "drawn", "image"]
+images:
+  location: ["images"]
+  ext: ".png"
+  rows: 224
+  columns: 224
+  channels: 3
+  rotations: [0, 90, 180, 270]
+modelling:
+  sample: True
+  class_sample_size: 920
+  features: ['url']
+  random_state: 5
+  minimum_class_instances: 2
+  batch_size: 32
+  train_size_inventory: 0.70
+  train_size_evaluation: 0.35

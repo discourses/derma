@@ -26,21 +26,20 @@ jobs:
           pip install flake8
           printf "\n"
           echo "============================= flake8 session starts =============================="
-          printf "\n"
+
           # stop the build if there are Python syntax errors or undefined names
+          printf "\n"
           echo "Issues in relation to logic (F7), syntax (Python E9, Flake F7), mathematical
           formulae symbols (F63), undefined variable names (F82):"
           echo "src/data"
           flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics src/data
-          echo "src/graphing"
-          flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics src/graphing
+
           # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
           printf "\n"
           echo "Complexity issues:"
           echo "src/data"
           flake8 . --count --exit-zero --max-complexity=10 --max-line-length=120 --statistics src/data
-          echo "src/graphing"
-          flake8 . --count --exit-zero --max-complexity=10 --max-line-length=120 --statistics src/graphing
+
       - name: Lint with pylint
         run: |
           pip install pylint

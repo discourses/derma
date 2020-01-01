@@ -17,8 +17,9 @@ handlers:
     formatter: simple
     filename: info.log
     maxBytes: 4096
-    backupCount: 8
+    backupCount: 0
     encoding: utf8
+    mode: w
 
   error:
     class: logging.handlers.RotatingFileHandler
@@ -26,15 +27,20 @@ handlers:
     formatter: simple
     filename: errors.log
     maxBytes: 4096
-    backupCount: 8
+    backupCount: 0
     encoding: utf8
+    mode: w
 
 loggers:
   basic:
+    level: INFO
+    handlers: [file, error]
+    propagate: no
+  debug:
     level: DEBUG
     handlers: [file, error]
     propagate: no
 
 root:
   level: DEBUG
-  handlers: [file, error]
+  handlers: [file]

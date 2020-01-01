@@ -5,7 +5,7 @@
   * [Problem Statement](#problem-statement)
   * [Rationale](#rationale)
   * [The Data](#the-data)
-  * [Preliminary Analysis of Metadata](https://nbviewer.jupyter.org/github/greyhypotheses/derma/blob/master/notebooks/preliminary.ipynb)
+  * [Preliminary Analysis of Metadata](https://nbviewer.jupyter.org/github/greyhypotheses/augmentation/blob/develop/notebooks/preliminary.ipynb)
   * [Copyright & Attribution](#copyright-and-attribution)
 
 <br>
@@ -13,7 +13,7 @@
 
 ## Brief Repository Notes
 
-This repository uses the wonderful continuous integration & delivery tool GitHub Actions. Hence, a variety of tests are conducted continuously.  The badges below will continuously highlight the state of each repository branch w.r.t. GitHub Action's actions. 
+This repository uses the wonderful continuous integration & delivery tool GitHub Actions. Hence, a variety of tests are conducted continuously.  The badges below will continuously highlight the state of each repository branch w.r.t. GitHub Action's actions.
 
 branch|state
 :---|:---
@@ -67,7 +67,7 @@ As noted above, this project's modelling challenge is focused on the Internation
 
 <br>
 
-|file| description|size| 
+|file| description|size|
 |:---|:---|:---|
 |[ISIC_2019_Training_Input.zip](https://s3.amazonaws.com/isic-challenge-2019/ISIC_2019_Training_Input.zip)|25,331 JPEG images of skin lesions|~9GB|
 |[ISIC_2019_Training_Metadata.csv](https://s3.amazonaws.com/isic-challenge-2019/ISIC_2019_Training_Metadata.csv)|25,331 metadata entries of age, sex, general anatomic site, and common lesion identifier|1.15MB|
@@ -86,7 +86,7 @@ To ensure availability these three data files are also stored in a [GitHub repos
 
 ### Preliminary Analysis of Metadata
 
-A preliminary analysis of the metadata is hosted in the notebook [preliminary.ipynb](https://nbviewer.jupyter.org/github/greyhypotheses/derma/blob/master/notebooks/preliminary.ipynb).
+A preliminary analysis of the metadata is hosted in the notebook [preliminary.ipynb](https://nbviewer.jupyter.org/github/greyhypotheses/augmentation/blob/develop/notebooks/preliminary.ipynb).
 
 <br>
 <br>
