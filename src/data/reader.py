@@ -21,7 +21,7 @@ class Reader:
     def generator(self, data, labels):
         base = tf.keras.preprocessing.image.ImageDataGenerator(rescale=self.rescale)
         return base.flow_from_dataframe(dataframe=data,
-                                        directory='/content/img/',
+                                        directory=None,
                                         x_col='url',
                                         y_col=labels,
                                         target_size=(self.rows, self.columns),
