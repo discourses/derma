@@ -21,15 +21,6 @@ develop|![](https://github.com/greyhypotheses/derma/workflows/Derma%20Python%20P
 master|![](https://github.com/greyhypotheses/derma/workflows/Derma%20Python%20Package/badge.svg?branch=master)
 
 <br>
-
-The current structure of this repository's project is outlined below.  An item with a ``--`` prefix is a directory, otherwise a file.  The ``.github/workflows`` directory host the `yaml` files used by GitHub Actions.
-
-<br>
-
-![](./docs/structure.svg)
-
-
-<br>
 <br>
 
 ## Automatic Identification of Skin Lesion Types
