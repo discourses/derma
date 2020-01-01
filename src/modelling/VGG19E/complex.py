@@ -7,7 +7,7 @@ import tensorflow as tf
 import src.cfg.cfg as cfg
 import src.data.reader as reader
 import src.modelling.VGG19E.architecture as arc
-import src.modelling.metrics as met
+import src.evaluating.metrics as met
 
 
 class Complex:
@@ -32,6 +32,10 @@ class Complex:
         self.validating = read.generator(validating_, labels)
         self.testing = read.generator(testing_, labels)
 
+        self.n_training = training_.shape[0]
+        self.n_validating = validating_.shape[0]
+        self.n_testing = testing_.shape[0]
+
         # The labels/classes
         self.labels = labels
 
@@ -55,13 +59,13 @@ class Complex:
         directory = os.path.join(self.base, name)
 
         model.fit_generator(generator=self.training,
-                            steps_per_epoch=math.floor(len(self.training) / self.batch_size),
+                            steps_per_epoch=math.floor(self.n_training / self.batch_size),
                             epochs=self.epochs,
                             verbose=1,
                             callbacks=[tf.keras.callbacks.TensorBoard(log_dir=directory, update_freq='epoch'),
                                        hp.KerasCallback(directory, hyp)],
                             validation_data=self.validating,
-                            validation_steps=math.floor(len(self.validating) / self.batch_size))
+                            validation_steps=math.floor(self.n_validating / self.batch_size))
 
 
     def run(self):
@@ -75,10 +79,10 @@ class Complex:
 
         # Architecture
         architecture = arc.Architecture()
-        hyper = architecture.hyper()
 
-        # The hyperparameters
-        alpha_units, alpha_drop_rate, beta_units, beta_drop_rate, optimization = architecture.hyperparameters()
+        # The hyperparameters priors & the list of hyperparameter combinations
+        alpha_units, alpha_drop_rate, beta_units, beta_drop_rate, optimization = architecture.priors()
+        hyperparameters = architecture.hyperparameters()
 
         # For TensorFlow's TensorBoard
         # noinspection PyUnresolvedReferences
@@ -90,9 +94,9 @@ class Complex:
         combination = 0
 
         # For each combination of hyperparameters determine the Deep CNN Model
-        for hyp in hyper:
+        for hyp in hyperparameters:
             model: tf.keras.preprocessing.image.ImageDataGenerator = \
-                architecture.core(hyp=hyp, metrics=metrics.classification(), labels=self.labels)
+                architecture.core(hyperparameters=hyp, metrics=metrics.classification(), labels=self.labels)
 
             Complex.instance(self, hyp=hyp, combination=combination, model=model)
 
