@@ -37,7 +37,7 @@ class Source:
         for i in self.inventory_filename:
             inventory_filename = os.path.join(inventory_filename, i)
 
-        inventory = pd.read_csv(inventory_filename)
+        inventory = pd.read_csv(self.inventory_url)
 
         inventory['name'] = inventory['image'] + inventory.angle.apply(
             lambda x: '-' + str(x).zfill(3) + self.images_ext)
