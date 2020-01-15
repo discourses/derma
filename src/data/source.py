@@ -1,22 +1,33 @@
+"""Module source"""
 import os
-
+import sys
 import pandas as pd
 
-from src.cfg import cfg as cfg
+from src.federal import federal as federal
 
 
 class Source:
+    """
+    Class Source
+
+    The methods herein download and prepare the metadata of the images that would be used for modelling
+    """
+
 
     def __init__(self):
+        """
+        The constructor
+
+        Herein, the constructor initialises the global variables used by the methods of this class.
+        """
 
         # Root directory
         self.root = os.path.split(os.getcwd())[0]
 
         # Variables
-        variables = cfg.Cfg().variables()
+        variables = federal.Federal().variables()
 
         # Inventory
-        self.inventory_filename = variables['inventory']['filename']
         self.inventory_url = variables['inventory']['url']
         self.inventory_fields = variables['inventory']['fields']
 
@@ -31,13 +42,18 @@ class Source:
         self.class_sample_size = variables['modelling']['class_sample_size']
 
 
-    def inventory(self):
+    def inventory(self) -> pd.DataFrame:
+        """
+        Downloads the metadata summary of images
+        :return:
+            Metadata DataFrame
+        """
 
-        inventory_filename = self.root
-        for i in self.inventory_filename:
-            inventory_filename = os.path.join(inventory_filename, i)
-
-        inventory = pd.read_csv(self.inventory_url)
+        try:
+            inventory = pd.read_csv(self.inventory_url)
+        except OSError as error:
+            print(error)
+            sys.exit(1)
 
         inventory['name'] = inventory['image'] + inventory.angle.apply(
             lambda x: '-' + str(x).zfill(3) + self.images_ext)

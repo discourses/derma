@@ -4,7 +4,7 @@ import os
 import pandas as pd
 import sklearn.model_selection as model_selection
 
-import src.cfg.cfg as cfg
+import src.federal.federal as federal
 
 
 class Transform:
@@ -14,13 +14,13 @@ class Transform:
         self.root = os.path.split(os.getcwd())[0]
 
         # Logging
-        cfg.Cfg().logs()
+        federal.Federal().logs()
         logging.basicConfig(level=logging.INFO)
         self.logger = logging.getLogger('root')
         self.logger.name = __name__
 
         # Variables
-        variables = cfg.Cfg().variables()
+        variables = federal.Federal().variables()
         self.random_state = variables['modelling']['random_state']
         self.train_size_inventory = variables['modelling']['train_size_inventory']
         self.train_size_evaluation = variables['modelling']['train_size_evaluation']
