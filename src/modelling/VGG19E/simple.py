@@ -1,7 +1,7 @@
 import math
 import tensorflow as tf
 
-import src.cfg.cfg as cfg
+import src.federal.federal as cfg
 import src.data.reader as reader
 import src.modelling.VGG19E.architecture as arc
 import src.evaluating.metrics as met
