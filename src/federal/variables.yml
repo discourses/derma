@@ -1,6 +1,5 @@
 inventory:
   url: "https://raw.githubusercontent.com/greyhypotheses/derma/develop/inventory.csv"
-  filename: ["images", "inventory.csv"]
   key: "name"
   fields: ["name", "age_approx", "anatom_site_general", "sex", "angle", "drawn", "image"]
 images:
