@@ -1,9 +1,9 @@
 import math
 import tensorflow as tf
 
-import src.federal.federal as cfg
+import src.federal.federal as federal
 import src.data.reader as reader
-import src.modelling.VGG19E.architecture as arc
+import src.modelling.VGG19FE.architecture as arc
 import src.evaluating.metrics as met
 
 
@@ -20,7 +20,7 @@ class Simple:
         """
 
         # Variables
-        variables = cfg.Cfg().variables()
+        variables = federal.Federal().variables()
         self.batch_size = variables['modelling']['batch_size']
 
         # Data
