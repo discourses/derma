@@ -1,3 +1,8 @@
+Associated repositories:
+
+* [dermatology](https://github.com/greyhypotheses/dermatology): An image data repository of the original and augmented images.
+* [augmentation](https://github.com/greyhypotheses/augmentation): This repository's package creates augmentations of the original images.
+* [derma.statistics]
 
 
 * [Brief Repository Notes](#brief-repository-notes)
