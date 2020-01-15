@@ -1,5 +1,5 @@
 inventory:
-  url: "https://raw.githubusercontent.com/greyhypotheses/derma/develop/inventory.csv"
+  url: "https://raw.githubusercontent.com/greyhypotheses/dermatology/master/augmentations/inventory.csv"
   key: "name"
   fields: ["name", "age_approx", "anatom_site_general", "sex", "angle", "drawn", "image"]
 images:
