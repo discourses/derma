@@ -4,10 +4,11 @@ import os
 import tensorboard.plugins.hparams.api as hp
 import tensorflow as tf
 
-import src.cfg.cfg as cfg
 import src.data.reader as reader
-import src.modelling.VGG19E.architecture as arc
 import src.evaluating.metrics as met
+import src.federal.federal as federal
+import src.modelling.VGG19FE.architecture as arc
+import src.modelling.VGG19FE.hyperparameters as hyp
 
 
 class Complex:
@@ -23,7 +24,7 @@ class Complex:
         """
 
         # Variables
-        variables = cfg.Cfg().variables()
+        variables = federal.Federal().variables()
         self.batch_size = variables['modelling']['batch_size']
 
         # Data
@@ -46,10 +47,10 @@ class Complex:
         self.base = 'logs'
 
 
-    def instance(self, hyp, combination, model):
+    def instance(self, hyperparameters_combination, combination, model):
         """
 
-        :param hyp:
+        :param hyperparameters_combination:
         :param combination:
         :param model:
         :return:
@@ -74,18 +75,14 @@ class Complex:
         :return:
         """
 
-        # Metrics
-        metrics = met.Metrics()
-
-        # Architecture
-        architecture = arc.Architecture()
-
         # The hyperparameters priors & the list of hyperparameter combinations
-        alpha_units, alpha_drop_rate, beta_units, beta_drop_rate, optimization = architecture.priors()
-        hyperparameters = architecture.hyperparameters()
+        hyperparameters = hyp.Hyperparameters()
+        alpha_units, alpha_drop_rate, beta_units, beta_drop_rate, optimization = hyperparameters.priors()
+        hyperparameters_values = hyperparameters.values()
 
         # For TensorFlow's TensorBoard
         # noinspection PyUnresolvedReferences
+        metrics = met.Metrics()
         with tf.summary.create_file_writer(logdir=self.base).as_default():
             hp.hparams_config(hparams=[alpha_units, alpha_drop_rate, beta_units, beta_drop_rate, optimization],
                               metrics=metrics.units())
@@ -94,10 +91,11 @@ class Complex:
         combination = 0
 
         # For each combination of hyperparameters determine the Deep CNN Model
-        for hyp in hyperparameters:
+        architecture = arc.Architecture()
+        for i in hyperparameters_values:
             model: tf.keras.preprocessing.image.ImageDataGenerator = \
-                architecture.core(hyperparameters=hyp, metrics=metrics.classification(), labels=self.labels)
+                architecture.core(hyperparameters=i, metrics=metrics.classification(), labels=self.labels)
 
-            Complex.instance(self, hyp=hyp, combination=combination, model=model)
+            Complex.instance(self, hyperparameters_combination=i, combination=combination, model=model)
 
             combination += 1

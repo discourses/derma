@@ -1,16 +1,27 @@
+"""Module federal"""
 import os
 
 import yaml
 
+import typing
 
-class Cfg:
+
+class Federal:
+    """
+    Class Federal
+    Consists of methods that parse the global settings summarised in the
+    YAML dictionaries of directory federal
+    """
 
     def __init__(self):
+        """
+        The constructor
+        """
         self.path = os.path.split(os.path.abspath(__file__))[0]
 
-    def variables(self):
+    def variables(self) -> typing.Dict:
         """
-        Parses the generic variables file of this project
+        Parses the global variables file of this project
 
         :return:
         """
@@ -23,7 +34,7 @@ class Cfg:
 
         return variables
 
-    def logs(self):
+    def logs(self) -> typing.Dict:
         """
         Parses the logs settings file of this project
 

@@ -1,11 +1,19 @@
+Associated repositories:
 
+* [dermatology](https://github.com/greyhypotheses/dermatology): An image data repository of the original and augmented images.
+* [augmentation](https://github.com/greyhypotheses/augmentation): This repository's package creates augmentations of the original images.
+* [derma.statistics]
+
+<br>
+
+# Derma
 
 * [Brief Repository Notes](#brief-repository-notes)
 * [Project](#automatic-identification-of-skin-lesion-types)
   * [Problem Statement](#problem-statement)
   * [Rationale](#rationale)
   * [The Data](#the-data)
-  * [Preliminary Analysis of Metadata](https://nbviewer.jupyter.org/github/greyhypotheses/augmentation/blob/develop/notebooks/preliminary.ipynb)
+  * [Preliminary Analysis of Metadata](https://drive.google.com/file/d/1H1Afh8siQ6bsVdVaaq4qoQASQhNnoyWT/view?usp=sharing)
   * [Copyright & Attribution](#copyright-and-attribution)
 
 <br>
@@ -77,7 +85,7 @@ To ensure availability these three data files are also stored in a [GitHub repos
 
 ### Preliminary Analysis of Metadata
 
-A preliminary analysis of the metadata is hosted in the notebook [preliminary.ipynb](https://nbviewer.jupyter.org/github/greyhypotheses/augmentation/blob/develop/notebooks/preliminary.ipynb).
+A preliminary analysis of the metadata is hosted in the notebook [preliminary.ipynb](https://drive.google.com/file/d/1H1Afh8siQ6bsVdVaaq4qoQASQhNnoyWT/view?usp=sharing).
 
 <br>
 <br>

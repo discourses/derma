@@ -1,6 +1,6 @@
 import tensorflow as tf
 
-import src.cfg.cfg as cfg
+import src.federal.federal as federal
 
 
 class Reader:
@@ -13,7 +13,7 @@ class Reader:
         """
         self.rescale = rescale
 
-        variables = cfg.Cfg().variables()
+        variables = federal.Federal().variables()
         self.rows = variables['images']['rows']
         self.columns = variables['images']['columns']
         self.batch_size = variables['modelling']['batch_size']
