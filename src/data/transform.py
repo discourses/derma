@@ -4,8 +4,6 @@ import os
 import pandas as pd
 import sklearn.model_selection as model_selection
 
-import src.federal.federal as federal
-
 import src.config as config
 
 
