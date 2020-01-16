@@ -6,6 +6,8 @@ import sklearn.model_selection as model_selection
 
 import src.federal.federal as federal
 
+import src.config as config
+
 
 class Transform:
 
@@ -14,13 +16,13 @@ class Transform:
         self.root = os.path.split(os.getcwd())[0]
 
         # Logging
-        federal.Federal().logs()
+        config.Config().logs()
         logging.basicConfig(level=logging.INFO)
         self.logger = logging.getLogger('root')
         self.logger.name = __name__
 
         # Variables
-        variables = federal.Federal().variables()
+        variables = config.Config().variables()
         self.random_state = variables['modelling']['random_state']
         self.train_size_inventory = variables['modelling']['train_size_inventory']
         self.train_size_evaluation = variables['modelling']['train_size_evaluation']
