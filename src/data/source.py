@@ -1,9 +1,11 @@
 """Module source"""
 import os
 import sys
+import typing
+
 import pandas as pd
 
-from src.federal import federal as federal
+import src.config as config
 
 
 class Source:
@@ -25,7 +27,7 @@ class Source:
         self.root = os.path.split(os.getcwd())[0]
 
         # Variables
-        variables = federal.Federal().variables()
+        variables = config.Config().variables()
 
         # Inventory
         self.inventory_url = variables['inventory']['url']
@@ -39,12 +41,14 @@ class Source:
         self.features = variables['modelling']['features']
         self.random_state = variables['modelling']['random_state']
         self.sample = variables['modelling']['sample']
+        self.replace = variables['modelling']['replace']
         self.class_sample_size = variables['modelling']['class_sample_size']
 
 
     def inventory(self) -> pd.DataFrame:
         """
-        Downloads the metadata summary of images
+        Downloads the metadata summary of images.
+
         :return:
             Metadata DataFrame
         """
@@ -61,7 +65,16 @@ class Source:
         return inventory
 
 
-    def url(self, inventory):
+    def url(self, inventory: pd.DataFrame) -> pd.DataFrame:
+        """
+        Adds the field 'url' to the inputted data frame.  It records the path - including the image name - to an image.
+
+        :type inventory: pandas.DataFrame
+
+        :param inventory:
+        :return:
+            pandas DataFrame inventory
+        """
 
         images_location = self.root
         for i in self.images_location:
@@ -72,10 +85,36 @@ class Source:
         return inventory
 
 
-    def sampling(self, data, fields, labels):
+    def sampling(self, data: pd.DataFrame, fields: typing.List, labels: typing.List) -> pd.DataFrame:
+        """
+        Provides a sample of the data
 
+        :type data: pandas.DataFrame
+        :type fields: List
+        :type labels: List
+
+        :param data: A data frame of the data set wherefrom a sample is extract
+        :param fields: The fields of the data set, excluding the class/label columns
+        :param labels: The labels of the data set
+        :return:
+            A sample of data
+        """
+
+        # Counts the number of records per class/label
+        n_per_label = data[labels].sum(axis=0)
+
+        # If sampling without replacement is required, but one or more classes have fewer records than
+        # the requested sample size, the sample size is assigned as outlined below
+        if (not self.replace) & (n_per_label.min() < self.class_sample_size):
+            print("Because sampling without replacement has been requested, and to ensure a balanced "
+                  "data set, the sample size has been changed to the size of the smallest class")
+            class_sample_size = n_per_label.min()
+        else:
+            class_sample_size = self.class_sample_size
+
+        # Hence
         excerpt = data.groupby(labels)[fields + labels] \
-            .apply(lambda x: x.sample(n=self.class_sample_size, replace=False, random_state=self.random_state))
+            .apply(lambda x: x.sample(n=class_sample_size, replace=self.replace, random_state=self.random_state))
         excerpt.reset_index(drop=True, inplace=True)
 
         return excerpt
