@@ -27,7 +27,7 @@ class Config:
         :return:
         """
 
-        url = 'https://raw.githubusercontent.com/greyhypotheses/dictionaries/master/derma/variables.yml'
+        url = 'https://raw.githubusercontent.com/greyhypotheses/dictionaries/develop/derma/variables.yml'
         try:
             req = requests.get(url)
         except requests.exceptions.RequestException as e:
@@ -48,7 +48,7 @@ class Config:
         :return:
         """
 
-        url = 'https://raw.githubusercontent.com/greyhypotheses/dictionaries/master/derma/logs.yml'
+        url = 'https://raw.githubusercontent.com/greyhypotheses/dictionaries/develop/derma/logs.yml'
         try:
             req = requests.get(url)
         except requests.exceptions.RequestException as e:
