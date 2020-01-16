@@ -17,13 +17,6 @@ def main():
 
     # Data
     inventory, labels, features = source.Source().summaries()
-    print(inventory.shape)
-
-    n_per_class = inventory[labels].sum(axis=0)
-    print(n_per_class)
-    print(n_per_class.min())
-    print(type(n_per_class))
-
     training, validating, testing = transform.Transform().summaries(inventory, features, labels)
     print(training.head())
 
