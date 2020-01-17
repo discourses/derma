@@ -1,23 +1,34 @@
-import typing
 import os
 import sys
-import yaml
+import typing
+
 import requests
+import yaml
 
 
 class Config:
-
     """
     Class Federal
     Consists of methods that parse the global settings summarised in the
     YAML dictionaries of directory federal
     """
 
+
     def __init__(self):
         """
         The constructor
         """
-        self.path = os.path.split(os.path.abspath(__file__))[0]
+        self.root = os.path.split(os.path.abspath(__package__))[0]
+
+
+    def paths(self, partitions):
+
+        path = self.root
+        for partition in partitions:
+            path = os.path.join(path, partition)
+
+        return path
+
 
     @staticmethod
     def variables() -> typing.Dict:
@@ -38,7 +49,12 @@ class Config:
         variables['images']['image_dimension'] = (variables['images']['rows'], variables['images']['columns'],
                                                   variables['images']['channels'])
 
+        variables['modelling']['model_checkpoints_path'] = \
+            Config().paths(variables['modelling']['model_checkpoints_location'])
+        variables['images']['path'] = Config().paths(variables['images']['location'])
+
         return variables
+
 
     @staticmethod
     def logs() -> typing.Dict:
