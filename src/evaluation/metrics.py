@@ -9,7 +9,7 @@ class Metrics:
 
 
     @staticmethod
-    def classification():
+    def definitions_keras():
         metrics = [tf.keras.metrics.TruePositives(name='tp'),
                    tf.keras.metrics.FalsePositives(name='fp'),
                    tf.keras.metrics.TrueNegatives(name='tn'),
@@ -22,7 +22,7 @@ class Metrics:
 
 
     @staticmethod
-    def units():
+    def definitions_tensorflow():
         metrics = [hp.Metric('tp'),
                    hp.Metric('fp'),
                    hp.Metric('tn'),

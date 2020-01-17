@@ -1,7 +1,13 @@
+"""Module hyperparameters"""
 import tensorboard.plugins.hparams.api as hp
 
 
 class Hyperparameters:
+    """
+    Class Hyperparameters
+
+    The numerical values of this program must be converted to YAML dictionary values, and subsequently read-in
+    """
 
     def __init__(self):
 
@@ -10,10 +16,10 @@ class Hyperparameters:
     @staticmethod
     def priors():
         alpha_units = hp.HParam('num_units', hp.Discrete([512]))
-        alpha_drop_rate = hp.HParam('dropout', hp.RealInterval(0.1, 0.5))
+        alpha_drop_rate = hp.HParam('dropout', hp.RealInterval(0.1, 0.3))
 
         beta_units = hp.HParam('num_units', hp.Discrete([512]))
-        beta_drop_rate = hp.HParam('dropout', hp.RealInterval(0.1, 0.5))
+        beta_drop_rate = hp.HParam('dropout', hp.RealInterval(0.1, 0.3))
 
         optimization = hp.HParam('optimizer', hp.Discrete(['adam']))
 

@@ -1,9 +1,11 @@
 """Module source"""
 import os
 import sys
+
 import pandas as pd
 
-from src.federal import federal as federal
+import src.config as config
+import src.data.sampling as sampling
 
 
 class Source:
@@ -21,30 +23,26 @@ class Source:
         Herein, the constructor initialises the global variables used by the methods of this class.
         """
 
-        # Root directory
-        self.root = os.path.split(os.getcwd())[0]
-
         # Variables
-        variables = federal.Federal().variables()
+        variables = config.Config().variables()
 
         # Inventory
         self.inventory_url = variables['inventory']['url']
         self.inventory_fields = variables['inventory']['fields']
 
         # Images
-        self.images_location = variables['images']['location']
+        self.images_path = variables['images']['path']
         self.images_ext = variables['images']['ext']
 
         # Modelling
         self.features = variables['modelling']['features']
-        self.random_state = variables['modelling']['random_state']
         self.sample = variables['modelling']['sample']
-        self.class_sample_size = variables['modelling']['class_sample_size']
 
 
     def inventory(self) -> pd.DataFrame:
         """
-        Downloads the metadata summary of images
+        Downloads the metadata summary of images.
+
         :return:
             Metadata DataFrame
         """
@@ -55,30 +53,23 @@ class Source:
             print(error)
             sys.exit(1)
 
-        inventory['name'] = inventory['image'] + inventory.angle.apply(
-            lambda x: '-' + str(x).zfill(3) + self.images_ext)
-
         return inventory
 
 
-    def url(self, inventory):
+    def url(self, inventory: pd.DataFrame) -> pd.DataFrame:
+        """
+        Adds the field 'url' to the inputted data frame.  It records the path - including the image name - to an image.
 
-        images_location = self.root
-        for i in self.images_location:
-            images_location = os.path.join(images_location, i)
+        :type inventory: pandas.DataFrame
 
-        inventory['url'] = inventory.name.apply(lambda x: os.path.join(images_location, x))
+        :param inventory:
+        :return:
+            pandas DataFrame inventory
+        """
+
+        inventory['url'] = inventory.name.apply(lambda x: os.path.join(self.images_path, x))
 
         return inventory
-
-
-    def sampling(self, data, fields, labels):
-
-        excerpt = data.groupby(labels)[fields + labels] \
-            .apply(lambda x: x.sample(n=self.class_sample_size, replace=False, random_state=self.random_state))
-        excerpt.reset_index(drop=True, inplace=True)
-
-        return excerpt
 
 
     def summaries(self):
@@ -90,7 +81,7 @@ class Source:
 
         # Sample
         if self.sample:
-            inventory = Source().sampling(data=inventory, fields=fields, labels=labels)
+            inventory = sampling.Sampling().sample(data=inventory, fields=fields, labels=labels)
 
         # Add the images URL field
         inventory = Source().url(inventory)

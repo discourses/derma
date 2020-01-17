@@ -1,20 +1,33 @@
 import tensorflow as tf
 
-import src.federal.federal as federal
+import src.config as config
 
 
 class Architecture:
 
     def __init__(self):
-        self.name = 'Extraction'
-        variables = federal.Federal().variables()
+        variables = config.Config().variables()
         self.image_dimension = variables['images']['image_dimension']
 
+    def baseline(self):
+        """
+        Sets-up the baseline architecture
 
-    def core(self, hyperparameters, metrics, labels):
+        :return:
+        """
+
         # Base Model
         base = tf.keras.applications.VGG19(include_top=False, input_shape=self.image_dimension, weights='imagenet')
         base.trainable = False
+
+        return base
+
+
+    @staticmethod
+    def layers(hyperparameters, labels, metrics=None):
+
+        # Base
+        base = Architecture().baseline()
 
         # Flattening Object
         flatten = tf.keras.layers.Flatten()
@@ -35,9 +48,13 @@ class Architecture:
         # Labels. Case
         # one-hot-code: categorical_crossentropy
         # integers: sparse_categorical_crossentropy
-        model.compile(optimizer=hyperparameters['optimization'],
-                      metrics=metrics,
-                      loss=tf.keras.losses.categorical_crossentropy)
+        if metrics is None:
+            model.compile(optimizer=hyperparameters['optimization'],
+                          loss=tf.keras.losses.categorical_crossentropy)
+        else:
+            model.compile(optimizer=hyperparameters['optimization'],
+                          metrics=metrics,
+                          loss=tf.keras.losses.categorical_crossentropy)
 
         print(base.summary())
         print(model.summary())

@@ -6,32 +6,21 @@ if __name__ == '__main__':
     sys.path.append(os.path.join(os.getcwd(), 'src'))
     import src.data.source as source
     import src.data.transform as transform
-    import src.config as config
 
-    import src.modelling.VGG19FE.simple as vgg19e_simple
-    import src.modelling.VGG19FE.architecture as vgg19e_arc
-    import src.modelling.VGG19FE.hyperparameters as vgg19e_hyp
+    import src.modelling.extraction as extraction
 
 
 def main():
-
     # Data
     inventory, labels, features = source.Source().summaries()
-    training, validating, testing = transform.Transform().summaries(inventory, features, labels)
-    print(training.head())
+    training_, validating_, testing_ = transform.Transform().summaries(inventory, features, labels)
 
-    variables = config.Config().variables()
-    print(variables['images']['image_dimension'])
-
-    # VGG19 Extract
-    # arc = vgg19e_arc.Architecture()
-    # hyp = vgg19e_hyp.Hyperparameters()
-
-    # Experiment
-    # vgg = vgg19e_simple.Simple(training_=training, validating_=validating, testing_=testing,
-    #                            labels=labels, epochs=2)
-    # print(hyp.values()[0])
-    # history = vgg.run(hyperparameters=hyp.values()[0])
+    # Steps w.r.t. a feature extraction transfer learning model
+    extraction.steps.Steps().proceed(labels=labels,
+                                     epochs=2,
+                                     training_=training_,
+                                     validating_=validating_,
+                                     testing_=testing_)
 
 
 if __name__ == '__main__':
