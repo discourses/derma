@@ -3,7 +3,7 @@ import tensorflow as tf
 import src.config as config
 
 
-class Reader:
+class Pipelines:
 
     def __init__(self, rescale=1. / 255):
         """
@@ -35,7 +35,7 @@ class Reader:
     @staticmethod
     def image_label_pairs(i, j):
         img = tf.io.read_file(i)
-        img = Reader().image_decoder(img)
+        img = Pipelines().image_decoder(img)
         return img, j
 
 
@@ -46,7 +46,7 @@ class Reader:
         dataset = tf.data.Dataset.from_tensor_slices((filenames, labelnames))
 
         # 'cache/training/log'
-        dataset = dataset.map(Reader().image_label_pairs, num_parallel_calls=tf.data.experimental.AUTOTUNE)
+        dataset = dataset.map(Pipelines().image_label_pairs, num_parallel_calls=tf.data.experimental.AUTOTUNE)
         dataset = dataset.batch(batch_size=self.batch_size, drop_remainder=False)
         dataset = dataset.cache()
         dataset = dataset.prefetch(buffer_size=tf.data.experimental.AUTOTUNE)
