@@ -17,10 +17,8 @@ class Pipelines:
     much more efficient.
     """
 
-    def __init__(self, rescale=1. / 255):
+    def __init__(self, rescale: float=1. / 255):
         """
-        :type rescale: float
-
         :param rescale: image integers scaling factor
         """
         self.rescale = rescale
@@ -50,7 +48,7 @@ class Pipelines:
         return img
 
 
-    def image_label_pairs(self, filename: str, labelname: str):
+    def image_label_pairs(self, filename: str, labelname: str) -> (tf.python.framework.ops.Tensor, str):
         """
         Create image & label pairs
 
@@ -63,7 +61,8 @@ class Pipelines:
         return img, labelname
 
 
-    def generator_tensorflow(self, data: pd.DataFrame, labels: typing.List):
+    def generator_tensorflow(self, data: pd.DataFrame, labels: typing.List) -> \
+            tf.python.data.ops.dataset_ops.PrefetchDataset:
         """
         Create image delivery pipeline
 
