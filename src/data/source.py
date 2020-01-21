@@ -73,6 +73,11 @@ class Source:
 
 
     def summaries(self):
+        """
+        Uploads the inventory of images
+
+        :return:
+        """
 
         # Read-in the inventory of images
         inventory = Source().inventory()
