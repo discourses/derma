@@ -31,13 +31,13 @@ class Steps:
         hyp = hyperparameters.Hyperparameters()
         est = estimating.Estimating()
 
-        Steps().partitions(self.model_checkpoints_path)
+        self.partitions(self.model_checkpoints_path)
 
         for i in range(len(hyp.values())):
             # Ensure that the model checkpoints for a combination of hyperparameters are saved
             # to a distinct directory that EXISTS
             network_checkpoints_path = os.path.join(self.model_checkpoints_path, str(i).zfill(4))
-            Steps().partitions(network_checkpoints_path)
+            self.partitions(network_checkpoints_path)
 
             # History of losses
             est.network(hyperparameters=hyp.values()[i], labels=labels, epochs=epochs,
