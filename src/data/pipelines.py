@@ -48,7 +48,7 @@ class Pipelines:
         return img
 
 
-    def image_label_pairs(self, filename: str, labelname: str) -> (tf.python.framework.ops.Tensor, str):
+    def image_label_pairs(self, filename: str, labelname: str = None) -> (tf.python.framework.ops.Tensor, str):
         """
         Create image & label pairs
 
@@ -58,10 +58,14 @@ class Pipelines:
         """
         img = tf.io.read_file(filename)
         img = self.image_decoder(img)
-        return img, labelname
+
+        if labelname is None:
+            return img
+        else:
+            return img, labelname
 
 
-    def generator_tensorflow(self, data: pd.DataFrame, labels: typing.List) -> \
+    def generator_tensorflow(self, data: pd.DataFrame, labels: typing.List = None) -> \
             tf.python.data.ops.dataset_ops.PrefetchDataset:
         """
         Create image delivery pipeline
@@ -71,12 +75,19 @@ class Pipelines:
         :return:
         """
 
+        # The names of the image files
         filenames = data['url'].values
-        labelnames = data[labels].values
 
-        dataset = tf.data.Dataset.from_tensor_slices((filenames, labelnames))
+        # During prediction exercises the input data frame should not include ground truth data
+        if labels is None:
+            matrices = filenames
+        else:
+            labelnames = data[labels].values
+            matrices = (filenames, labelnames)
 
-        # 'cache/training/log'
+        # Hence
+        # 'cache/.../log'
+        dataset = tf.data.Dataset.from_tensor_slices(matrices)
         dataset = dataset.map(self.image_label_pairs, num_parallel_calls=tf.data.experimental.AUTOTUNE)
         dataset = dataset.batch(batch_size=self.batch_size, drop_remainder=False)
         dataset = dataset.cache()
