@@ -1,6 +1,6 @@
 import numpy as np
 
-import src.config as config
+import config
 
 
 class Confusion:

@@ -3,7 +3,7 @@ import os
 import numpy as np
 import pandas as pd
 
-import src.config as config
+import config
 
 
 class Losses:
