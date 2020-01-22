@@ -18,7 +18,7 @@ class Config:
         """
         The constructor
         """
-        self.root = os.path.split(os.path.abspath(__package__))[0]
+        self.root = os.path.abspath(__package__)
 
 
     def paths(self, partitions):
@@ -50,8 +50,8 @@ class Config:
                                                   variables['images']['channels'])
 
         variables['modelling']['model_checkpoints_path'] = \
-            Config().paths(variables['modelling']['model_checkpoints_location'])
-        variables['images']['path'] = Config().paths(variables['images']['location'])
+            Config().paths(variables['modelling']['model_checkpoints_directory'])
+        variables['images']['path'] = Config().paths(variables['zipped']['images']['unzipped'])
 
         return variables
 
