@@ -1,10 +1,11 @@
 """Module source"""
 import os
 import sys
+import glob
 
 import pandas as pd
 
-import src.config as config
+import config
 import src.data.sampling as sampling
 
 
@@ -52,6 +53,13 @@ class Source:
         except OSError as error:
             print(error)
             sys.exit(1)
+
+        imports = glob.glob(os.path.join(self.images_path, '*{}'.format(self.images_ext)))
+        accessible = pd.DataFrame(imports, columns=['name'])
+        accessible['name'] = accessible.name.apply(lambda x: os.path.split(x)[1])
+
+        inventory = accessible.merge(inventory, how='inner', on='name')
+        print(inventory.shape)
 
         return inventory
 
