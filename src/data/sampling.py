@@ -2,7 +2,7 @@ import typing
 
 import pandas as pd
 
-import src.config as config
+import config
 
 
 class Sampling:
