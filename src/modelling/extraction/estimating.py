@@ -3,7 +3,7 @@ import os
 
 import tensorflow as tf
 
-import src.config as config
+import config
 import src.data.pipelines as pipelines
 import src.modelling.extraction.architecture as arc
 

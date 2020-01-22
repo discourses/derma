@@ -1,6 +1,6 @@
 import tensorflow as tf
 
-import src.config as config
+import config
 
 
 class Architecture:
