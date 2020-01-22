@@ -8,9 +8,12 @@ if __name__ == '__main__':
     import src.data.transform as transform
 
     import src.modelling.extraction as extraction
+    import config
 
 
 def main():
+    variables = config.Config().variables()
+
     # Reading-in a metadata table of the images, and lists summarising the table's label columns & feature columns
     inventory, labels, features = source.Source().summaries()
 
@@ -19,7 +22,7 @@ def main():
 
     # Model: feature extraction transfer learning model
     extraction.steps.Steps().proceed(labels=labels,
-                                     epochs=2,
+                                     epochs=variables['modelling']['epochs'],
                                      training_=training_,
                                      validating_=validating_,
                                      testing_=testing_)
