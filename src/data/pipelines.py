@@ -1,7 +1,7 @@
 """Module pipelines"""
 import tensorflow as tf
 
-import src.config as config
+import config
 
 import pandas as pd
 
@@ -48,7 +48,7 @@ class Pipelines:
         return img
 
 
-    def image_label_pairs(self, filename: str, labelname: str = None) -> (tf.python.framework.ops.Tensor, str):
+    def image_label_pairs(self, filename: str, labelname: str = None):
         """
         Create image & label pairs
 
@@ -65,8 +65,7 @@ class Pipelines:
             return img, labelname
 
 
-    def generator_tensorflow(self, data: pd.DataFrame, labels: typing.List = None) -> \
-            tf.python.data.ops.dataset_ops.PrefetchDataset:
+    def generator_tensorflow(self, data: pd.DataFrame, labels: typing.List = None):
         """
         Create image delivery pipeline
 
