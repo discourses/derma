@@ -6,7 +6,7 @@ import numpy as np
 import pandas as pd
 import sklearn.model_selection as model_selection
 
-import src.config as config
+import config
 
 
 class Transform:
@@ -24,7 +24,7 @@ class Transform:
         # Variables
         variables = config.Config().variables()
         self.random_state = variables['modelling']['random_state']
-        self.train_size_inventory = variables['modelling']['train_size_inventory']
+        self.train_size_initial = variables['modelling']['train_size_initial']
         self.train_size_evaluation = variables['modelling']['train_size_evaluation']
 
 
@@ -68,7 +68,7 @@ class Transform:
 
         # Stratified Splitting
         x_learn, x_evaluation, y_learn, y_evaluation = \
-            Transform().stratification(x=data[features], y=data[labels], train_size=self.train_size_inventory,
+            Transform().stratification(x=data[features], y=data[labels], train_size=self.train_size_initial,
                                        random_state=self.random_state, stratify=data[labels])
 
         x_validate, x_test, y_validate, y_test = \
