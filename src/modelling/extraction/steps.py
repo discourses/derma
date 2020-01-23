@@ -43,13 +43,18 @@ class Steps:
 
     def proceed(self, labels, epochs, training_, validating_, testing_):
 
+        # Ensure that the checkpoints directory is empty.  And, just in case the
+        # checkpoints directory is deleted, re-create it
         self.cleanup()
-
-        hyp = hyperparameters.Hyperparameters()
-        est = estimating.Estimating()
-
         self.partitions(self.model_checkpoints_path)
 
+        # A hyperparameters instance for creating a set of hyperparameters combinations
+        hyp = hyperparameters.Hyperparameters()
+
+        # A model estimation instance
+        est = estimating.Estimating()
+
+        # Estimate a model per hyperparameter combination
         for i in range(len(hyp.values())):
             # Ensure that the model checkpoints for a combination of hyperparameters are saved
             # to a distinct directory that EXISTS
@@ -59,7 +64,6 @@ class Steps:
             print(hyp.values()[i])
 
             # History of losses
-
             est.network(hyperparameters=hyp.values()[i], labels=labels, epochs=epochs,
                         training_=training_, validating_=validating_, testing_=testing_,
                         network_checkpoints_path=network_checkpoints_path)
