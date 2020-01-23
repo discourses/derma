@@ -13,13 +13,11 @@ class Config:
     YAML dictionaries of directory federal
     """
 
-
     def __init__(self):
         """
         The constructor
         """
         self.root = os.path.abspath(__package__)
-
 
     def paths(self, partitions):
 
@@ -28,7 +26,6 @@ class Config:
             path = os.path.join(path, partition)
 
         return path
-
 
     @staticmethod
     def variables() -> typing.Dict:
@@ -54,7 +51,6 @@ class Config:
         variables['images']['path'] = Config().paths(variables['zipped']['images']['unzipped'])
 
         return variables
-
 
     @staticmethod
     def logs() -> typing.Dict:
