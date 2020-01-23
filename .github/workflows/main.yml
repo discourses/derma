@@ -1,10 +1,10 @@
-name: Derma Python Package
+name: Derma Project
 
 on: [push]
 
 jobs:
   build:
-
+    name: Testing Derma Project Programs
     runs-on: ubuntu-latest
     strategy:
       max-parallel: 4
