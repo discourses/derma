@@ -64,6 +64,8 @@ class Source:
             print(error)
             sys.exit(1)
 
+        assert req.status_code == 200, "Not 200"
+
         # If the calling function is not a test function, cf. inventory & downloaded images
         if not testing:
             imports = glob.glob(os.path.join(self.images_path, '*{}'.format(self.images_ext)))
