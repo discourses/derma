@@ -65,7 +65,7 @@ jobs:
       - uses: actions/checkout@v1
 
       - name: Build the Docker image
-        run: docker build -f importing/Dockerfile --tag greyhypotheses/derma:importing
+        run: docker build . -f importing/Dockerfile --tag greyhypotheses/derma:importing
 
       - name: Push the image to Docker Hub
         run: |
@@ -83,7 +83,7 @@ jobs:
       - uses: actions/checkout@v1
 
       - name: Build the Docker image
-        run: docker build -f importing/Dockerfile --tag docker.pkg.github.com/greyhypotheses/derma/derma:importing
+        run: docker build . -f importing/Dockerfile --tag docker.pkg.github.com/greyhypotheses/derma/derma:importing
 
       - name: Push the image to GitHub Packages
         run: |
