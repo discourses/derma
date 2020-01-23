@@ -22,7 +22,6 @@ class Architecture:
 
         return base
 
-
     @staticmethod
     def layers(hyperparameters, labels, metrics=None):
 

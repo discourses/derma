@@ -5,9 +5,8 @@ import tensorflow as tf
 
 import config
 import src.data.pipelines as pipelines
-import src.modelling.extraction.architecture as arc
-
 import src.evaluation.measures as measures
+import src.modelling.extraction.architecture as arc
 
 
 class Estimating:
@@ -20,7 +19,6 @@ class Estimating:
         # Variables
         variables = config.Config().variables()
         self.batch_size = variables['modelling']['batch_size']
-
 
     def parameters(self, model, labels, epochs, training_, validating_, network_checkpoints_path):
         """
@@ -68,7 +66,6 @@ class Estimating:
                                       validation_data=validating)
 
         return history
-
 
     def network(self, hyperparameters, labels, epochs, training_, validating_, testing_, network_checkpoints_path):
         """

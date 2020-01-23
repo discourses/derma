@@ -28,7 +28,6 @@ class Steps:
             raise Exception(
                 "Unable to delete all the items of {}".format(self.model_checkpoints_path))
 
-
     @staticmethod
     def partitions(path):
         """
@@ -39,7 +38,6 @@ class Steps:
 
         if not os.path.exists(path):
             os.makedirs(path)
-
 
     def proceed(self, labels, epochs, training_, validating_, testing_):
 

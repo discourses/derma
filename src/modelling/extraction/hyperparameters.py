@@ -18,14 +18,12 @@ class Hyperparameters:
     """
 
     def __init__(self):
-
         variables = config.Config().variables()
         model_extraction = variables['model']['extraction']
         self.num_units = model_extraction['num_units']
         self.dropout = model_extraction['dropout']
         self.opt = model_extraction['opt']
         self.name = "Hyperparameters"
-
 
     def priors(self):
         alpha_units = hp.HParam('num_units', hp.Discrete(self.num_units))
@@ -37,7 +35,6 @@ class Hyperparameters:
         optimization = hp.HParam('optimizer', hp.Discrete(self.opt))
 
         return alpha_units, alpha_drop_rate, beta_units, beta_drop_rate, optimization
-
 
     def values(self):
         alpha_units, alpha_drop_rate, beta_units, beta_drop_rate, optimization = self.priors()
