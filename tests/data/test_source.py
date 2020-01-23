@@ -4,7 +4,6 @@ import src.data.source as source
 class TestSource:
 
     def test_inventory(self):
-
         inventory = source.Source().inventory()
         assert inventory.shape[0] != 0, "The images inventory file must not be empty"
 
