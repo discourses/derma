@@ -26,7 +26,6 @@ class Files:
         self.ext = zipped_images['ext']
         self.zero_filling = zipped_images['zero_filling']
 
-
     def cleanup(self):
 
         [os.remove(os.path.join(base, file))
@@ -38,12 +37,10 @@ class Files:
          for directory in directories
          if os.path.exists(os.path.join(base, directory))]
 
-
     def local_directory(self):
 
         if os.path.exists(self.images_path):
             os.mkdir(self.images_path)
-
 
     def extractor(self, blob):
         try:
@@ -54,7 +51,6 @@ class Files:
 
         zipped_object = zipfile.ZipFile(io.BytesIO(req.content))
         zipped_object.extractall(path='images')
-
 
     def list_of_blobs(self):
 

@@ -1,5 +1,5 @@
-import os
 import multiprocessing as mp
+import os
 import sys
 
 if __name__ == '__main__':
@@ -9,7 +9,6 @@ if __name__ == '__main__':
 
 
 def main():
-
     # An instance of files
     images = files.Files()
 
