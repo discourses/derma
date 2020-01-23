@@ -3,7 +3,11 @@ import os
 import sys
 import glob
 
+import io
+import requests
+
 import pandas as pd
+import inspect
 
 import config
 import src.data.sampling as sampling
@@ -48,18 +52,24 @@ class Source:
             Metadata DataFrame
         """
 
+        # Examine the name of function that called this function
+        caller = inspect.stack()[1]
+        testing = (caller.function == 'test_inventory') | (caller.function == 'test_url')
+
+        # Download the inventory of the images metadata
         try:
-            inventory = pd.read_csv(self.inventory_url)
+            req = requests.get(self.inventory_url)
+            inventory = pd.read_csv(io.StringIO(req.content.decode(encoding='utf-8')))
         except OSError as error:
             print(error)
             sys.exit(1)
 
-        imports = glob.glob(os.path.join(self.images_path, '*{}'.format(self.images_ext)))
-        accessible = pd.DataFrame(imports, columns=['name'])
-        accessible['name'] = accessible.name.apply(lambda x: os.path.split(x)[1])
-
-        inventory = accessible.merge(inventory, how='inner', on='name')
-        print(inventory.shape)
+        # If the calling function is not a test function, cf. inventory & downloaded images
+        if not testing:
+            imports = glob.glob(os.path.join(self.images_path, '*{}'.format(self.images_ext)))
+            accessible = pd.DataFrame(imports, columns=['name'])
+            accessible['name'] = accessible.name.apply(lambda x: os.path.split(x)[1])
+            inventory = accessible.merge(inventory, how='inner', on='name')
 
         return inventory
 
