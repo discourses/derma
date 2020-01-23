@@ -7,7 +7,6 @@ class Metrics:
     def __init__(self):
         self.name = 'Metrics'
 
-
     @staticmethod
     def definitions_keras():
         metrics = [tf.keras.metrics.TruePositives(name='tp'),
@@ -19,7 +18,6 @@ class Metrics:
                    tf.keras.metrics.AUC(name='auc')]
 
         return metrics
-
 
     @staticmethod
     def definitions_tensorflow():

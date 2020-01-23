@@ -11,26 +11,21 @@ import src.evaluation.losses as losses
 class Measures:
 
     def __init__(self):
-
         # Labels for the confusion matrix variables
         self.confusion_matrix_variables = ['tn', 'fn', 'tp', 'fp']
 
         # Pipeline
         self.pipeline = pipelines.Pipelines()
 
-
     @staticmethod
     def confusion_variable_series(plausibilities, truth, labels, data_set_name,
                                   network_checkpoints_path, confusion_matrix_variable):
-
         series = confusion.Confusion().calculate(plausibilities, truth, confusion_matrix_variable)
 
         pd.DataFrame(series, columns=['thresholds'] + labels) \
             .to_csv(os.path.join(network_checkpoints_path, data_set_name + '_' + confusion_matrix_variable + '.csv'))
 
-
     def predictions(self, model, data_set_name, data_set, labels, network_checkpoints_path):
-
         # Data
         generator_input = data_set.copy()
         generator_input.reset_index(inplace=True, drop=True)
@@ -45,7 +40,6 @@ class Measures:
                                                                    data_set_name + '_' + 'predictions.csv'))
         return plausibilities
 
-
     def calculate(self, history, network_checkpoints_path,
                   training_, validating_, testing_, labels):
         # losses
@@ -56,7 +50,6 @@ class Measures:
 
         # Hence
         for data_set_name, data_set in data_sets:
-
             # Raw predictions
             plausibilities = self.predictions(history.model, data_set_name, data_set[['url']],
                                               labels, network_checkpoints_path)
