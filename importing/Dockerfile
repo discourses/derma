@@ -10,7 +10,7 @@ RUN pip install --upgrade pip
 # file of each step separately; and RUN the file immediately after COPY
 WORKDIR /app
 RUN mkdir /app/images
-COPY importing/requirements.txt /app
+COPY importing/requirements.txt /app/importing/requirements.txt
 RUN pip install --requirement /app/importing/requirements.txt
 
 # Specific COPY
