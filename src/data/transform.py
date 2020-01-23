@@ -27,14 +27,12 @@ class Transform:
         self.train_size_initial = variables['modelling']['train_size_initial']
         self.train_size_evaluation = variables['modelling']['train_size_evaluation']
 
-
     @staticmethod
     def stratification(x, y, train_size, random_state, stratify) -> (pd.DataFrame, pd.DataFrame,
                                                                      pd.DataFrame, pd.DataFrame):
         return model_selection.train_test_split(x, y,
                                                 train_size=train_size,
                                                 random_state=random_state, stratify=stratify)
-
 
     def for_generator(self, x: np.ndarray, y: np.ndarray, labels: typing.List, group: str) -> pd.DataFrame:
         """
@@ -53,7 +51,6 @@ class Transform:
         self.logger.info("{}: {}, {}, {}".format(group, x.shape, y.shape, data.shape))
 
         return data
-
 
     def summaries(self, data: pd.DataFrame, features: typing.List, labels: typing.List) -> (pd.DataFrame,
                                                                                             pd.DataFrame, pd.DataFrame):

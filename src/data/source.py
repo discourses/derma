@@ -1,13 +1,12 @@
 """Module source"""
+import glob
+import inspect
+import io
 import os
 import sys
-import glob
-
-import io
-import requests
 
 import pandas as pd
-import inspect
+import requests
 
 import config
 import src.data.sampling as sampling
@@ -19,7 +18,6 @@ class Source:
 
     The methods herein download and prepare the metadata of the images that would be used for modelling
     """
-
 
     def __init__(self):
         """
@@ -42,7 +40,6 @@ class Source:
         # Modelling
         self.features = variables['modelling']['features']
         self.sample = variables['modelling']['sample']
-
 
     def inventory(self) -> pd.DataFrame:
         """
@@ -75,7 +72,6 @@ class Source:
 
         return inventory
 
-
     def url(self, inventory: pd.DataFrame) -> pd.DataFrame:
         """
         Adds the field 'url' to the inputted data frame.  It records the path - including the image name - to an image.
@@ -90,7 +86,6 @@ class Source:
         inventory['url'] = inventory.name.apply(lambda x: os.path.join(self.images_path, x))
 
         return inventory
-
 
     def summaries(self):
         """

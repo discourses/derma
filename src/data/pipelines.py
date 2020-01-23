@@ -1,11 +1,10 @@
 """Module pipelines"""
+import typing
+
+import pandas as pd
 import tensorflow as tf
 
 import config
-
-import pandas as pd
-
-import typing
 
 
 class Pipelines:
@@ -17,7 +16,7 @@ class Pipelines:
     much more efficient.
     """
 
-    def __init__(self, rescale: float=1. / 255):
+    def __init__(self, rescale: float = 1. / 255):
         """
         :param rescale: image integers scaling factor
         """
@@ -27,7 +26,6 @@ class Pipelines:
         self.rows = variables['images']['rows']
         self.columns = variables['images']['columns']
         self.batch_size = variables['modelling']['batch_size']
-
 
     @staticmethod
     def image_decoder(img):
@@ -47,7 +45,6 @@ class Pipelines:
         # Hence
         return img
 
-
     def image_label_pairs(self, filename: str, labelname: str = None):
         """
         Create image & label pairs
@@ -63,7 +60,6 @@ class Pipelines:
             return img
         else:
             return img, labelname
-
 
     def generator_tensorflow(self, data: pd.DataFrame, labels: typing.List = None):
         """
@@ -93,7 +89,6 @@ class Pipelines:
         dataset = dataset.prefetch(buffer_size=tf.data.experimental.AUTOTUNE)
 
         return dataset
-
 
     def generator_keras(self, data: pd.DataFrame, labels: typing.List):
         """

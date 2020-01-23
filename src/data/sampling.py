@@ -19,7 +19,6 @@ class Sampling:
         self.replace = variables['modelling']['replace']
         self.class_sample_size = variables['modelling']['class_sample_size']
 
-
     def sample_size(self, n_per_label: pd.Series) -> int:
         """
         If sampling without replacement is required, but one or more classes have fewer records than
@@ -37,7 +36,6 @@ class Sampling:
             class_sample_size = self.class_sample_size
 
         return class_sample_size
-
 
     def sample(self, data: pd.DataFrame, fields: typing.List, labels: typing.List) -> pd.DataFrame:
         """
