@@ -13,11 +13,9 @@ RUN mkdir /app/checkpoints
 COPY requirements.txt /app
 RUN pip install --requirement /app/requirements.txt
 
-# Specific COPY
+# Specific COPY commands
 COPY config.py /app/config.py
-COPY src/data /app/src
-COPY src/evaluation /app/src
-COPY src/modelling/extraction app/src/
+COPY src /app/src
 
 # Port
 EXPOSE 8050
