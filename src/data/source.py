@@ -1,10 +1,14 @@
 """Module source"""
+import glob
+import inspect
+import io
 import os
 import sys
 
 import pandas as pd
+import requests
 
-import src.config as config
+import config
 import src.data.sampling as sampling
 
 
@@ -14,7 +18,6 @@ class Source:
 
     The methods herein download and prepare the metadata of the images that would be used for modelling
     """
-
 
     def __init__(self):
         """
@@ -38,7 +41,6 @@ class Source:
         self.features = variables['modelling']['features']
         self.sample = variables['modelling']['sample']
 
-
     def inventory(self) -> pd.DataFrame:
         """
         Downloads the metadata summary of images.
@@ -47,14 +49,26 @@ class Source:
             Metadata DataFrame
         """
 
+        # Examine the name of function that called this function
+        caller = inspect.stack()[1]
+        testing = (caller.function == 'test_inventory') | (caller.function == 'test_url')
+
+        # Download the inventory of the images metadata
         try:
-            inventory = pd.read_csv(self.inventory_url)
+            req = requests.get(self.inventory_url)
+            inventory = pd.read_csv(io.StringIO(req.content.decode(encoding='utf-8')))
         except OSError as error:
             print(error)
             sys.exit(1)
 
-        return inventory
+        # If the calling function is not a test function, cf. inventory & downloaded images
+        if not testing:
+            imports = glob.glob(os.path.join(self.images_path, '*{}'.format(self.images_ext)))
+            accessible = pd.DataFrame(imports, columns=['name'])
+            accessible['name'] = accessible.name.apply(lambda x: os.path.split(x)[1])
+            inventory = accessible.merge(inventory, how='inner', on='name')
 
+        return inventory
 
     def url(self, inventory: pd.DataFrame) -> pd.DataFrame:
         """
@@ -71,8 +85,12 @@ class Source:
 
         return inventory
 
-
     def summaries(self):
+        """
+        Uploads the inventory of images
+
+        :return:
+        """
 
         # Read-in the inventory of images
         inventory = Source().inventory()

@@ -3,11 +3,10 @@ import os
 
 import tensorflow as tf
 
-import src.config as config
+import config
 import src.data.pipelines as pipelines
+import src.evaluation.measures as measures
 import src.modelling.extraction.architecture as arc
-
-import src.evaluation.losses as losses
 
 
 class Estimating:
@@ -20,7 +19,6 @@ class Estimating:
         # Variables
         variables = config.Config().variables()
         self.batch_size = variables['modelling']['batch_size']
-
 
     def parameters(self, model, labels, epochs, training_, validating_, network_checkpoints_path):
         """
@@ -69,7 +67,6 @@ class Estimating:
 
         return history
 
-
     def network(self, hyperparameters, labels, epochs, training_, validating_, testing_, network_checkpoints_path):
         """
 
@@ -86,6 +83,9 @@ class Estimating:
         history = self.parameters(model, labels, epochs,
                                   training_, validating_, network_checkpoints_path)
 
-        losses.Losses().series(history=history, network_checkpoints_path=network_checkpoints_path)
-
-        return history
+        measures.Measures().calculate(history=history,
+                                      network_checkpoints_path=network_checkpoints_path,
+                                      training_=training_,
+                                      validating_=validating_,
+                                      testing_=testing_,
+                                      labels=labels)

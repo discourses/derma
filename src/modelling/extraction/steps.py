@@ -1,6 +1,6 @@
 import os
 
-import src.config as config
+import config
 import src.modelling.extraction.estimating as estimating
 import src.modelling.extraction.hyperparameters as hyperparameters
 
@@ -13,6 +13,20 @@ class Steps:
         variables = config.Config().variables()
         self.model_checkpoints_path = variables['modelling']['model_checkpoints_path']
 
+    def cleanup(self):
+
+        files = [os.remove(os.path.join(base, file))
+                 for base, directories, files in os.walk(self.model_checkpoints_path)
+                 for file in files]
+
+        directories = [os.removedirs(os.path.join(base, directory))
+                       for base, directories, files in os.walk(self.model_checkpoints_path, topdown=False)
+                       for directory in directories
+                       if os.path.exists(os.path.join(base, directory))]
+
+        if any(files) | any(directories):
+            raise Exception(
+                "Unable to delete all the items of {}".format(self.model_checkpoints_path))
 
     @staticmethod
     def partitions(path):
@@ -25,19 +39,27 @@ class Steps:
         if not os.path.exists(path):
             os.makedirs(path)
 
-
     def proceed(self, labels, epochs, training_, validating_, testing_):
 
+        # Ensure that the checkpoints directory is empty.  And, just in case the
+        # checkpoints directory is deleted, re-create it
+        self.cleanup()
+        self.partitions(self.model_checkpoints_path)
+
+        # A hyperparameters instance for creating a set of hyperparameters combinations
         hyp = hyperparameters.Hyperparameters()
+
+        # A model estimation instance
         est = estimating.Estimating()
 
-        Steps().partitions(self.model_checkpoints_path)
-
+        # Estimate a model per hyperparameter combination
         for i in range(len(hyp.values())):
             # Ensure that the model checkpoints for a combination of hyperparameters are saved
             # to a distinct directory that EXISTS
             network_checkpoints_path = os.path.join(self.model_checkpoints_path, str(i).zfill(4))
-            Steps().partitions(network_checkpoints_path)
+            self.partitions(network_checkpoints_path)
+
+            print(hyp.values()[i])
 
             # History of losses
             est.network(hyperparameters=hyp.values()[i], labels=labels, epochs=epochs,

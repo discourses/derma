@@ -1,10 +1,12 @@
 import logging
 import os
+import typing
 
+import numpy as np
 import pandas as pd
 import sklearn.model_selection as model_selection
 
-import src.config as config
+import config
 
 
 class Transform:
@@ -22,23 +24,19 @@ class Transform:
         # Variables
         variables = config.Config().variables()
         self.random_state = variables['modelling']['random_state']
-        self.train_size_inventory = variables['modelling']['train_size_inventory']
+        self.train_size_initial = variables['modelling']['train_size_initial']
         self.train_size_evaluation = variables['modelling']['train_size_evaluation']
 
-
     @staticmethod
-    def stratification(x, y, train_size, random_state, stratify):
+    def stratification(x, y, train_size, random_state, stratify) -> (pd.DataFrame, pd.DataFrame,
+                                                                     pd.DataFrame, pd.DataFrame):
         return model_selection.train_test_split(x, y,
                                                 train_size=train_size,
                                                 random_state=random_state, stratify=stratify)
 
-
-    def for_generator(self, x, y, labels, group):
+    def for_generator(self, x: np.ndarray, y: np.ndarray, labels: typing.List, group: str) -> pd.DataFrame:
         """
-        :type x: numpy.ndarray
-        :type y: numpy.ndarray
-        :type labels: list
-        :type group: str
+        Preparing the metadata for the generator that creates the images delivery pipeline
 
         :param x: The features part of a data set
         :param y: The corresponding classes/labels
@@ -54,12 +52,20 @@ class Transform:
 
         return data
 
+    def summaries(self, data: pd.DataFrame, features: typing.List, labels: typing.List) -> (pd.DataFrame,
+                                                                                            pd.DataFrame, pd.DataFrame):
+        """
+        Performs stratified data splitting
 
-    def summaries(self, data, features, labels):
+        :param data: The data set to be split
+        :param features: The names of the feature columns
+        :param labels: The names of the label columns
+        :return:
+        """
 
         # Stratified Splitting
         x_learn, x_evaluation, y_learn, y_evaluation = \
-            Transform().stratification(x=data[features], y=data[labels], train_size=self.train_size_inventory,
+            Transform().stratification(x=data[features], y=data[labels], train_size=self.train_size_initial,
                                        random_state=self.random_state, stratify=data[labels])
 
         x_validate, x_test, y_validate, y_test = \
@@ -67,8 +73,8 @@ class Transform:
                                        random_state=self.random_state, stratify=y_evaluation)
 
         # Setting-up for generator
-        training = Transform().for_generator(x=x_learn, y=y_learn, labels=labels, group='Training')
-        validating = Transform().for_generator(x=x_validate, y=y_validate, labels=labels, group='Validating')
-        testing = Transform().for_generator(x=x_test, y=y_test, labels=labels, group='Testing')
+        training = self.for_generator(x=x_learn, y=y_learn, labels=labels, group='Training')
+        validating = self.for_generator(x=x_validate, y=y_validate, labels=labels, group='Validating')
+        testing = self.for_generator(x=x_test, y=y_test, labels=labels, group='Testing')
 
         return training, validating, testing

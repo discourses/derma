@@ -3,7 +3,7 @@ import os
 import numpy as np
 import pandas as pd
 
-import src.config as config
+import config
 
 
 class Losses:
@@ -12,7 +12,6 @@ class Losses:
         # Variables
         variables = config.Config().variables()
         self.model_checkpoints_path = variables['modelling']['model_checkpoints_path']
-
 
     @staticmethod
     def series(history, network_checkpoints_path):

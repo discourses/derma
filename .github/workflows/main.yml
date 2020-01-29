@@ -1,10 +1,10 @@
-name: Derma Python Package
+name: Derma Project
 
 on: [push]
 
 jobs:
   build:
-
+    name: Testing Derma Project Programs
     runs-on: ubuntu-latest
     strategy:
       max-parallel: 4
@@ -56,3 +56,40 @@ jobs:
           pip install coverage
           pip install pytest-cov
           pytest --cov src/data tests/data
+
+  importing-pkg:
+    name: Buiding for Docker Hub
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Build the Docker image
+        run: docker build . -f importing/Dockerfile --tag greyhypotheses/derma:importing
+
+      - name: Push the image to Docker Hub
+        run: |
+          docker login -u "${DOCKER_HUB_USERNAME}" -p "${DOCKER_HUB_ENTRY}"
+          docker push greyhypotheses/derma:importing
+        env:
+          DOCKER_HUB_USERNAME: ${{secrets.DOCKER_HUB_USERNAME}}
+          DOCKER_HUB_ENTRY: ${{secrets.DOCKER_HUB_ENTRY}}
+
+  importing-pkg-backup:
+    name: Building for GitHub Docker Packages
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Build the Docker image
+        run: docker build . -f importing/Dockerfile --tag docker.pkg.github.com/greyhypotheses/derma/derma:importing
+
+      - name: Push the image to GitHub Packages
+        run: |
+          docker login -u "${GITHUB_PACKAGES_USERNAME}" -p "${GITHUB_PACKAGES_ENTRY}" docker.pkg.github.com
+          docker push docker.pkg.github.com/greyhypotheses/derma/derma:importing
+        env:
+          GITHUB_PACKAGES_USERNAME: ${{secrets.GITHUB_PACKAGES_USERNAME}}
+          GITHUB_PACKAGES_ENTRY: ${{secrets.GITHUB_PACKAGES_ENTRY}}
+

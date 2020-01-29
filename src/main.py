@@ -7,20 +7,25 @@ if __name__ == '__main__':
     import src.data.source as source
     import src.data.transform as transform
 
-    import src.modelling.extraction as extraction
+    import src.modelling.extraction.steps as extraction
+    import config
 
 
 def main():
-    # Data
+    variables = config.Config().variables()
+
+    # Reading-in a metadata table of the images, and lists summarising the table's label columns & feature columns
     inventory, labels, features = source.Source().summaries()
+
+    # Splitting the data into training, validating, and testing sets.  The sets are image metadata tables.
     training_, validating_, testing_ = transform.Transform().summaries(inventory, features, labels)
 
-    # Steps w.r.t. a feature extraction transfer learning model
-    extraction.steps.Steps().proceed(labels=labels,
-                                     epochs=2,
-                                     training_=training_,
-                                     validating_=validating_,
-                                     testing_=testing_)
+    # Model: feature extraction transfer learning model
+    extraction.Steps().proceed(labels=labels,
+                               epochs=variables['modelling']['epochs'],
+                               training_=training_,
+                               validating_=validating_,
+                               testing_=testing_)
 
 
 if __name__ == '__main__':

@@ -1,6 +1,6 @@
 import tensorflow as tf
 
-import src.config as config
+import config
 
 
 class Architecture:
@@ -21,7 +21,6 @@ class Architecture:
         base.trainable = False
 
         return base
-
 
     @staticmethod
     def layers(hyperparameters, labels, metrics=None):
