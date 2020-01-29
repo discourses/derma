@@ -86,7 +86,7 @@ class Pipelines:
         dataset = dataset.map(self.image_label_pairs, num_parallel_calls=tf.data.experimental.AUTOTUNE)
         dataset = dataset.batch(batch_size=self.batch_size, drop_remainder=False)
         dataset = dataset.cache()
-        dataset = dataset.prefetch(buffer_size=tf.data.experimental.AUTOTUNE)
+        # dataset = dataset.prefetch(buffer_size=tf.data.experimental.AUTOTUNE)
 
         return dataset
 
