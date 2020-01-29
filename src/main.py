@@ -7,7 +7,7 @@ if __name__ == '__main__':
     import src.data.source as source
     import src.data.transform as transform
 
-    import src.modelling.extraction.steps as fe
+    import src.modelling.extraction.steps as extraction
     import config
 
 
@@ -21,11 +21,11 @@ def main():
     training_, validating_, testing_ = transform.Transform().summaries(inventory, features, labels)
 
     # Model: feature extraction transfer learning model
-    fe.Steps().proceed(labels=labels,
-                       epochs=variables['modelling']['epochs'],
-                       training_=training_,
-                       validating_=validating_,
-                       testing_=testing_)
+    extraction.Steps().proceed(labels=labels,
+                               epochs=variables['modelling']['epochs'],
+                               training_=training_,
+                               validating_=validating_,
+                               testing_=testing_)
 
 
 if __name__ == '__main__':
