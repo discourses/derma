@@ -13,6 +13,7 @@ COPY requirements.txt /app
 RUN pip install --requirement /app/requirements.txt
 
 # Specific COPY
+COPY config.py /app/config.py
 COPY src/data /app/src
 COPY src/evaluation /app/src
 COPY src/modelling/extraction app/src/
