@@ -53,13 +53,15 @@ class Estimating:
             mode='auto',
             save_freq='epoch')
 
-        # Validation steps
-        validation_steps = math.floor(validating_.shape[0] / self.batch_size)
-        validation_steps = validation_steps if validating_.shape[0] % self.batch_size == 0 else validation_steps + 1
+        # Steps per epoch [Re-design: cf. validation_steps, and steps in measures.Measures().prediction]
+        steps_per_epoch = math.ceil(training_.shape[0] / self.batch_size)
+
+        # Validation steps [Re-design: cf. steps_per_epoch, and steps in measures.Measures().prediction]
+        validation_steps = math.ceil(validating_.shape[0] / self.batch_size)
 
         # History
         history = model.fit_generator(generator=training,
-                                      steps_per_epoch=math.floor(training_.shape[0] / self.batch_size),
+                                      steps_per_epoch=steps_per_epoch,
                                       epochs=epochs,
                                       verbose=1,
                                       callbacks=[early_stopping, model_checkpoints],
