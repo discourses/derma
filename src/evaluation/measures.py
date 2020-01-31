@@ -2,6 +2,9 @@ import os
 from typing import Dict
 
 import pandas as pd
+import math
+
+import config
 
 import src.data.pipelines as pipelines
 import src.evaluation.confusion as confusion
@@ -17,6 +20,10 @@ class Measures:
         # Pipeline
         self.pipeline = pipelines.Pipelines()
 
+        # Global variables
+        variables = config.Config().variables()
+        self.batch_size = variables['modelling']['batch_size']
+
     @staticmethod
     def confusion_variable_series(plausibilities, truth, labels, data_set_name,
                                   network_checkpoints_path, confusion_matrix_variable):
@@ -31,8 +38,11 @@ class Measures:
         generator_input.reset_index(inplace=True, drop=True)
         tensors_of_images = self.pipeline.generator_tensorflow(generator_input)
 
+        # Steps [Re-design: cf. steps_per_epoch, validation_steps in estimating.Estimating().parameters]
+        steps = math.ceil(data_set.shape[0] / self.batch_size)
+
         # Predictions
-        plausibilities = model.predict(tensors_of_images)
+        plausibilities = model.predict(tensors_of_images, steps)
         predictor_output = pd.DataFrame(plausibilities, columns=labels)
 
         # Save
