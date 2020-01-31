@@ -84,9 +84,9 @@ class Pipelines:
         # 'cache/.../log'
         dataset = tf.data.Dataset.from_tensor_slices(matrices)
         dataset = dataset.map(self.image_label_pairs, num_parallel_calls=tf.data.experimental.AUTOTUNE)
-        dataset = dataset.cache()
-        dataset = dataset.repeat()
+        dataset = dataset.cache()        
         dataset = dataset.batch(batch_size=self.batch_size, drop_remainder=False)
+        dataset = dataset.repeat()
         dataset = dataset.prefetch(buffer_size=tf.data.experimental.AUTOTUNE)
 
         return dataset
