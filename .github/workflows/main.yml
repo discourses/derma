@@ -93,3 +93,20 @@ jobs:
           GITHUB_PACKAGES_USERNAME: ${{secrets.GITHUB_PACKAGES_USERNAME}}
           GITHUB_PACKAGES_ENTRY: ${{secrets.GITHUB_PACKAGES_ENTRY}}
 
+  extraction-model:
+    name: Buiding for Docker Hub
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Build the Docker image
+        run: docker build . -f src/modelling/extraction/Dockerfile --tag greyhypotheses/derma:FeatureExtractionDL
+
+      - name: Push the image to Docker Hub
+        run: |
+          docker login -u "${DOCKER_HUB_USERNAME}" -p "${DOCKER_HUB_ENTRY}"
+          docker push greyhypotheses/derma:FeatureExtractionDL
+        env:
+          DOCKER_HUB_USERNAME: ${{secrets.DOCKER_HUB_USERNAME}}
+          DOCKER_HUB_ENTRY: ${{secrets.DOCKER_HUB_ENTRY}}

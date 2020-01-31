@@ -15,6 +15,7 @@ RUN pip install --requirement /app/importing/requirements.txt
 
 # Specific COPY
 COPY importing /app/importing
+COPY config.py /app/config.py
 
 # Port
 EXPOSE 8050

@@ -39,7 +39,7 @@ class Files:
 
     def local_directory(self):
 
-        if os.path.exists(self.images_path):
+        if not os.path.exists(self.images_path):
             os.mkdir(self.images_path)
 
     def extractor(self, blob):

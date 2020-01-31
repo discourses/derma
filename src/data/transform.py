@@ -65,12 +65,12 @@ class Transform:
 
         # Stratified Splitting
         x_learn, x_evaluation, y_learn, y_evaluation = \
-            Transform().stratification(x=data[features], y=data[labels], train_size=self.train_size_initial,
-                                       random_state=self.random_state, stratify=data[labels])
+            self.stratification(x=data[features], y=data[labels], train_size=self.train_size_initial,
+                                random_state=self.random_state, stratify=data[labels])
 
         x_validate, x_test, y_validate, y_test = \
-            Transform().stratification(x=x_evaluation, y=y_evaluation, train_size=self.train_size_evaluation,
-                                       random_state=self.random_state, stratify=y_evaluation)
+            self.stratification(x=x_evaluation, y=y_evaluation, train_size=self.train_size_evaluation,
+                                random_state=self.random_state, stratify=y_evaluation)
 
         # Setting-up for generator
         training = self.for_generator(x=x_learn, y=y_learn, labels=labels, group='Training')
