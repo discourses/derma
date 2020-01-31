@@ -49,7 +49,7 @@ class Measures:
         data_sets: Dict[str, pd.DataFrame] = {'training': training_, 'validating': validating_, 'testing': testing_}
 
         # Hence
-        for data_set_name, data_set in data_sets:
+        for data_set_name, data_set in data_sets.items():
             # Raw predictions
             plausibilities = self.predictions(history.model, data_set_name, data_set[['url']],
                                               labels, network_checkpoints_path)
