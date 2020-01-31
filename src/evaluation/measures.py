@@ -42,7 +42,7 @@ class Measures:
         steps = math.ceil(data_set.shape[0] / self.batch_size)
 
         # Predictions
-        plausibilities = model.predict(tensors_of_images, steps)
+        plausibilities = model.predict(tensors_of_images, steps=steps)
         predictor_output = pd.DataFrame(plausibilities, columns=labels)
 
         # Save
