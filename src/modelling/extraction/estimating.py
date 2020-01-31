@@ -40,11 +40,7 @@ class Estimating:
 
         # Early stopping
         early_stopping = tf.keras.callbacks.EarlyStopping(
-            monitor='val_loss',
-            verbose=1,
-            patience=3,
-            mode='min',
-            restore_best_weights=True
+            monitor='val_loss', verbose=1, patience=3, mode='min', restore_best_weights=True
         )
 
         # Checkpoints
@@ -57,13 +53,19 @@ class Estimating:
             mode='auto',
             save_freq='epoch')
 
+        # Validation steps
+        validation_steps = math.floor(validating_.shape[0] / self.batch_size)
+        validation_steps = validation_steps if validating_.shape[0] % self.batch_size == 0 else validation_steps + 1
+
         # History
         history = model.fit_generator(generator=training,
                                       steps_per_epoch=math.floor(training_.shape[0] / self.batch_size),
                                       epochs=epochs,
                                       verbose=1,
                                       callbacks=[early_stopping, model_checkpoints],
-                                      validation_data=validating)
+                                      validation_data=validating,
+                                      validation_steps=validation_steps,
+                                      validation_freq=1)
 
         return history
 
