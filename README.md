@@ -19,6 +19,45 @@ Associated repositories:
 <br>
 <br>
 
+## Temporary
+
+The python environment was created via [`venv`](https://docs.python.org/3/library/venv.html)
+```
+>> python -m venv env
+```
+This virtual environment can be deleted via the command `rm -r env` (UNIX environment)
+
+```
+>> env\Scripts\activate.bat
+```
+
+```
+>> pip list
+```
+
+```
+>> python -m pip install --upgrade pip==20.0.2
+```
+
+Next, TensorFlow 2.0.0 is installed; tensorflow==2.0.0
+```
+>> pip install --upgrade tensorflow
+```
+
+The TensorFlow installation step installs numpy & requests.  Whereas
+
+* pandas==1.0.0
+* pytest==5.3.5
+* coverage==5.0.3
+* pytest-cov==2.8.1
+* pylint==2.4.4
+* PyYAML==5.3
+
+where installed separately.
+
+<br>
+<br>
+
 ## Brief Repository Notes
 
 This repository uses the wonderful continuous integration & delivery tool GitHub Actions. Hence, a variety of tests are conducted continuously.  The badges below will continuously highlight the state of each repository branch w.r.t. GitHub Action's actions.
