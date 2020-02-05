@@ -51,6 +51,7 @@ class Measures:
 
         # Transfer
         print('Transferring to S3 ...')
+        print(network_checkpoints_path)
         print('aws s3 cp ' + network_checkpoints_path + ' '
               + self.s3_path + os.path.basename(network_checkpoints_path) + '/ --recursive')
         services.Services().awscli('aws s3 cp ' + network_checkpoints_path + ' '
