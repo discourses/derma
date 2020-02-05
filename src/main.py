@@ -1,6 +1,7 @@
 import os
 import sys
 
+
 if __name__ == '__main__':
     sys.path.append(os.getcwd())
     sys.path.append(os.path.join(os.getcwd(), 'src'))
@@ -15,17 +16,23 @@ def main():
     variables = config.Config().variables()
 
     # Reading-in a metadata table of the images, and lists summarising the table's label columns & feature columns
+    # inventory: DataFrame
+    # labels: list
+    # features: list
     inventory, labels, features = source.Source().summaries()
 
     # Splitting the data into training, validating, and testing sets.  The sets are image metadata tables.
+    # training_: DataFrame
+    # validating_: DataFrame
+    # testing_: DataFrame
     training_, validating_, testing_ = transform.Transform().summaries(inventory, features, labels)
 
     # Model: feature extraction transfer learning model
-    extraction.Steps().proceed(labels=labels,
-                               epochs=variables['modelling']['epochs'],
-                               training_=training_,
-                               validating_=validating_,
-                               testing_=testing_)
+    extraction.Steps().evaluate(labels=labels,
+                                epochs=variables['modelling']['epochs'],
+                                training_=training_,
+                                validating_=validating_,
+                                testing_=testing_)
 
 
 if __name__ == '__main__':

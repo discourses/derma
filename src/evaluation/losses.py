@@ -14,7 +14,7 @@ class Losses:
         self.model_checkpoints_path = variables['modelling']['model_checkpoints_path']
 
     @staticmethod
-    def series(history, network_checkpoints_path):
+    def evaluate(history, network_checkpoints_path):
         array_of_metrics = np.array([history.epoch, history.history['loss'], history.history['val_loss']]).T
 
         metrics = pd.DataFrame(array_of_metrics, columns=['epoch', 'training_loss', 'validation_loss'])

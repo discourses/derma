@@ -1,14 +1,10 @@
 tensorflow
+requests
+numpy
 pandas
-matplotlib
 pytest
 coverage
 pytest-cov
 pylint
-scikit-learn
-scikit-image
-requests
-jupyterlab
-nodejs
 PyYAML
-numpy
+scikit-learn

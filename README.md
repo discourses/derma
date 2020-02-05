@@ -8,6 +8,7 @@ Associated repositories:
 
 # Derma
 
+* [Temporary Notes](#temporary-notes)
 * [Brief Repository Notes](#brief-repository-notes)
 * [Project](#automatic-identification-of-skin-lesion-types)
   * [Problem Statement](#problem-statement)
@@ -15,6 +16,48 @@ Associated repositories:
   * [The Data](#the-data)
   * [Preliminary Analysis of Metadata](https://drive.google.com/file/d/1H1Afh8siQ6bsVdVaaq4qoQASQhNnoyWT/view?usp=sharing)
   * [Copyright & Attribution](#copyright-and-attribution)
+
+<br>
+<br>
+
+## Temporary Notes
+
+* Local operating system: Windows 7
+* Cloud test machine: GitHub Actions Ubuntu
+
+Locally, the python environment was created via [`venv`](https://docs.python.org/3/library/venv.html)
+```
+>> python -m venv env
+```
+This virtual environment can be deleted via the command `rm -r env` (Cygwin)
+
+```
+>> env\Scripts\activate.bat
+```
+
+```
+>> pip list
+```
+
+```
+>> python -m pip install --upgrade pip==20.0.2
+```
+
+Next, TensorFlow 2.0.0 is installed; tensorflow==2.0.0
+```
+>> pip install --upgrade tensorflow
+```
+
+The TensorFlow installation step installs numpy & requests.  Whereas
+
+* pandas==1.0.0
+* pytest==5.3.5
+* coverage==5.0.3
+* pytest-cov==2.8.1
+* pylint==2.4.4
+* PyYAML==5.3
+
+where installed separately.
 
 <br>
 <br>
@@ -75,7 +118,7 @@ As noted above, this project's modelling challenge is focused on the Internation
 <br>
 <br>
 
-To ensure availability these three data files are also stored in a [GitHub repository](https://github.com/greyhypotheses/dermatology/tree/master/data).  The images are either the same as those hosted by the [ISIC Archive API](https://www.isic-archive.com/#!/topWithHeader/onlyHeaderTop/apiDocumentation) or  down-sampled versions.  Future modelling projects might involve re-visiting the original images of the [ISIC Archive API](https://isic-archive.com/api/v1).  The API is documented at [ISIC Archive API Documentation](https://www.isic-archive.com/#!/topWithHeader/onlyHeaderTop/apiDocumentation); [sample API script](./src/data/archive.py).  The data set outlined below might be used if the ground truths are released in time.
+To ensure availability these three data files are also stored in a [GitHub repository](https://github.com/greyhypotheses/dermatology/tree/master/data).  The images are either the same as those hosted by the [ISIC Archive API](https://www.isic-archive.com/#!/topWithHeader/onlyHeaderTop/apiDocumentation) or  down-sampled versions.  Future modelling projects might involve re-visiting the original images of the [ISIC Archive API](https://isic-archive.com/api/v1).  The API is documented at [ISIC Archive API Documentation](https://www.isic-archive.com/#!/topWithHeader/onlyHeaderTop/apiDocumentation).  The data set outlined below might be used if the ground truths are released in time.
 
 * [ISIC_2019_Test_Input.zip](https://s3.amazonaws.com/isic-challenge-2019/ISIC_2019_Test_Input.zip): 8,238 JPEG images of skin lesions
 * [ISIC_2019_Test_Metadata.csv](https://s3.amazonaws.com/isic-challenge-2019/ISIC_2019_Test_Metadata.csv): 8,238 metadata entries of age, sex, and general anatomic site

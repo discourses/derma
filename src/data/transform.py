@@ -1,8 +1,6 @@
 import logging
 import os
-import typing
 
-import numpy as np
 import pandas as pd
 import sklearn.model_selection as model_selection
 
@@ -12,6 +10,10 @@ import config
 class Transform:
 
     def __init__(self):
+        """
+        Herein the constructor initialises global variables
+        """
+
         # Root directory
         self.root = os.path.split(os.getcwd())[0]
 
@@ -23,20 +25,31 @@ class Transform:
 
         # Variables
         variables = config.Config().variables()
-        self.random_state = variables['modelling']['random_state']
-        self.train_size_initial = variables['modelling']['train_size_initial']
-        self.train_size_evaluation = variables['modelling']['train_size_evaluation']
+        self.random_state: int = variables['modelling']['random_state']
+        self.train_size_initial: float = variables['modelling']['train_size_initial']
+        self.train_size_evaluation: float = variables['modelling']['train_size_evaluation']
 
     @staticmethod
-    def stratification(x, y, train_size, random_state, stratify) -> (pd.DataFrame, pd.DataFrame,
-                                                                     pd.DataFrame, pd.DataFrame):
-        return model_selection.train_test_split(x, y,
-                                                train_size=train_size,
+    def stratification(x: pd.DataFrame, y: pd.DataFrame,
+                       train_size: float, random_state: int, stratify) -> (pd.DataFrame, pd.DataFrame,
+                                                                           pd.DataFrame, pd.DataFrame):
+        """
+        Stratified splitting of a dataset
+
+        :param x:
+        :param y:
+        :param train_size:
+        :param random_state:
+        :param stratify:
+        :return:
+        """
+
+        return model_selection.train_test_split(x, y, train_size=train_size,
                                                 random_state=random_state, stratify=stratify)
 
-    def for_generator(self, x: np.ndarray, y: np.ndarray, labels: typing.List, group: str) -> pd.DataFrame:
+    def for_generator(self, x: pd.DataFrame, y: pd.DataFrame, labels: list, group: str) -> pd.DataFrame:
         """
-        Preparing the metadata for the generator that creates the images delivery pipeline
+        Preparing a metadata set for a generator that creates the images delivery pipeline
 
         :param x: The features part of a data set
         :param y: The corresponding classes/labels
@@ -45,15 +58,12 @@ class Transform:
         :return:
         """
 
-        data = pd.DataFrame(x, columns=['url']) \
-            .join(pd.DataFrame(y, columns=labels), how='inner')
-
+        data = x[['url']].join(y[labels], how='inner')
         self.logger.info("{}: {}, {}, {}".format(group, x.shape, y.shape, data.shape))
-
         return data
 
-    def summaries(self, data: pd.DataFrame, features: typing.List, labels: typing.List) -> (pd.DataFrame,
-                                                                                            pd.DataFrame, pd.DataFrame):
+    def summaries(self, data: pd.DataFrame, features: list, labels: list) -> (pd.DataFrame,
+                                                                              pd.DataFrame, pd.DataFrame):
         """
         Performs stratified data splitting
 

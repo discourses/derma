@@ -21,9 +21,7 @@ class Source:
 
     def __init__(self):
         """
-        The constructor
-
-        Herein, the constructor initialises the global variables used by the methods of this class.
+        Herein the constructor initialises the global variables used by the methods of this class.
         """
 
         # Variables
@@ -68,13 +66,12 @@ class Source:
             accessible['name'] = accessible.name.apply(lambda x: os.path.split(x)[1])
             inventory = accessible.merge(inventory, how='inner', on='name')
 
+        # Hence
         return inventory
 
     def url(self, inventory: pd.DataFrame) -> pd.DataFrame:
         """
         Adds the field 'url' to the inputted data frame.  It records the path - including the image name - to an image.
-
-        :type inventory: pandas.DataFrame
 
         :param inventory:
         :return:
@@ -82,28 +79,31 @@ class Source:
         """
 
         inventory['url'] = inventory.name.apply(lambda x: os.path.join(self.images_path, x))
-
         return inventory
 
-    def summaries(self):
+    def summaries(self) -> (pd.DataFrame, list, list):
         """
-        Uploads the inventory of images
 
         :return:
+            inventory: The metadata of the images, including the column 'url' of local image file paths
+            labels: The list of label columns
+            features: The list of feature columns
         """
 
         # Read-in the inventory of images
-        inventory = Source().inventory()
-        fields = self.inventory_fields
-        labels = inventory.columns.drop(fields).tolist()
+        inventory: pd.DataFrame = self.inventory()
+        fields: list = self.inventory_fields
+        labels: list = inventory.columns.drop(fields).tolist()
 
         # Sample
         if self.sample:
             inventory = sampling.Sampling().sample(data=inventory, fields=fields, labels=labels)
 
         # Add the images URL field
-        inventory = Source().url(inventory)
+        inventory: pd.DataFrame = self.url(inventory)
 
         # Return
-        features = self.features
+        features: list = self.features
+
+        # Hence
         return inventory, labels, features
