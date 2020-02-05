@@ -1,6 +1,7 @@
 import os
 import sys
 import typing
+import datetime
 
 import requests
 import yaml
@@ -8,7 +9,6 @@ import yaml
 
 class Config:
     """
-    Class Federal
     Consists of methods that parse the global settings summarised in the
     YAML dictionaries of directory federal
     """
@@ -27,8 +27,7 @@ class Config:
 
         return path
 
-    @staticmethod
-    def variables() -> typing.Dict:
+    def variables(self) -> typing.Dict:
         """
         Parses the global variables file of this project
 
@@ -43,12 +42,18 @@ class Config:
             sys.exit(1)
         variables = yaml.safe_load(req.text)
 
+        # Image Dimension
         variables['images']['image_dimension'] = (variables['images']['rows'], variables['images']['columns'],
                                                   variables['images']['channels'])
 
+        # local Storage
         variables['modelling']['model_checkpoints_path'] = \
-            Config().paths(variables['modelling']['model_checkpoints_directory'])
-        variables['images']['path'] = Config().paths(variables['zipped']['images']['unzipped'])
+            self.paths(variables['modelling']['model_checkpoints_directory'])
+        variables['images']['path'] = self.paths(variables['zipped']['images']['unzipped'])
+
+        # Cloud Storage
+        datetime_string = datetime.datetime.now().strftime('%Y%m%d.%H%M%S')
+        variables['modelling']['s3_path'] = variables['modelling']['s3_bucket'] + datetime_string + '/'
 
         return variables
 
