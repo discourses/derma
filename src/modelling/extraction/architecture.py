@@ -22,11 +22,10 @@ class Architecture:
 
         return base
 
-    @staticmethod
-    def layers(hyperparameters, labels, metrics=None):
+    def layers(self, hyperparameters, labels, metrics=None):
 
         # Base
-        base = Architecture().baseline()
+        base = self.baseline()
 
         # Flattening Object
         flatten = tf.keras.layers.Flatten()
