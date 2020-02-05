@@ -50,5 +50,8 @@ class Measures:
              for confusion_matrix_variable in self.confusion_matrix_variables]
 
         # Transfer
-        services.Services().awscli('aws s3 cp ' + network_checkpoints_path + ' ' +
-                                   self.s3_path + os.path.basename(network_checkpoints_path) + '/ --recursive')
+        print('Transferring to S3 ...')
+        print('aws s3 cp ' + network_checkpoints_path + ' '
+              + self.s3_path + os.path.basename(network_checkpoints_path) + '/ --recursive')
+        services.Services().awscli('aws s3 cp ' + network_checkpoints_path + ' '
+                                   + self.s3_path + os.path.basename(network_checkpoints_path) + '/ --recursive')
