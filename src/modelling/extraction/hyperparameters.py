@@ -18,14 +18,21 @@ class Hyperparameters:
     """
 
     def __init__(self):
-        variables = config.Config().variables()
-        model_extraction = variables['model']['extraction']
-        self.num_units = model_extraction['num_units']
-        self.dropout = model_extraction['dropout']
-        self.opt = model_extraction['opt']
-        self.name = "Hyperparameters"
+        """
+        Herein the constructor initialises global variables
+        """
+        variables: dict = config.Config().variables()
 
-    def priors(self):
+        model_extraction: dict = variables['model']['extraction']
+        self.num_units: list = model_extraction['num_units']
+        self.dropout: list = model_extraction['dropout']
+        self.opt: list = model_extraction['opt']
+
+    def priors(self) -> (hp.HParam, hp.HParam, hp.HParam, hp.HParam, hp.HParam):
+        """
+        Initialises the set of values per hyperparameter type
+        :return:
+        """
         alpha_units = hp.HParam('num_units', hp.Discrete(self.num_units))
         alpha_drop_rate = hp.HParam('dropout', hp.Discrete(self.dropout))
 
@@ -36,7 +43,13 @@ class Hyperparameters:
 
         return alpha_units, alpha_drop_rate, beta_units, beta_drop_rate, optimization
 
-    def values(self):
+    def values(self) -> list:
+        """
+        Creates unique combinations of hyperparameters
+        :return:
+            combinations: A list of dictionaries, wherein each dictionary is a unique combination
+            of hyperparameters.  Each combination estimates a distinct/single model.
+        """
         alpha_units, alpha_drop_rate, beta_units, beta_drop_rate, optimization = self.priors()
 
         combinations = [{'alpha_drop_rate': i,
