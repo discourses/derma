@@ -1,5 +1,5 @@
 import typing
-import os
+
 import pandas as pd
 
 import config
@@ -7,13 +7,11 @@ import src.data.pipelines as pipelines
 import src.evaluation.confusion as confusion
 import src.evaluation.losses as losses
 import src.evaluation.predictions as predictions
-import src.io.services as services
 
 
 class Measures:
 
     def __init__(self):
-
         # Pipeline
         self.pipeline = pipelines.Pipelines()
 
@@ -33,7 +31,8 @@ class Measures:
         losses.Losses().evaluate(history=history, network_checkpoints_path=network_checkpoints_path)
 
         # Data groups
-        data_sets: typing.Dict[str, pd.DataFrame] = {'training': training_, 'validating': validating_, 'testing': testing_}
+        data_sets: typing.Dict[str, pd.DataFrame] = {'training': training_, 'validating': validating_,
+                                                     'testing': testing_}
 
         # Hence
         for data_set_name, data_set in data_sets.items():
@@ -48,11 +47,3 @@ class Measures:
             [confusion.Confusion().evaluate(plausibilities, truth, labels, data_set_name, network_checkpoints_path,
                                             confusion_matrix_variable)
              for confusion_matrix_variable in self.confusion_matrix_variables]
-
-        # Transfer
-        print('Transferring to S3 ...')
-        print(network_checkpoints_path)
-        print('aws s3 cp ' + network_checkpoints_path + '/ '
-              + self.s3_path + os.path.basename(network_checkpoints_path) + '/ --recursive')
-        services.Services().awscli('aws s3 cp ' + network_checkpoints_path + ' '
-                                   + self.s3_path + os.path.basename(network_checkpoints_path) + '/ --recursive')
