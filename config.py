@@ -9,8 +9,8 @@ import yaml
 
 class Config:
     """
-    Consists of methods that parse the global settings summarised in the
-    YAML dictionaries of directory federal
+    Consists of methods that parse the global settings summarised in the online
+    YAML dictionaries
     """
 
     def __init__(self):
@@ -19,7 +19,13 @@ class Config:
         """
         self.root = os.path.abspath(__package__)
 
-    def paths(self, partitions):
+    def paths(self, partitions: list):
+        """
+        Creates a path relative to the project's root directory
+        :param partitions:
+        :return:
+            path: The created from a list of directories
+        """
 
         path = self.root
         for partition in partitions:
