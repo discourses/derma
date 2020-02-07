@@ -8,56 +8,14 @@ Associated repositories:
 
 # Derma
 
-* [Temporary Notes](#temporary-notes)
 * [Brief Repository Notes](#brief-repository-notes)
+  * [Temporary Notes](#temporary-notes)
 * [Project](#automatic-identification-of-skin-lesion-types)
   * [Problem Statement](#problem-statement)
   * [Rationale](#rationale)
   * [The Data](#the-data)
   * [Preliminary Analysis of Metadata](https://drive.google.com/file/d/1H1Afh8siQ6bsVdVaaq4qoQASQhNnoyWT/view?usp=sharing)
   * [Copyright & Attribution](#copyright-and-attribution)
-
-<br>
-<br>
-
-## Temporary Notes
-
-* Local operating system: Windows 7
-* Cloud test machine: GitHub Actions Ubuntu
-
-Locally, the python environment was created via [`venv`](https://docs.python.org/3/library/venv.html)
-```
->> python -m venv env
-```
-This virtual environment can be deleted via the command `rm -r env` (Cygwin)
-
-```
->> env\Scripts\activate.bat
-```
-
-```
->> pip list
-```
-
-```
->> python -m pip install --upgrade pip==20.0.2
-```
-
-Next, TensorFlow 2.0.0 is installed; tensorflow==2.0.0
-```
->> pip install --upgrade tensorflow
-```
-
-The TensorFlow installation step installs numpy & requests.  Whereas
-
-* pandas==1.0.0
-* pytest==5.3.5
-* coverage==5.0.3
-* pytest-cov==2.8.1
-* pylint==2.4.4
-* PyYAML==5.3
-
-where installed separately.
 
 <br>
 <br>
@@ -72,7 +30,55 @@ develop|![](https://github.com/greyhypotheses/derma/workflows/Derma%20Python%20P
 master|![](https://github.com/greyhypotheses/derma/workflows/Derma%20Python%20Package/badge.svg?branch=master)
 
 <br>
+
+### Temporary Notes
+
+* Local operating system: Windows 7
+* Cloud test machine: GitHub Actions Ubuntu
+
+Locally, the python environment was created via [`venv`](https://docs.python.org/3/library/venv.html)
+
+```
+>> python -m venv env
+```
+
+This virtual environment can be deleted via the command `rm -r env` (Cygwin).  The environment is activated via 
+
+```
+>> env\Scripts\activate.bat
+```
+
+within a Windows operating system, and the command
+
+```
+>> pip list
+```
+
+is used to list the set of directly & indirectly installed packages.  Always remember to upgrade pip before populating the environment
+
+```
+>> python -m pip install --upgrade pip==20.0.2
+```
+
+The [requirements](requirements.txt) document lists the directly installed packages and their versions.  Thus far the TensorFlow version used by this package/repository is TensorFlow 2.0.1
+```
+>> pip install --upgrade tensorflow==2.0.1
+```
+
+The TensorFlow installation step installs numpy & requests.  Whereas
+
+* pandas
+* pytest
+* coverage
+* pytest-cov
+* pylint
+* PyYAML
+
+were installed separately.
+
 <br>
+<br>
+
 
 ## Automatic Identification of Skin Lesion Types
 Via Dermoscopic Images of Cancerous/Pre-cancerous Skin Lesions

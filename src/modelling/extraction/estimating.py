@@ -20,6 +20,7 @@ class Estimating:
         # Variables
         variables = config.Config().variables()
         self.batch_size = variables['modelling']['batch_size']
+        self.patience = variables['modelling']['early_stopping_patience']
 
     def parameters(self, model, labels: list, epochs: int, training_: pd.DataFrame, validating_: pd.DataFrame,
                    network_checkpoints_path: str):
@@ -41,7 +42,7 @@ class Estimating:
 
         # Early stopping
         early_stopping = tf.keras.callbacks.EarlyStopping(
-            monitor='val_loss', verbose=1, patience=3, mode='min', restore_best_weights=True
+            monitor='val_loss', verbose=1, patience=self.patience, mode='min', restore_best_weights=True
         )
 
         # Checkpoints
