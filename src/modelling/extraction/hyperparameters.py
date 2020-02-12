@@ -21,12 +21,6 @@ class Hyperparameters:
         """
         Herein the constructor initialises global variables
         """
-        # variables: dict = config.Config().variables()
-
-        # model_extraction: dict = variables['model']['extraction']
-        # self.num_units: list = model_extraction['num_units']
-        # self.dropout: list = model_extraction['dropout']
-        # self.opt: list = model_extraction['opt']
 
         self.alpha_units = hyperparameters_dict['alpha']['units']
         self.alpha_dropout = hyperparameters_dict['alpha']['dropout']
