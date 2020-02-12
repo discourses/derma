@@ -7,6 +7,8 @@ import config
 import src.modelling.extraction.estimating as estimating
 import src.modelling.extraction.hyperparameters as hyperparameters
 
+import src.modelling.extraction.architecture as arc
+
 
 class Steps:
 
@@ -52,7 +54,7 @@ class Steps:
         if not os.path.exists(path):
             os.makedirs(path)
 
-    def evaluate(self, labels: list, epochs: int,
+    def evaluate(self, labels: list, epochs: int, hyperparameters_dict: dict,
                  training_: pd.DataFrame, validating_: pd.DataFrame, testing_: pd.DataFrame):
         """
         Runs one or more deep neural network models w.r.t. a defined architecture and sets of hyperparameters
@@ -70,7 +72,7 @@ class Steps:
         self.partitions(self.model_checkpoints_path)
 
         # A hyperparameters instance for creating a set of hyperparameters combinations
-        hyp = hyperparameters.Hyperparameters()
+        hyp = hyperparameters.Hyperparameters(hyperparameters_dict=hyperparameters_dict)
 
         # A model estimation instance
         est = estimating.Estimating()
@@ -87,7 +89,12 @@ class Steps:
             hyperparameters_set_values: dict = hyp.values()[i]
             self.logger.info(" Hyperparameters Set {}: {}".format(hyperparameters_set, hyperparameters_set_values))
 
+            # Architecture, tf.python.keras.engine.sequential.Sequential,
+            # tf.keras.models.Sequential, tf.keras.preprocessing.image.ImageDataGenerator
+            architecture = arc.Architecture()
+            model = architecture.layers(hyperparameters=hyperparameters_set_values, labels=labels)
+
             # History of losses
-            est.network(hyperparameters=hyperparameters_set_values, labels=labels, epochs=epochs,
+            est.network(model=model, labels=labels, epochs=epochs,
                         training_=training_, validating_=validating_, testing_=testing_,
                         network_checkpoints_path=network_checkpoints_path)
