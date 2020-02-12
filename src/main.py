@@ -1,5 +1,8 @@
 import os
 import sys
+import argparse
+import requests
+import yaml
 
 
 if __name__ == '__main__':
@@ -13,6 +16,24 @@ if __name__ == '__main__':
 
 
 def main():
+    # The hyperparameters
+    parser = argparse.ArgumentParser()
+    parser.add_argument("hyperparameters_url")
+    args = parser.parse_args()
+
+    try:
+        req = requests.get(args.hyperparameters_url)
+    except requests.exceptions.RequestException as e:
+        print(e)
+        sys.exit(1)
+    hyperparameters_dict = yaml.safe_load(req.text)
+
+    print("\nThe hyperparameters file: ")
+    print(args.hyperparameters_url)
+    print("\nThe hyperparameters: ")
+    print(hyperparameters_dict)
+
+    # The global variables
     variables = config.Config().variables()
 
     # Reading-in a metadata table of the images, and lists summarising the table's label columns & feature columns
@@ -30,6 +51,7 @@ def main():
     # Model: feature extraction transfer learning model
     extraction.Steps().evaluate(labels=labels,
                                 epochs=variables['modelling']['epochs'],
+                                hyperparameters_dict=hyperparameters_dict,
                                 training_=training_,
                                 validating_=validating_,
                                 testing_=testing_)
