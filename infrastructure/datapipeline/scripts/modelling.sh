@@ -1,3 +1,3 @@
 #!/bin/bash
 cd ~
-docker pull greyhypotheses/derma:FeatureExtractionDL
+sudo docker pull greyhypotheses/derma:FeatureExtractionDL
