@@ -28,6 +28,7 @@ branch|state
 :---|:---
 develop|![](https://github.com/greyhypotheses/derma/workflows/Derma%20Python%20Package/badge.svg?branch=develop)
 master|![](https://github.com/greyhypotheses/derma/workflows/Derma%20Python%20Package/badge.svg?branch=master)
+codebuild develop|![](https://codebuild.us-east-1.amazonaws.com/badges?uuid=eyJlbmNyeXB0ZWREYXRhIjoiZHJSbisrNDZ3NnI2Vjh3bTVkZmVXRlZvclY5Rm1UZll2cFZFcnpHUDE0bk5nbDRvVUJjbGdlSW1qVDRZN1Q0SFh6VFpUSDFWZURUcS9TTHhJTktNSmhJPSIsIml2UGFyYW1ldGVyU3BlYyI6IlFXaVNXUlFJckl5eW9sOEYiLCJtYXRlcmlhbFNldFNlcmlhbCI6MX0%3D&branch=develop)
 
 <br>
 
@@ -42,7 +43,7 @@ Locally, the python environment was created via [`venv`](https://docs.python.org
 >> python -m venv env
 ```
 
-This virtual environment can be deleted via the command `rm -r env` (Cygwin).  The environment is activated via 
+This virtual environment can be deleted via the command `rm -r env` (Cygwin).  The environment is activated via
 
 ```
 >> env\Scripts\activate.bat
