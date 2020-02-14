@@ -1,0 +1,110 @@
+{
+    "name": "",
+    "description": "",
+    "source": {
+        "type": "GITHUB_ENTERPRISE",
+        "location": "",
+        "gitCloneDepth": 0,
+        "buildspec": "",
+        "auth": {
+            "type": "OAUTH",
+            "resource": ""
+        },
+        "reportBuildStatus": true,
+        "insecureSsl": true,
+        "sourceIdentifier": ""
+    },
+    "secondarySources": [
+        {
+            "type": "CODEPIPELINE",
+            "location": "",
+            "gitCloneDepth": 0,
+            "buildspec": "",
+            "auth": {
+                "type": "OAUTH",
+                "resource": ""
+            },
+            "reportBuildStatus": true,
+            "insecureSsl": true,
+            "sourceIdentifier": ""
+        }
+    ],
+    "artifacts": {
+        "type": "CODEPIPELINE",
+        "location": "",
+        "path": "",
+        "namespaceType": "BUILD_ID",
+        "name": "",
+        "packaging": "ZIP",
+        "overrideArtifactName": true,
+        "encryptionDisabled": true,
+        "artifactIdentifier": ""
+    },
+    "secondaryArtifacts": [
+        {
+            "type": "CODEPIPELINE",
+            "location": "",
+            "path": "",
+            "namespaceType": "BUILD_ID",
+            "name": "",
+            "packaging": "NONE",
+            "overrideArtifactName": true,
+            "encryptionDisabled": true,
+            "artifactIdentifier": ""
+        }
+    ],
+    "cache": {
+        "type": "S3",
+        "location": ""
+    },
+    "environment": {
+        "type": "WINDOWS_CONTAINER",
+        "image": "",
+        "computeType": "BUILD_GENERAL1_LARGE",
+        "environmentVariables": [
+            {
+                "name": "",
+                "value": "",
+                "type": "PLAINTEXT"
+            }
+        ],
+        "privilegedMode": true,
+        "certificate": "",
+        "registryCredential": {
+            "credential": "",
+            "credentialProvider": "SECRETS_MANAGER"
+        },
+        "imagePullCredentialsType": "SERVICE_ROLE"
+    },
+    "serviceRole": "",
+    "timeoutInMinutes": 0,
+    "queuedTimeoutInMinutes": 0,
+    "encryptionKey": "",
+    "tags": [
+        {
+            "key": "",
+            "value": ""
+        }
+    ],
+    "vpcConfig": {
+        "vpcId": "",
+        "subnets": [
+            ""
+        ],
+        "securityGroupIds": [
+            ""
+        ]
+    },
+    "badgeEnabled": true,
+    "logsConfig": {
+        "cloudWatchLogs": {
+            "status": "ENABLED",
+            "groupName": "",
+            "streamName": ""
+        },
+        "s3Logs": {
+            "status": "ENABLED",
+            "location": ""
+        }
+    }
+}
