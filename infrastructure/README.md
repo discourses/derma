@@ -42,7 +42,10 @@ Activate the pipeline.
 The EC2 template creation command
 
 ```bash
->> aws ec2 create-launch-template --launch-template-name TemplateForDocker --version-description 0.1 --launch-template-data file://template-data.json
+>> aws ec2 create-launch-template
+   --launch-template-name TemplateForDocker
+   --version-description 0.1
+   --launch-template-data file://template-data.json
 ```
 leads to an output of the form
 ```bash
@@ -78,6 +81,9 @@ To terminate an instance
 ```bash
 >> aws ec2 terminate-instances --instance-ids {instance-id}
 ```
+
+<br>
+<br>
 
 
 ### Code Build
