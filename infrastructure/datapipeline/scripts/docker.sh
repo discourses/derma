@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Update intance libraries
+# Update instance libraries
 sudo yum update -y
 
 # Install Docker

@@ -1,7 +1,7 @@
 #!/bin/bash
 cd ~
 
-# Stop all containers
+# Stop all containers.
 sudo docker stop $(sudo docker ps -a -q)
 
 # Remove all containers and associated volumes
