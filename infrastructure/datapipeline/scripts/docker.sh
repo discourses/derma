@@ -1,9 +1,10 @@
 #!/bin/bash
+
+# Update intance libraries
 sudo yum update -y
 
 # Install Docker
 sudo yum install -y docker
-sudo service docker start
 
-# In order to use docker commands without 'sudo'
-sudo usermod -a -G docker ec2-user
+# Start docker
+sudo service docker start
