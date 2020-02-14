@@ -1,13 +1,11 @@
 import math
-import os
 
 import pandas as pd
-import tensorflow as tf
 
 import config
 import src.data.pipelines as pipelines
 import src.evaluation.measures as measures
-import src.modelling.extraction.architecture as arc
+import src.evaluation.monitors as monitors
 
 
 class Estimating:
@@ -41,15 +39,10 @@ class Estimating:
         validating = pipeline.generator_tensorflow(validating_, labels)
 
         # Early stopping
-        early_stopping = tf.keras.callbacks.EarlyStopping(
-            monitor='val_loss', verbose=1, patience=self.patience, mode='min', restore_best_weights=True
-        )
+        early_stopping = monitors.Monitors().early_stopping()
 
         # Checkpoints
-        model_checkpoints = tf.keras.callbacks.ModelCheckpoint(
-            filepath=os.path.join(network_checkpoints_path, 'model_{epoch}.h5'),
-            monitor='val_loss', verbose=1, save_best_only=False, save_weights_only=False,
-            mode='auto', save_freq='epoch')
+        model_checkpoints = monitors.Monitors().model_checkpoints(network_checkpoints_path=network_checkpoints_path)
 
         # Steps per epoch [Re-design: cf. validation_steps, and steps in measures.Measures().prediction]
         steps_per_epoch = math.ceil(training_.shape[0] / self.batch_size)
@@ -61,16 +54,17 @@ class Estimating:
         print('For: ' + network_checkpoints_path)
         history = model.fit_generator(generator=training, steps_per_epoch=steps_per_epoch, epochs=epochs,
                                       verbose=1, callbacks=[early_stopping, model_checkpoints],
-                                      validation_data=validating, validation_steps=validation_steps, validation_freq=1)
+                                      validation_data=validating, validation_steps=validation_steps,
+                                      validation_freq=1)
 
         return history
 
-    def network(self, hyperparameters: dict, labels: list, epochs: int,
+    def network(self, model, labels: list, epochs: int,
                 training_: pd.DataFrame, validating_: pd.DataFrame, testing_: pd.DataFrame,
                 network_checkpoints_path: str):
         """
 
-        :param hyperparameters:
+        :param model:
         :param labels:
         :param epochs:
         :param training_:
@@ -80,13 +74,9 @@ class Estimating:
         :return:
         """
 
-        # Architecture, tf.python.keras.engine.sequential.Sequential,
-        # tf.keras.models.Sequential, tf.keras.preprocessing.image.ImageDataGenerator
-        architecture = arc.Architecture()
-        model = architecture.layers(hyperparameters=hyperparameters, labels=labels)
-
         # Estimate the parameters of the network described by model's architecture.  The parameters
         # function saves the models at the end of every epoch.  And, it returns the loss history
+
         history = self.parameters(model, labels, epochs,
                                   training_, validating_, network_checkpoints_path)
 
