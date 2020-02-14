@@ -1,0 +1,48 @@
+version: 0.2
+
+env:
+  variables:
+     release: "0.1"
+     # key: "value"
+     # key: "value"
+  # parameter-store:
+     # key: "value"
+     # key: "value"
+  git-credential-helper: yes
+
+phases:
+  # install:
+    # If you use the Ubuntu standard image 2.0 or later, you must specify runtime-versions.
+    # If you specify runtime-versions and use an image other than Ubuntu standard image 2.0, the build fails.
+    # runtime-versions:
+      # name: version
+      # name: version
+    # commands:
+      # - command
+      # - command
+  pre_build:
+    commands:
+      - echo 'Pre-building'
+  build:
+    commands:
+      - echo 'Building ...'
+  # post_build:
+    # commands:
+      # - command
+      # - command
+artifacts:
+  discard-paths: no
+  base-directory: $CODEBUILD_SRC_DIR
+  files:
+    - infrastructure/datapipeline/scripts/cleanup.sh
+    - infrastructure/datapipeline/scripts/directories.sh
+    - infrastructure/datapipeline/scripts/docker.sh
+    - infrastructure/datapipeline/scripts/files.sh
+    - infrastructure/datapipeline/scripts/import.sh
+    - infrastructure/datapipeline/scripts/importpkg.sh
+    - infrastructure/datapipeline/scripts/model.sh
+    - infrastructure/datapipeline/scripts/modelpkg.sh
+    - infrastructure/datapipeline/scripts/synchronise.sh
+# cache:
+  # paths:
+    # - paths
