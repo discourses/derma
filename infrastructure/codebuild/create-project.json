@@ -2,12 +2,12 @@
     "name": "",
     "description": "",
     "source": {
-        "type": "GITHUB_ENTERPRISE",
+        "type": "",
         "location": "",
         "gitCloneDepth": 0,
         "buildspec": "",
         "auth": {
-            "type": "OAUTH",
+            "type": "",
             "resource": ""
         },
         "reportBuildStatus": true,
@@ -16,12 +16,12 @@
     },
     "secondarySources": [
         {
-            "type": "CODEPIPELINE",
+            "type": "",
             "location": "",
             "gitCloneDepth": 0,
             "buildspec": "",
             "auth": {
-                "type": "OAUTH",
+                "type": "",
                 "resource": ""
             },
             "reportBuildStatus": true,
@@ -30,24 +30,24 @@
         }
     ],
     "artifacts": {
-        "type": "CODEPIPELINE",
+        "type": "",
         "location": "",
         "path": "",
-        "namespaceType": "BUILD_ID",
+        "namespaceType": "",
         "name": "",
-        "packaging": "ZIP",
+        "packaging": "",
         "overrideArtifactName": true,
         "encryptionDisabled": true,
         "artifactIdentifier": ""
     },
     "secondaryArtifacts": [
         {
-            "type": "CODEPIPELINE",
+            "type": "",
             "location": "",
             "path": "",
-            "namespaceType": "BUILD_ID",
+            "namespaceType": "",
             "name": "",
-            "packaging": "NONE",
+            "packaging": "none",
             "overrideArtifactName": true,
             "encryptionDisabled": true,
             "artifactIdentifier": ""
@@ -58,23 +58,23 @@
         "location": ""
     },
     "environment": {
-        "type": "WINDOWS_CONTAINER",
+        "type": "",
         "image": "",
-        "computeType": "BUILD_GENERAL1_LARGE",
+        "computeType": "",
         "environmentVariables": [
             {
                 "name": "",
                 "value": "",
-                "type": "PLAINTEXT"
+                "type": "plaintext"
             }
         ],
         "privilegedMode": true,
         "certificate": "",
         "registryCredential": {
             "credential": "",
-            "credentialProvider": "SECRETS_MANAGER"
+            "credentialProvider": "secrets manager"
         },
-        "imagePullCredentialsType": "SERVICE_ROLE"
+        "imagePullCredentialsType": "service role"
     },
     "serviceRole": "",
     "timeoutInMinutes": 0,
@@ -98,12 +98,12 @@
     "badgeEnabled": true,
     "logsConfig": {
         "cloudWatchLogs": {
-            "status": "ENABLED",
+            "status": "enabled",
             "groupName": "",
             "streamName": ""
         },
         "s3Logs": {
-            "status": "ENABLED",
+            "status": "enabled",
             "location": ""
         }
     }
