@@ -41,12 +41,14 @@ def main():
     # labels: list
     # features: list
     inventory, labels, features = source.Source().summaries()
+    reproduce = inventory.sort_values(by=['image', 'angle']).copy()
+    reproduce.reset_index(drop=True, inplace=True)
 
     # Splitting the data into training, validating, and testing sets.  The sets are image metadata tables.
     # training_: DataFrame
     # validating_: DataFrame
     # testing_: DataFrame
-    training_, validating_, testing_ = transform.Transform().summaries(inventory, features, labels)
+    training_, validating_, testing_ = transform.Transform().summaries(reproduce, features, labels)
 
     # Model: feature extraction transfer learning model
     extraction.Steps().evaluate(labels=labels,
