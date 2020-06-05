@@ -5,7 +5,7 @@ Associated Repositories:
 
 Tools
 
-* [readerpython](https://github.com/greyhypotheses/readerpython): The docker image of this repository will be used to run containers that download, and dearchive if necessary, data sets into a volumes [for this repository, the augmentation repository, and any other] 
+* [readerpython](https://github.com/greyhypotheses/readerpython): **In progress**. The docker image of this repository will be used to run containers that download, and dearchive if necessary, data sets into a volumes [for this repository, the augmentation repository, and any other] 
 
 Associated Colab Notebook:
 
@@ -17,8 +17,9 @@ Associated Colab Notebook:
 
 # Derma
 
-* [Brief Repository Notes](#brief-repository-notes)
-  * [Temporary Notes](#temporary-notes)
+* [Notes In Progress](#notes-in-progress)
+  * [Brief Start Notes](#brief-start-notes)
+  * [Technical Notes](#technical-notes)
 * [Project](#automatic-identification-of-skin-lesion-types)
   * [Problem Statement](#problem-statement)
   * [Rationale](#rationale)
@@ -29,7 +30,7 @@ Associated Colab Notebook:
 <br>
 <br>
 
-## Brief Repository Notes
+## Notes In Progress
 
 This repository uses the wonderful continuous integration & delivery tool GitHub Actions. Hence, a variety of tests are conducted continuously.  The badges below will continuously highlight the state of each repository branch w.r.t. GitHub Action's actions.
 
@@ -41,7 +42,32 @@ codebuild develop|![](https://codebuild.us-east-1.amazonaws.com/badges?uuid=eyJl
 
 <br>
 
-### Temporary Notes
+### Brief Start Notes
+
+Ref. https://hub.docker.com/r/greyhypotheses/derma/tags
+
+```bash
+# Import greyhypotheses/derma:importing from Docker Hub.
+sudo docker pull greyhypotheses/derma:importing
+
+# Running docker package greyhypotheses/derma:importing
+sudo docker run -v ~/images:/app/images greyhypotheses/derma:importing
+```
+
+```bash
+# Import greyhypotheses/derma:FeatureExtractionDL from Docker Hub.
+sudo docker pull greyhypotheses/derma:FeatureExtractionDL
+
+# Runs the FeatureExtractionDL model.  It requires one string argument; the string
+# must be a URL oF A  YAML file of hyperparameters, e.g.,
+# https://raw.githubusercontent.com/greyhypotheses/dictionaries/develop/derma/hyperparameters/pattern.yml
+sudo docker run -v ~/images:/app/images -v ~/checkpoints:/app/checkpoints 
+    greyhypotheses/derma:FeatureExtractionDL src/main.py $1
+```
+
+<br>
+
+### Technical Notes
 
 * Local operating system: Windows 7
 * Cloud test machine: GitHub Actions Ubuntu
@@ -131,7 +157,6 @@ As noted above, this project's modelling challenge is focused on the Internation
 |[ISIC_2019_Training_Metadata.csv](https://s3.amazonaws.com/isic-challenge-2019/ISIC_2019_Training_Metadata.csv)|25,331 metadata entries of age, sex, general anatomic site, and common lesion identifier|1.15MB|
 |[ISIC_2019_Training_GroundTruth.csv](https://s3.amazonaws.com/isic-challenge-2019/ISIC_2019_Training_GroundTruth.csv)|25,331 entries of gold standard lesion diagnoses|1.23MB|
 
-<br>
 <br>
 
 To ensure availability these three data files are also stored in a [GitHub repository](https://github.com/greyhypotheses/dermatology/tree/master/data).  The images are either the same as those hosted by the [ISIC Archive API](https://www.isic-archive.com/#!/topWithHeader/onlyHeaderTop/apiDocumentation) or  down-sampled versions.  Future modelling projects might involve re-visiting the original images of the [ISIC Archive API](https://isic-archive.com/api/v1).  The API is documented at [ISIC Archive API Documentation](https://www.isic-archive.com/#!/topWithHeader/onlyHeaderTop/apiDocumentation).  The data set outlined below might be used if the ground truths are released in time.
