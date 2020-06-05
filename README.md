@@ -17,6 +17,8 @@ Associated Colab Notebook:
 
 # Derma
 
+**Note**, a link to a Colab interface is upcoming.  Colab offers access to GPU machines; the times per epoch are superb.
+
 * [Notes In Progress](#notes-in-progress)
   * [Brief Start Notes](#brief-start-notes)
   * [Technical Notes](#technical-notes)
