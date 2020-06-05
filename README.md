@@ -1,9 +1,17 @@
-Associated repositories:
+Associated Repositories:
 
 * [dermatology](https://github.com/greyhypotheses/dermatology): An image data repository of the original and augmented images.
 * [augmentation](https://github.com/greyhypotheses/augmentation): This repository's package creates augmentations of the original images.
-* [derma.statistics]
 
+Tools
+
+* [readerpython](https://github.com/greyhypotheses/readerpython): The docker image of this repository will be used to run containers that download, and dearchive if necessary, data sets into a volumes 
+
+Associated Colab Notebooks:
+* [![Preliminary Metadata Analysis](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1H1Afh8siQ6bsVdVaaq4qoQASQhNnoyWT): A preliminary assessment of the [raw images in dermatology](https://github.com/greyhypotheses/dermatology/tree/master/data/images) 
+
+
+<br>
 <br>
 
 # Derma
@@ -97,15 +105,15 @@ This project is focused on image classification for cancer diagnostics, it is sp
 <br>
 
 ### Rationale
-This project has been chosen as a precursor, test case, to applying bayesian deep learning, amongst other bayesian techniques, to diagnostic, prognostic, and pathogenetic challenges in medicine.  [Uncertainty](https://www.stat.berkeley.edu/~aldous/157/Papers/Fox_Ulkumen.pdf) is an inherent aspect of medical and health diagnostics, but [deep learning methods that consider uncertainty are rarely used due to the scalability challenges of such methods](https://arxiv.org/pdf/1906.01620.pdf).  A key example being bayesian deep learning methods.
+This project has been chosen as a precursor to applying bayesian deep learning, amongst other bayesian techniques, to diagnostic, prognostic, and pathogenetic challenges in medicine.  [Uncertainty](https://www.stat.berkeley.edu/~aldous/157/Papers/Fox_Ulkumen.pdf) is an inherent aspect of medical and health diagnostics, but [deep learning methods that consider uncertainty are rarely used due to the scalability challenges of such methods](https://arxiv.org/pdf/1906.01620.pdf).  A key example being bayesian deep learning methods.
 
-Bearing in mind the potential of deep learning in the fields of medicine & health, the objective of this project is to
+The first objective of this project is to
 
-* Apply bayesian deep learning, amongst other methods, to the stated problem within an engineering design/prototype that is not constrained by scalability; make the best use of bayes for model selection.
+* Apply deep learning, amongst other methods, to the stated problem within an engineering design/prototype that is not constrained by scalability.
 
 * Investigate and apply interpretability options.
 
-Non-bayesian deep convolutional neural networks [has been applied to skin cancer images](https://cs.stanford.edu/people/esteva/nature/).
+Note: non-bayesian deep convolutional neural networks [has been applied to skin cancer images](https://cs.stanford.edu/people/esteva/nature/).
 
 <br>
 <br>
@@ -135,7 +143,7 @@ To ensure availability these three data files are also stored in a [GitHub repos
 
 ### Preliminary Analysis of Metadata
 
-A preliminary analysis of the metadata is hosted in the notebook [preliminary.ipynb](https://drive.google.com/file/d/1H1Afh8siQ6bsVdVaaq4qoQASQhNnoyWT/view?usp=sharing).
+A preliminary analysis of the metadata is hosted in the notebook [preliminary.ipynb](https://colab.research.google.com/drive/1H1Afh8siQ6bsVdVaaq4qoQASQhNnoyWT).
 
 <br>
 <br>
