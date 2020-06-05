@@ -44,8 +44,6 @@ codebuild develop|![](https://codebuild.us-east-1.amazonaws.com/badges?uuid=eyJl
 
 ### Brief Start Notes
 
-Ref. https://hub.docker.com/r/greyhypotheses/derma/tags
-
 The [server of images](./importing); this will be replaced with [readerpython](https://github.com/greyhypotheses/readerpython)
 
 ```bash
