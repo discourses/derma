@@ -5,10 +5,11 @@ Associated Repositories:
 
 Tools
 
-* [readerpython](https://github.com/greyhypotheses/readerpython): The docker image of this repository will be used to run containers that download, and dearchive if necessary, data sets into a volumes 
+* [readerpython](https://github.com/greyhypotheses/readerpython): The docker image of this repository will be used to run containers that download, and dearchive if necessary, data sets into a volumes [for this repository, the augmentation repository, and any other] 
 
-Associated Colab Notebooks:
-* [![Preliminary Metadata Analysis](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1H1Afh8siQ6bsVdVaaq4qoQASQhNnoyWT): A preliminary assessment of the [raw images in dermatology](https://github.com/greyhypotheses/dermatology/tree/master/data/images) 
+Associated Colab Notebook:
+[![Preliminary Metadata Analysis](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1H1Afh8siQ6bsVdVaaq4qoQASQhNnoyWT)
+A preliminary assessment of the [raw images in dermatology](https://github.com/greyhypotheses/dermatology/tree/master/data/images) 
 
 
 <br>
