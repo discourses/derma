@@ -46,6 +46,8 @@ codebuild develop|![](https://codebuild.us-east-1.amazonaws.com/badges?uuid=eyJl
 
 Ref. https://hub.docker.com/r/greyhypotheses/derma/tags
 
+The [server of images](./importing); this will be replaced with [readerpython](https://github.com/greyhypotheses/readerpython)
+
 ```bash
 # Import greyhypotheses/derma:importing from Docker Hub.
 sudo docker pull greyhypotheses/derma:importing
@@ -53,6 +55,8 @@ sudo docker pull greyhypotheses/derma:importing
 # Running docker package greyhypotheses/derma:importing
 sudo docker run -v ~/images:/app/images greyhypotheses/derma:importing
 ```
+
+The [feature extraction deep learning model](./src/modelling/extraction) 
 
 ```bash
 # Import greyhypotheses/derma:FeatureExtractionDL from Docker Hub.
