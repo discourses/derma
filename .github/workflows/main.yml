@@ -75,23 +75,23 @@ jobs:
           DOCKER_HUB_USERNAME: ${{secrets.DOCKER_HUB_USERNAME}}
           DOCKER_HUB_ENTRY: ${{secrets.DOCKER_HUB_ENTRY}}
 
-  importing-pkg-backup:
-    name: Building for GitHub Docker Packages
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v1
-
-      - name: Build the Docker image
-        run: docker build . -f importing/Dockerfile --tag docker.pkg.github.com/greyhypotheses/derma/derma:importing
-
-      - name: Push the image to GitHub Packages
-        run: |
-          docker login -u "${GITHUB_PACKAGES_USERNAME}" -p "${GITHUB_PACKAGES_ENTRY}" docker.pkg.github.com
-          docker push docker.pkg.github.com/greyhypotheses/derma/derma:importing
-        env:
-          GITHUB_PACKAGES_USERNAME: ${{secrets.GITHUB_PACKAGES_USERNAME}}
-          GITHUB_PACKAGES_ENTRY: ${{secrets.GITHUB_PACKAGES_ENTRY}}
+  #  importing-pkg-backup:
+  #    name: Building for GitHub Docker Packages
+  #    runs-on: ubuntu-latest
+  #
+  #    steps:
+  #      - uses: actions/checkout@v1
+  #
+  #      - name: Build the Docker image
+  #        run: docker build . -f importing/Dockerfile --tag docker.pkg.github.com/greyhypotheses/derma/derma:importing
+  #
+  #      - name: Push the image to GitHub Packages
+  #        run: |
+  #          docker login -u "${GITHUB_PACKAGES_USERNAME}" -p "${GITHUB_PACKAGES_ENTRY}" docker.pkg.github.com
+  #          docker push docker.pkg.github.com/greyhypotheses/derma/derma:importing
+  #        env:
+  #          GITHUB_PACKAGES_USERNAME: ${{secrets.GITHUB_PACKAGES_USERNAME}}
+  #          GITHUB_PACKAGES_ENTRY: ${{secrets.GITHUB_PACKAGES_ENTRY}}
 
   extraction-model:
     name: Buiding for Docker Hub
