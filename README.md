@@ -90,7 +90,7 @@ This virtual environment can be deleted via the command `rm -r env` (Cygwin).  T
 >> env\Scripts\activate.bat
 ```
 
-within a Windows operating system, and the command
+within a Windows operating system; deactivated via the command `deactivate`.  The command
 
 ```
 >> pip list
