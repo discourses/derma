@@ -46,7 +46,9 @@ codebuild develop|![](https://codebuild.us-east-1.amazonaws.com/badges?uuid=eyJl
 
 ### Brief Start Notes
 
-The [server of images](./importing); this will be replaced with [readerpython](https://github.com/greyhypotheses/readerpython)
+Sometimes the models are run in an AWS machine via docker images; [greyhypotheses @ Docker Hub](https://hub.docker.com/r/greyhypotheses/derma/tags).
+
+An instance, i.e., container, of the image `greyhypotheses/derma:importing` serves dermatoscopic images to the deep learning model/s; [importing](./importing) will be replaced with [readerpython](https://github.com/greyhypotheses/readerpython)
 
 ```bash
 # Import greyhypotheses/derma:importing from Docker Hub.
@@ -88,7 +90,7 @@ This virtual environment can be deleted via the command `rm -r env` (Cygwin).  T
 >> env\Scripts\activate.bat
 ```
 
-within a Windows operating system, and the command
+within a Windows operating system; deactivated via the command `deactivate`.  The command
 
 ```
 >> pip list
@@ -97,12 +99,12 @@ within a Windows operating system, and the command
 is used to list the set of directly & indirectly installed packages.  Always remember to upgrade pip before populating the environment
 
 ```
->> python -m pip install --upgrade pip==20.0.2
+>> python -m pip install --upgrade pip==20.2.4
 ```
 
 The [requirements](requirements.txt) document lists the directly installed packages and their versions.  Thus far the TensorFlow version used by this package/repository is TensorFlow 2.0.1
 ```
->> pip install --upgrade tensorflow==2.0.1
+>> pip install --upgrade tensorflow==2.3.1
 ```
 
 The TensorFlow installation step installs numpy & requests.  Whereas
