@@ -5,7 +5,7 @@ Associated Repositories:
 
 Tools
 
-* [readerpython](https://github.com/greyhypotheses/readerpython): **In progress**. The docker image of this repository will be used to run containers that download, and dearchive if necessary, data sets into a volumes [for this repository, the augmentation repository, and any other] 
+* [readerpython](https://github.com/greyhypotheses/readerpython): **In progress**. The docker image of this repository will be used to run containers that download, and dearchive if necessary, data sets into a volume [for this repository, the augmentation repository, and any other] 
 
 Associated Colab Notebook:
 
@@ -66,7 +66,8 @@ sudo docker pull greyhypotheses/derma:FeatureExtractionDL
 
 # Runs the FeatureExtractionDL model.  It requires one string argument; the string
 # must be a URL oF A  YAML file of hyperparameters, e.g.,
-# https://raw.githubusercontent.com/greyhypotheses/dictionaries/develop/derma/hyperparameters/pattern.yml
+# https://raw.githubusercontent.com/greyhypotheses/dictionaries/develop
+# /derma/hyperparameters/pattern.yml
 sudo docker run -v ~/images:/app/images -v ~/checkpoints:/app/checkpoints 
     greyhypotheses/derma:FeatureExtractionDL src/main.py $1
 ```
@@ -99,12 +100,12 @@ within a Windows operating system; deactivated via the command `deactivate`.  Th
 is used to list the set of directly & indirectly installed packages.  Always remember to upgrade pip before populating the environment
 
 ```
->> python -m pip install --upgrade pip==20.2.4
+>> python -m pip install --upgrade pip==21.0
 ```
 
 The [requirements](requirements.txt) document lists the directly installed packages and their versions.  Thus far the TensorFlow version used by this package/repository is TensorFlow 2.0.1
 ```
->> pip install --upgrade tensorflow==2.3.1
+>> pip install --upgrade tensorflow==2.4.1
 ```
 
 The TensorFlow installation step installs numpy & requests.  Whereas
