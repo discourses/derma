@@ -1,0 +1,38 @@
+inventory:
+  url: 'https://github.com/greyhypotheses/dermatology/raw/master/augmentations/inventory.csv'
+  key: 'name'
+  fields: ['name', 'age_approx', 'anatom_site_general', 'sex', 'angle', 'drawn', 'image']
+zipped:
+  images:
+    url: 'https://github.com/greyhypotheses/dermatology/raw/master/augmentations/images/'
+    from: 0
+    to: 195
+    zero_filling: 3
+    ext: '.zip'
+    unzipped: ['images']
+images:
+  ext: '.png'
+  rows: 224
+  columns: 224
+  channels: 3
+  rotations: [0, 90, 180, 270]
+modelling:
+  sample: True
+  replace: False
+  class_sample_size: 192
+  epochs: 35
+  features: ['url']
+  random_state: 5
+  minimum_class_instances: 2
+  batch_size: 32
+  train_size_initial: 0.625
+  train_size_evaluation: 0.50
+  early_stopping_patience: 5
+  model_checkpoints_directory: ['checkpoints']
+  confusion_matrix_variables: ['tn', 'fn', 'tp', 'fp']
+  s3_bucket: 's3://models.checkpoints/'
+evaluating:
+  thresholds:
+    min: 0
+    max: 1.0
+    step: 0.05
