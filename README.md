@@ -1,11 +1,11 @@
 Associated Repositories:
 
-* [dermatology](https://github.com/greyhypotheses/dermatology): An image data repository of the original and augmented images.
-* [augmentation](https://github.com/greyhypotheses/augmentation): This repository's package creates augmentations of the original images.
+* [dermatology](https://github.com/discourses/dermatology): An image data repository of the original and augmented images.
+* [augmentation](https://github.com/discourses/augmentation): This repository's package creates augmentations of the original images.
 
 Tools
 
-* [readerpython](https://github.com/greyhypotheses/readerpython): **In progress**. The docker image of this repository will be used to run containers that download, and dearchive if necessary, data sets into a volume [for this repository, the augmentation repository, and any other] 
+* [reader](https://github.com/discourses/reader): **In progress**. The docker image of this repository will be used to run containers that download, and dearchive if necessary, data sets into a volume [for this repository, the augmentation repository, and any other] 
 
 Associated Colab Notebook:
 
@@ -48,7 +48,8 @@ codebuild develop|![](https://codebuild.us-east-1.amazonaws.com/badges?uuid=eyJl
 
 Sometimes the models are run in an AWS machine via docker images; [greyhypotheses @ Docker Hub](https://hub.docker.com/r/greyhypotheses/derma/tags).
 
-An instance, i.e., container, of the image `greyhypotheses/derma:importing` serves dermatoscopic images to the deep learning model/s; [importing](./importing) will be replaced with [readerpython](https://github.com/greyhypotheses/readerpython)
+An instance, i.e., container, of the image `greyhypotheses/derma:importing` serves dermatoscopic images to the deep 
+learning model/s; [importing](./importing) will be replaced with [reader](https://github.com/discourses/reader)
 
 ```bash
 # Import greyhypotheses/derma:importing from Docker Hub.
@@ -66,8 +67,8 @@ sudo docker pull greyhypotheses/derma:FeatureExtractionDL
 
 # Runs the FeatureExtractionDL model.  It requires one string argument; the string
 # must be a URL oF A  YAML file of hyperparameters, e.g.,
-# https://raw.githubusercontent.com/greyhypotheses/dictionaries/develop
-# /derma/hyperparameters/pattern.yml
+# https://raw.githubusercontent.com/discourses/derma/develop
+# /resources/hyperparameters/pattern.yml
 sudo docker run -v ~/images:/app/images -v ~/checkpoints:/app/checkpoints 
     greyhypotheses/derma:FeatureExtractionDL src/main.py $1
 ```
@@ -91,10 +92,10 @@ This virtual environment can be deleted via the command `rm -r env` (Cygwin).  T
 >> env\Scripts\activate.bat
 ```
 
-within a Windows operating system; deactivated via the command `deactivate`.  The command
+within a Windows operating system; deactivated via the command `env\Scripts\deactivate.bat`.  The command
 
 ```
->> pip list
+>> env\Scripts\pip list
 ```
 
 is used to list the set of directly & indirectly installed packages.  Always remember to upgrade pip before populating the environment
@@ -105,7 +106,7 @@ is used to list the set of directly & indirectly installed packages.  Always rem
 
 The [requirements](requirements.txt) document lists the directly installed packages and their versions.  Thus far the TensorFlow version used by this package/repository is TensorFlow 2.0.1
 ```
->> pip install --upgrade tensorflow==2.4.1
+>> env\Scripts\pip install --upgrade tensorflow==2.4.1
 ```
 
 The TensorFlow installation step installs numpy & requests.  Whereas
@@ -117,7 +118,7 @@ The TensorFlow installation step installs numpy & requests.  Whereas
 * pylint
 * PyYAML
 
-were installed separately.
+were installed separately [The list members, numpy, and requests were later updated independently.].
 
 <br>
 <br>
