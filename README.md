@@ -104,7 +104,7 @@ is used to list the set of directly & indirectly installed packages.  Always rem
 >> python -m pip install --upgrade pip==21.1.1
 ```
 
-The [requirements](requirements.txt) document lists the directly installed packages and their versions.  Thus far the TensorFlow version used by this package/repository is TensorFlow 2.0.1
+The [requirements](requirements.txt) document lists the directly installed packages and their versions.  Thus far the TensorFlow version used by this package/repository is TensorFlow 2.4.1
 ```
 >> env\Scripts\pip install --upgrade tensorflow==2.4.1
 ```
