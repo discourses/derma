@@ -1,3 +1,5 @@
+<br>
+
 Associated Repositories:
 
 * [dermatology](https://github.com/discourses/dermatology): An image data repository of the original and augmented images.
@@ -38,11 +40,12 @@ This repository uses the wonderful continuous integration & delivery tool GitHub
 
 branch|state
 :---|:---
-develop|![](https://github.com/greyhypotheses/derma/workflows/Derma%20Project/badge.svg?branch=develop)
-master|![](https://github.com/greyhypotheses/derma/workflows/Derma%20Project/badge.svg?branch=master)
+develop|[![Derma Project](https://github.com/discourses/derma/actions/workflows/main.yml/badge.svg?branch=develop&event=push)](https://github.com/discourses/derma/actions/workflows/main.yml)
+master|[![Derma Project](https://github.com/discourses/derma/actions/workflows/main.yml/badge.svg?branch=master&event=push)](https://github.com/discourses/derma/actions/workflows/main.yml)
 codebuild develop|![](https://codebuild.us-east-1.amazonaws.com/badges?uuid=eyJlbmNyeXB0ZWREYXRhIjoiZHJSbisrNDZ3NnI2Vjh3bTVkZmVXRlZvclY5Rm1UZll2cFZFcnpHUDE0bk5nbDRvVUJjbGdlSW1qVDRZN1Q0SFh6VFpUSDFWZURUcS9TTHhJTktNSmhJPSIsIml2UGFyYW1ldGVyU3BlYyI6IlFXaVNXUlFJckl5eW9sOEYiLCJtYXRlcmlhbFNldFNlcmlhbCI6MX0%3D&branch=develop)
 
 <br>
+
 
 ### Brief Start Notes
 
