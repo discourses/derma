@@ -1,5 +1,3 @@
-<br>
-
 Associated Repositories:
 
 * [dermatology](https://github.com/discourses/dermatology): An image data repository of the original and augmented images.
@@ -40,12 +38,11 @@ This repository uses the wonderful continuous integration & delivery tool GitHub
 
 branch|state
 :---|:---
-develop|[![Derma Project](https://github.com/discourses/derma/actions/workflows/main.yml/badge.svg?branch=develop&event=push)](https://github.com/discourses/derma/actions/workflows/main.yml)
-master|[![Derma Project](https://github.com/discourses/derma/actions/workflows/main.yml/badge.svg?branch=master&event=push)](https://github.com/discourses/derma/actions/workflows/main.yml)
+develop|![](https://github.com/greyhypotheses/derma/workflows/Derma%20Project/badge.svg?branch=develop)
+master|![](https://github.com/greyhypotheses/derma/workflows/Derma%20Project/badge.svg?branch=master)
 codebuild develop|![](https://codebuild.us-east-1.amazonaws.com/badges?uuid=eyJlbmNyeXB0ZWREYXRhIjoiZHJSbisrNDZ3NnI2Vjh3bTVkZmVXRlZvclY5Rm1UZll2cFZFcnpHUDE0bk5nbDRvVUJjbGdlSW1qVDRZN1Q0SFh6VFpUSDFWZURUcS9TTHhJTktNSmhJPSIsIml2UGFyYW1ldGVyU3BlYyI6IlFXaVNXUlFJckl5eW9sOEYiLCJtYXRlcmlhbFNldFNlcmlhbCI6MX0%3D&branch=develop)
 
 <br>
-
 
 ### Brief Start Notes
 
@@ -104,7 +101,7 @@ within a Windows operating system; deactivated via the command `env\Scripts\deac
 is used to list the set of directly & indirectly installed packages.  Always remember to upgrade pip before populating the environment
 
 ```
->> python -m pip install --upgrade pip==21.0
+>> python -m pip install --upgrade pip==21.1.1
 ```
 
 The [requirements](requirements.txt) document lists the directly installed packages and their versions.  Thus far the TensorFlow version used by this package/repository is TensorFlow 2.0.1
