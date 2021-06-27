@@ -1,10 +1,10 @@
 tensorflow
-requests
-numpy
 pandas
+scikit-learn
 pytest
 coverage
 pytest-cov
 pylint
+flake8
 PyYAML
-scikit-learn
+
