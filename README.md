@@ -101,28 +101,35 @@ within a Windows operating system; deactivated via the command `env\Scripts\deac
 is used to list the set of directly & indirectly installed packages.  Always remember to upgrade pip before populating the environment
 
 ```
->> python -m pip install --upgrade pip==21.1.1
+>> python -m pip install --upgrade pip==21.1.3
 ```
 
-The [requirements](requirements.txt) document lists the directly installed packages and their versions.  Thus far the TensorFlow version used by this package/repository is TensorFlow 2.4.1
+The [requirements](requirements.txt) document lists the directly installed packages and their versions; and a few 
+indirectly installed pckages.  Thus far, the TensorFlow version used by this package/repository is TensorFlow 2.5.0
 ```
->> env\Scripts\pip install --upgrade tensorflow==2.4.1
+>> env\Scripts\pip install --upgrade tensorflow==2.5.0
 ```
 
-The TensorFlow installation step installs numpy & requests.  Whereas
+The TensorFlow installation step installs numpy & requests, and the rest
 
-* pandas
-* pytest
-* coverage
-* pytest-cov
-* pylint
-* PyYAML
+```shell
+pip install --upgrade pandas
+pip install --upgrade scikit-learn
+pip install --upgrade pytest coverage pytest-cov pylint flake8
+pip install --upgrade PyYAML
+```
 
-were installed separately [The list members, numpy, and requests were later updated independently.].
+The Python version is can be checked via ``python --version``.  Finally, the requirements document was/is created via
+
+```shell
+env\Scripts\pip freeze -r docs/filter.txt > requirements.txt
+```
+
+It is edited -> the packages above the line *## The following requirements were added by pip freeze:* are the directly 
+installed packages.
 
 <br>
 <br>
-
 
 ## Automatic Identification of Skin Lesion Types
 Via Dermoscopic Images of Cancerous/Pre-cancerous Skin Lesions
