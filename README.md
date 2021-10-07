@@ -101,7 +101,7 @@ within a Windows operating system; deactivated via the command `env\Scripts\deac
 is used to list the set of directly & indirectly installed packages.  Always remember to upgrade pip before populating the environment
 
 ```
->> python -m pip install --upgrade pip==21.1.3
+>> python -m pip install --upgrade pip==21.2.4
 ```
 
 The [requirements](requirements.txt) document lists the directly installed packages and their versions; and a few 
