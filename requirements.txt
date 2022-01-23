@@ -9,5 +9,5 @@ flake8==3.9.2
 PyYAML==5.4.1
 
 ## The following requirements were added by pip freeze:
-numpy==1.19.5
+numpy==1.21.0
 requests==2.25.1
