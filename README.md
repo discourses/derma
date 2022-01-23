@@ -101,13 +101,13 @@ within a Windows operating system; deactivated via the command `env\Scripts\deac
 is used to list the set of directly & indirectly installed packages.  Always remember to upgrade pip before populating the environment
 
 ```
->> python -m pip install --upgrade pip==21.2.4
+>> python -m pip install --upgrade pip==21.3.1
 ```
 
 The [requirements](requirements.txt) document lists the directly installed packages and their versions; and a few 
 indirectly installed pckages.  Thus far, the TensorFlow version used by this package/repository is TensorFlow 2.5.0
 ```
->> env\Scripts\pip install --upgrade tensorflow==2.5.0
+>> env\Scripts\pip install --upgrade tensorflow==2.7.0
 ```
 
 The TensorFlow installation step installs numpy & requests, and the rest
