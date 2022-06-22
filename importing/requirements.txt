@@ -4,4 +4,4 @@ pytest-cov==2.11.1
 pylint==2.8.2
 requests==2.25.1
 PyYAML==5.4.1
-numpy==1.21.2
+numpy==1.22.0
