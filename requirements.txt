@@ -1,12 +1,13 @@
-tensorflow
-pandas
-scikit-learn
-pytest
-coverage
-pytest-cov
-flake8
-PyYAML
+tensorflow==2.11.1
+pandas==1.4.2
+scikit-learn==0.24.2
+pytest==6.2.4
+coverage==5.5
+pytest-cov==2.12.1
+pylint==2.8.3
+flake8==3.9.2
+PyYAML==5.4.1
 
 ## The following requirements were added by pip freeze:
-numpy
-requests
+numpy==1.22.3
+requests==2.31.0
