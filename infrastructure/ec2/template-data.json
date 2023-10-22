@@ -1,0 +1,64 @@
+{
+    "DisableApiTermination": true,
+    "Monitoring": {
+        "Enabled": false
+    },
+    "TagSpecifications": [
+        {
+            "ResourceType": "instance",
+            "Tags": [
+                {
+                    "Value": "Basic",
+                    "Key": "Docker"
+                }
+            ]
+        }
+    ],
+    "CapacityReservationSpecification": {
+        "CapacityReservationPreference": "open"
+    },
+    "InstanceInitiatedShutdownBehavior": "stop",
+    "ImageId": "ami-09d069a04349dc3cb",
+    "KeyName": "engineering",
+    "BlockDeviceMappings": [
+        {
+            "DeviceName": "/dev/xvda",
+            "Ebs": {
+                "Encrypted": false,
+                "DeleteOnTermination": true,
+                "VolumeType": "gp2",
+                "VolumeSize": 29,
+                "SnapshotId": "snap-07b8f6c745fa747c7"
+            }
+        }
+    ],
+    "CreditSpecification": {
+        "CpuCredits": "standard"
+    },
+    "HibernationOptions": {
+        "Configured": false
+    },
+    "EbsOptimized": false,
+    "Placement": {
+        "Tenancy": "default",
+        "GroupName": "",
+        "AvailabilityZone": "us-east-1c"
+    },
+    "IamInstanceProfile": {
+        "Arn": "arn:aws:iam::423014709737:instance-profile/EMR_EC2_DefaultRole"
+    },
+    "InstanceType": "t2.micro",
+    "NetworkInterfaces": [
+        {
+            "DeviceIndex": 0,
+            "Description": "",
+            "SubnetId": "subnet-5b233275",
+            "DeleteOnTermination": true,
+            "Groups": [
+                "sg-010ea8f202b4cc3e7"
+            ],
+            "Ipv6Addresses": [],
+            "AssociatePublicIpAddress": true
+        }
+    ]
+}
