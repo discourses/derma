@@ -1,0 +1,287 @@
+{
+  "objects": [
+    {
+      "failureAndRerunMode": "CASCADE",
+      "resourceRole": "DataPipelineDefaultResourceRole",
+      "role": "DataPipelineDefaultRole",
+      "pipelineLogUri": "s3://engineering.infrastructure.logs/datapipeline",
+      "scheduleType": "ONDEMAND",
+      "name": "Default",
+      "id": "Default"
+    },
+    {
+      "role": "DataPipelineDefaultRole",
+      "imageId": "ami-0b1b07e93b745d3bb",
+      "onFail": {
+        "ref": "ActionId_4ifL7"
+      },
+      "actionOnResourceFailure": "retryNone",
+      "instanceType": "t2.large",
+      "type": "Ec2Resource",
+      "terminateAfter": "4 Hours",
+      "resourceRole": "DataPipelineDefaultResourceRole",
+      "name": "PipelineResource",
+      "actionOnTaskFailure": "continue",
+      "keyPair": "science",
+      "associatePublicIpAddress": "true",
+      "securityGroups": "default",
+      "id": "ResourceId_aNX8O",
+      "region": "us-east-1"
+    },
+    {
+      "role": "DataPipelineDefaultRole",
+      "subject": "EC2 Resource Alarm",
+      "name": "EC2 Resource Alarm",
+      "id": "ActionId_4ifL7",
+      "type": "SnsAlarm",
+      "message": "EC2 Resource Failure",
+      "topicArn": "arn:aws:sns:us-east-1:787005662645:POC"
+    },
+    {
+      "onFail": {
+        "ref": "ActionId_ETkm1"
+      },
+      "scriptUri": "s3://engineering.infrastructure.definitions/projects/derma/infrastructure/datapipeline/scripts/files.sh",
+      "name": "Files Copy SCA",
+      "id": "ShellCommandActivityId_rKsr8",
+      "runsOn": {
+        "ref": "ResourceId_aNX8O"
+      },
+      "type": "ShellCommandActivity"
+    },
+    {
+      "role": "DataPipelineDefaultRole",
+      "subject": "Files Copy Failed",
+      "name": "Files Copy Alarm",
+      "id": "ActionId_ETkm1",
+      "message": "Unable to copy required files from Amazon S3 to an EC2 instance.",
+      "type": "SnsAlarm",
+      "topicArn": "arn:aws:sns:us-east-1:787005662645:POC"
+    },
+    {
+      "dependsOn": {
+        "ref": "ShellCommandActivityId_yDXlr"
+      },
+      "onFail": {
+        "ref": "ActionId_xOu4s"
+      },
+      "scriptUri": "s3://engineering.infrastructure.definitions/projects/derma/infrastructure/datapipeline/scripts/modelpkg.sh",
+      "name": "pull derma:FeatureExtractionDL",
+      "id": "ShellCommandActivityId_CoJKg",
+      "runsOn": {
+        "ref": "ResourceId_aNX8O"
+      },
+      "type": "ShellCommandActivity"
+    },
+    {
+      "role": "DataPipelineDefaultRole",
+      "subject": "Feature Extraction DL",
+      "name": "Feature Extraction DL Alarm",
+      "id": "ActionId_xOu4s",
+      "type": "SnsAlarm",
+      "message": "Unable to extract the feature extraction deep learning model package from Docker Hub.",
+      "topicArn": "arn:aws:sns:us-east-1:787005662645:POC"
+    },
+    {
+      "scriptUri": "s3://engineering.infrastructure.definitions/projects/derma/infrastructure/datapipeline/scripts/directories.sh",
+      "onFail": {
+        "ref": "ActionId_LLVlY"
+      },
+      "name": "Directories SCA",
+      "id": "ShellCommandActivityId_ECFvV",
+      "runsOn": {
+        "ref": "ResourceId_aNX8O"
+      },
+      "type": "ShellCommandActivity"
+    },
+    {
+      "role": "DataPipelineDefaultRole",
+      "subject": "Directories Step Failed",
+      "name": "Directories Alarm",
+      "id": "ActionId_LLVlY",
+      "message": "The directories.sh script was unable to create the required data directories.",
+      "type": "SnsAlarm",
+      "topicArn": "arn:aws:sns:us-east-1:787005662645:POC"
+    },
+    {
+      "dependsOn": {
+          "ref": "ShellCommandActivityId_wczQy"
+        },
+      "scriptUri": "s3://engineering.infrastructure.definitions/projects/derma/infrastructure/datapipeline/scripts/synchronise.sh",
+      "onFail": {
+        "ref": "ActionId_cSOo7"
+      },
+      "name": "Synchronise S3 SCA",
+      "runsOn": {
+        "ref": "ResourceId_aNX8O"
+      },
+      "id": "ShellCommandActivityId_Ur9hY",
+      "type": "ShellCommandActivity"
+    },
+    {
+      "role": "DataPipelineDefaultRole",
+      "subject": "Syncronisation Step Failed",
+      "name": "Synchronise S3 Alarm",
+      "id": "ActionId_cSOo7",
+      "message": "After the model run, the synchronisation script was unable to transfer the modelling results files to Amazon S3.",
+      "type": "SnsAlarm",
+      "topicArn": "arn:aws:sns:us-east-1:787005662645:POC"
+    },
+    {
+      "scriptUri": "s3://engineering.infrastructure.definitions/projects/derma/infrastructure/datapipeline/scripts/docker.sh",
+      "onFail": {
+        "ref": "ActionId_yvudW"
+      },
+      "name": "Install Docker SCA",
+      "id": "ShellCommandActivityId_xRC62",
+      "runsOn": {
+        "ref": "ResourceId_aNX8O"
+      },
+      "type": "ShellCommandActivity"
+    },
+    {
+      "role": "DataPipelineDefaultRole",
+      "subject": "Install Docker",
+      "name": "Install Docker Alarm",
+      "id": "ActionId_yvudW",
+      "message": "The docker installation step failed",
+      "type": "SnsAlarm",
+      "topicArn": "arn:aws:sns:us-east-1:787005662645:POC"
+    },
+    {
+      "dependsOn": [
+        {
+          "ref": "ShellCommandActivityId_CoJKg"
+        },
+        {
+          "ref": "ShellCommandActivityId_rKsr8"
+        }
+      ],
+      "onFail": {
+        "ref": "ActionId_H3pLX"
+      },
+      "name": "run FeatureExtractionDL",
+      "id": "ShellCommandActivityId_wczQy",
+      "runsOn": {
+        "ref": "ResourceId_aNX8O"
+      },
+      "type": "ShellCommandActivity",
+      "command": "cd ~\nbash model.sh #{myPattern}"
+    },
+    {
+      "role": "DataPipelineDefaultRole",
+      "subject": "derma:FeatureExtractionDL Failed",
+      "name": "run FeatureExtractionDL alarm",
+      "id": "ActionId_H3pLX",
+      "message": "derma:FeatureExtractionDL run failure.",
+      "type": "SnsAlarm",
+      "topicArn": "arn:aws:sns:us-east-1:787005662645:POC"
+    },
+    {
+      "onFail": {
+        "ref": "ActionId_ThyLq"
+      },
+      "name": "Name String SCA",
+      "id": "ShellCommandActivityId_zNrSc",
+      "runsOn": {
+        "ref": "ResourceId_aNX8O"
+      },
+      "type": "ShellCommandActivity",
+      "command": "cd ~\nnamestring=`date +%Y%m%d.%H%M%S`"
+    },
+    {
+      "role": "DataPipelineDefaultRole",
+      "subject": "Name String",
+      "name": "Name String Alarm",
+      "id": "ActionId_ThyLq",
+      "message": "Failed",
+      "type": "SnsAlarm",
+      "topicArn": "arn:aws:sns:us-east-1:787005662645:POC"
+    },
+    {
+      "dependsOn": [
+        {
+          "ref": "ShellCommandActivityId_xRC62"
+        },
+        {
+          "ref": "ShellCommandActivityId_ECFvV"
+        }
+      ],
+      "scriptUri": "s3://engineering.infrastructure.definitions/projects/derma/infrastructure/datapipeline/scripts/importpkg.sh",
+      "onFail": {
+        "ref": "ActionId_2bD3X"
+      },
+      "name": "pull derma:importing",
+      "id": "ShellCommandActivityId_H28aY",
+      "runsOn": {
+        "ref": "ResourceId_aNX8O"
+      },
+      "type": "ShellCommandActivity"
+    },
+    {
+      "role": "DataPipelineDefaultRole",
+      "subject": "derma:importing",
+      "name": "Importing Alarm",
+      "id": "ActionId_2bD3X",
+      "message": "Unable to extract the derma:importing package from Docker Hub.",
+      "type": "SnsAlarm",
+      "topicArn": "arn:aws:sns:us-east-1:787005662645:POC"
+    },
+    {
+      "dependsOn": {
+        "ref": "ShellCommandActivityId_H28aY"
+      },
+      "scriptUri": "s3://engineering.infrastructure.definitions/projects/derma/infrastructure/datapipeline/scripts/import.sh",
+      "onFail": {
+        "ref": "ActionId_kHCva"
+      },
+      "name": "run importing",
+      "id": "ShellCommandActivityId_yDXlr",
+      "runsOn": {
+        "ref": "ResourceId_aNX8O"
+      },
+      "type": "ShellCommandActivity"
+    },
+    {
+      "role": "DataPipelineDefaultRole",
+      "subject": "derma:importing Failed",
+      "name": "run importing alarm",
+      "id": "ActionId_kHCva",
+      "message": "derma:importing run failure",
+      "type": "SnsAlarm",
+      "topicArn": "arn:aws:sns:us-east-1:787005662645:POC"
+    },
+    {
+      "scriptUri": "s3://engineering.infrastructure.definitions/projects/derma/infrastructure/datapipeline/scripts/cleanup.sh",
+      "dependsOn": {
+        "ref": "ShellCommandActivityId_Ur9hY"
+      },
+      "onFail": {
+        "ref": "ActionId_9bPo1"
+      },
+      "name": "Clean Up SCA",
+      "id": "ShellCommandActivityId_R6tiq",
+      "runsOn": {
+        "ref": "ResourceId_aNX8O"
+      },
+      "type": "ShellCommandActivity"
+    },
+    {
+      "role": "DataPipelineDefaultRole",
+      "subject": "Clean Up Step Failed",
+      "name": "Clean Up Alarm",
+      "id": "ActionId_9bPo1",
+      "message": "Unable to clear the instance of project data.",
+      "type": "SnsAlarm",
+      "topicArn": "arn:aws:sns:us-east-1:787005662645:POC"
+    }
+  ],
+  "parameters": [
+    {
+      "id": "myPattern",
+      "description": "A set of hyperparameters for DL modelling",
+      "type": "string",
+      "default": "https://raw.githubusercontent.com/greyhypotheses/dictionaries/develop/derma/hyperparameters/pattern.yml"
+    }
+  ]
+}
